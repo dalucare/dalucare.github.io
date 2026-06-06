@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dalucare | Cuidado médico com atendimento humanizado</title>
+  <meta name="description" content="Dalucare - clínica com atendimento humanizado, consultas, exames e acompanhamento médico com praticidade, confiança e acolhimento.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="topo">
+    <div class="container topo-conteudo">
+      <div class="logo">Dalucare</div>
+
+      <nav class="menu">
+        <a href="#inicio">Início</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#servicos">Serviços</a>
+        <a href="#diferenciais">Diferenciais</a>
+        <a href="#contato">Contato</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section id="inicio" class="hero">
+      <div class="container hero-conteudo">
+        <div class="hero-texto">
+          <span class="selo">Atendimento com acolhimento e confiança</span>
+          <h1>Bem-vindo à Dalucare</h1>
+          <p>
+            Uma clínica moderna, preparada para oferecer atendimento humanizado,
+            agilidade no agendamento e acompanhamento de qualidade para você e sua família.
+          </p>
+
+          <div class="hero-botoes">
+            <a class="btn btn-principal" href="#contato">Agendar atendimento</a>
+            <a class="btn btn-secundario" href="#servicos">Ver serviços</a>
+          </div>
+        </div>
+
+        <div class="hero-card">
+          <h2>Horário de atendimento</h2>
+          <p><strong>Segunda a sexta:</strong> 08h às 18h</p>
+          <p><strong>Sábado:</strong> 08h às 12h</p>
+          <p><strong>Telefone:</strong> (11) 3333-4444</p>
+          <p><strong>E-mail:</strong> contato@dalucare.com.br</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="sobre" class="secao">
+      <div class="container">
+        <h2>Sobre a Dalucare</h2>
+        <p class="texto-centralizado">
+          A Dalucare nasce com a proposta de unir tecnologia, agilidade e cuidado humano.
+          Nosso objetivo é oferecer uma experiência clara, acolhedora e eficiente desde o
+          primeiro contato até o acompanhamento do paciente.
+        </p>
+      </div>
+    </section>
+
+    <section id="servicos" class="secao secao-clara">
+      <div class="container">
+        <h2>Nossos serviços</h2>
+
+        <div class="grade-cards">
+          <article class="card">
+            <h3>Consultas</h3>
+            <p>Atendimento clínico com foco em diagnóstico, prevenção e acompanhamento.</p>
+          </article>
+
+          <article class="card">
+            <h3>Exames</h3>
+            <p>Solicitação, orientação e encaminhamento para exames complementares.</p>
+          </article>
+
+          <article class="card">
+            <h3>Retorno médico</h3>
+            <p>Reavaliação de condutas e acompanhamento da evolução do paciente.</p>
+          </article>
+
+          <article class="card">
+            <h3>Atendimento preventivo</h3>
+            <p>Orientações voltadas à promoção de saúde e qualidade de vida.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="diferenciais" class="secao">
+      <div class="container">
+        <h2>Diferenciais</h2>
+
+        <div class="grade-diferenciais">
+          <div class="diferencial">
+            <h3>Atendimento humanizado</h3>
+            <p>Escuta atenta, acolhimento e comunicação clara em todas as etapas.</p>
+          </div>
+
+          <div class="diferencial">
+            <h3>Agendamento facilitado</h3>
+            <p>Canal direto para contato, dúvidas e marcação de consulta.</p>
+          </div>
+
+          <div class="diferencial">
+            <h3>Estrutura moderna</h3>
+            <p>Ambiente organizado, confortável e preparado para melhor experiência.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contato" class="secao secao-clara">
+      <div class="container">
+        <h2>Entre em contato</h2>
+        <p class="texto-centralizado">
+          Preencha o formulário abaixo para solicitar atendimento.
+        </p>
+
+        <form id="form-contato" class="formulario">
+          <div class="linha-form">
+            <div class="campo">
+              <label for="nome">Nome</label>
+              <input type="text" id="nome" name="nome" placeholder="Digite seu nome">
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="campo">
+              <label for="telefone">Telefone</label>
+              <input type="text" id="telefone" name="telefone" placeholder="(00) 00000-0000">
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="campo">
+              <label for="email">E-mail</label>
+              <input type="email" id="email" name="email" placeholder="voce@exemplo.com">
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="campo">
+              <label for="mensagem">Mensagem</label>
+              <textarea id="mensagem" name="mensagem" rows="5" placeholder="Descreva sua necessidade"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-principal">Enviar solicitação</button>
+          <p id="aviso-form" class="aviso-form"></p>
+        </form>
+
+        <div class="contato-extra">
+          <p><strong>Endereço:</strong> Rua Exemplo, 123 - Centro - São Paulo/SP</p>
+          <p><strong>WhatsApp:</strong> <a href="https://wa.me/5511999999999" target="_blank">Falar pelo WhatsApp</a></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container">
+      <p>© <span id="ano"></span> Dalucare. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
