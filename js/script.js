@@ -2,11 +2,16 @@ const form = document.getElementById("form-contato");
 const aviso = document.getElementById("aviso-form");
 const ano = document.getElementById("ano");
 const btnTema = document.getElementById("btn-tema");
+const iconeTema = document.getElementById("icone-tema");
 const html = document.documentElement;
 
 function aplicarTema(tema) {
   html.setAttribute("data-theme", tema);
   localStorage.setItem("dalucare-theme", tema);
+
+  if (iconeTema) {
+    iconeTema.textContent = tema === "dark" ? "☀" : "☾";
+  }
 
   if (btnTema) {
     const rotulo = tema === "dark" ? "Ativar modo claro" : "Ativar modo escuro";

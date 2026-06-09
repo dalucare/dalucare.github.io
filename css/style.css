@@ -101,14 +101,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   padding: 18px 0;
-}
-
-.topo-acoes {
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  flex-shrink: 0;
 }
 
 .logo {
@@ -123,6 +117,7 @@ body {
   align-items: center;
   gap: 20px;
   flex-wrap: nowrap;
+  flex-shrink: 0;
 }
 
 .menu a {
@@ -144,7 +139,7 @@ body {
   flex-shrink: 0;
   width: 42px;
   height: 42px;
-  margin: 0;
+  margin: 0 0 0 4px;
   padding: 0;
   border: 1px solid var(--cor-btn-tema-borda);
   border-radius: 999px;
@@ -161,14 +156,9 @@ body {
   border-color: var(--cor-primaria);
 }
 
-.icone-tema {
+#icone-tema {
   font-size: 18px;
   line-height: 1;
-}
-
-[data-theme="light"] .icone-tema-claro,
-[data-theme="dark"] .icone-tema-escuro {
-  display: none;
 }
 
 /* HERO / BANNER PRINCIPAL */
@@ -447,10 +437,6 @@ textarea {
     font-size: 36px;
   }
 
-  .topo-acoes {
-    gap: 16px;
-  }
-
   .menu {
     gap: 14px;
   }
@@ -462,17 +448,11 @@ textarea {
     gap: 12px;
   }
 
-  .topo-acoes {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    width: 100%;
-  }
-
   .menu {
     flex-wrap: wrap;
     justify-content: center;
     gap: 10px 16px;
+    width: 100%;
   }
 
   .hero {
