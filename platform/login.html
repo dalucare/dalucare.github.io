@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrar | Dalucare</title>
+  <link rel="stylesheet" href="../css/style.css?v=20260611">
+  <link rel="stylesheet" href="css/app.css?v=20260611">
+  <script src="js/auth.js?v=20260611"></script>
+</head>
+<body class="pagina-app">
+  <header class="app-topo">
+    <div class="container">
+      <a class="logo" href="../index.html">Dalucare</a>
+      <a class="link-voltar" href="../index.html">← Voltar ao site</a>
+    </div>
+  </header>
+
+  <main class="app-centro">
+    <div class="auth-card">
+      <h1>Entrar</h1>
+      <p class="auth-subtitulo">Acesse sua conta de paciente ou profissional.</p>
+
+      <form id="form-login" class="formulario">
+        <div class="linha-form">
+          <div class="campo">
+            <label for="login-email">E-mail</label>
+            <input type="email" id="login-email" name="email" placeholder="voce@exemplo.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="campo">
+            <label for="login-senha">Senha</label>
+            <input type="password" id="login-senha" name="senha" placeholder="Digite sua senha" required autocomplete="current-password" minlength="6">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-principal" id="btn-login" style="width: 100%;">Entrar</button>
+        <p id="aviso-login" class="aviso-form"></p>
+      </form>
+
+      <p class="auth-links">
+        Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    if (obterSessao()) {
+      window.location.href = "painel.html";
+    }
+
+    const formLogin = document.getElementById("form-login");
+    const avisoLogin = document.getElementById("aviso-login");
+    const btnLogin = document.getElementById("btn-login");
+
+    formLogin.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const email = document.getElementById("login-email").value;
+      const senha = document.getElementById("login-senha").value;
+
+      btnLogin.disabled = true;
+      btnLogin.textContent = "Entrando...";
+
+      try {
+        autenticarUsuario(email, senha);
+        window.location.href = "painel.html";
+      } catch (erro) {
+        mostrarAviso(avisoLogin, erro.message, "erro");
+        btnLogin.disabled = false;
+        btnLogin.textContent = "Entrar";
+      }
+    });
+  </script>
+</body>
+</html>

@@ -132,6 +132,18 @@ body {
   color: var(--cor-primaria);
 }
 
+.menu-entrar {
+  padding: 8px 16px;
+  border-radius: 999px;
+  background-color: var(--cor-primaria);
+  color: var(--cor-branca) !important;
+}
+
+.menu-entrar:hover {
+  background-color: var(--cor-primaria-escura);
+  color: var(--cor-branca) !important;
+}
+
 .btn-tema {
   display: inline-flex;
   align-items: center;
@@ -323,7 +335,8 @@ body {
 }
 
 .campo input,
-.campo textarea {
+.campo textarea,
+.campo select {
   width: 100%;
   padding: 14px;
   border: 1px solid var(--cor-input-borda);
@@ -341,8 +354,90 @@ body {
 }
 
 .campo input:focus,
-.campo textarea:focus {
+.campo textarea:focus,
+.campo select:focus {
   border-color: var(--cor-primaria);
+}
+
+.linha-dupla {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+}
+
+/* PROFISSIONAIS */
+.grade-profissionais {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 35px;
+}
+
+.card-profissional {
+  background-color: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: 16px;
+  padding: 28px;
+  box-shadow: var(--sombra);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.card-profissional:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--sombra-hover);
+}
+
+.badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: var(--cor-selo-fundo);
+  color: var(--cor-primaria-escura);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-profissional h3 {
+  font-size: 22px;
+  color: var(--cor-titulo);
+  margin-bottom: 6px;
+}
+
+.card-local {
+  color: var(--cor-primaria);
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.card-profissional > p {
+  color: var(--cor-texto-suave);
+  margin-bottom: 16px;
+}
+
+.card-detalhes {
+  list-style: none;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.card-detalhes li {
+  padding: 6px 0;
+  border-bottom: 1px solid var(--cor-borda);
+  font-size: 15px;
+}
+
+.card-detalhes li:last-child {
+  border-bottom: none;
+}
+
+.btn-card {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
 }
 
 textarea {
@@ -425,11 +520,23 @@ textarea {
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.rodape-extra {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.rodape-extra a {
+  color: var(--cor-rodape-texto);
+  opacity: 0.85;
+}
+
 /* RESPONSIVIDADE */
 @media (max-width: 900px) {
   .hero-conteudo,
   .grade-cards,
-  .grade-diferenciais {
+  .grade-diferenciais,
+  .grade-profissionais,
+  .linha-dupla {
     grid-template-columns: 1fr;
   }
 

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro | Dalucare</title>
+  <link rel="stylesheet" href="../css/style.css?v=20260611">
+  <link rel="stylesheet" href="css/app.css?v=20260611">
+  <script src="js/auth.js?v=20260611"></script>
+</head>
+<body class="pagina-app">
+  <header class="app-topo">
+    <div class="container">
+      <a class="logo" href="../index.html">Dalucare</a>
+      <a class="link-voltar" href="login.html">← Já tenho conta</a>
+    </div>
+  </header>
+
+  <main class="app-centro">
+    <div class="auth-card">
+      <h1>Criar conta</h1>
+      <p class="auth-subtitulo">Cadastre-se como paciente ou profissional de saúde.</p>
+
+      <div class="auth-tabs">
+        <button type="button" class="auth-tab ativo" data-tipo="paciente">Sou paciente</button>
+        <button type="button" class="auth-tab" data-tipo="profissional">Sou profissional</button>
+      </div>
+
+      <form id="form-cadastro" class="formulario">
+        <input type="hidden" id="cadastro-tipo" name="tipo" value="paciente">
+
+        <div class="linha-form">
+          <div class="campo">
+            <label for="cadastro-nome">Nome completo</label>
+            <input type="text" id="cadastro-nome" name="nome" placeholder="Seu nome" required minlength="3" autocomplete="name">
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="campo">
+            <label for="cadastro-email">E-mail</label>
+            <input type="email" id="cadastro-email" name="email" placeholder="voce@exemplo.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="campo">
+            <label for="cadastro-senha">Senha</label>
+            <input type="password" id="cadastro-senha" name="senha" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
+          </div>
+        </div>
+
+        <div class="linha-form">
+          <div class="campo">
+            <label for="cadastro-confirmar">Confirmar senha</label>
+            <input type="password" id="cadastro-confirmar" name="confirmarSenha" placeholder="Repita a senha" required minlength="6" autocomplete="new-password">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-principal" id="btn-cadastro" style="width: 100%;">Criar conta</button>
+        <p id="aviso-cadastro" class="aviso-form"></p>
+      </form>
+
+      <p class="auth-links">
+        Já tem conta? <a href="login.html">Faça login</a>
+      </p>
+    </div>
+  </main>
+
+  <script>
+    if (obterSessao()) {
+      window.location.href = "painel.html";
+    }
+
+    const tabs = document.querySelectorAll(".auth-tab");
+    const inputTipo = document.getElementById("cadastro-tipo");
+    const formCadastro = document.getElementById("form-cadastro");
+    const avisoCadastro = document.getElementById("aviso-cadastro");
+    const btnCadastro = document.getElementById("btn-cadastro");
+
+    tabs.forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        tabs.forEach(function (item) {
+          item.classList.remove("ativo");
+        });
+        tab.classList.add("ativo");
+        inputTipo.value = tab.dataset.tipo;
+      });
+    });
+
+    formCadastro.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+
+      const dados = {
+        nome: document.getElementById("cadastro-nome").value,
+        email: document.getElementById("cadastro-email").value,
+        senha: document.getElementById("cadastro-senha").value,
+        confirmarSenha: document.getElementById("cadastro-confirmar").value,
+        tipo: inputTipo.value,
+      };
+
+      btnCadastro.disabled = true;
+      btnCadastro.textContent = "Criando conta...";
+
+      try {
+        cadastrarUsuario(dados);
+        autenticarUsuario(dados.email, dados.senha);
+        window.location.href = "painel.html";
+      } catch (erro) {
+        mostrarAviso(avisoCadastro, erro.message, "erro");
+        btnCadastro.disabled = false;
+        btnCadastro.textContent = "Criar conta";
+      }
+    });
+  </script>
+</body>
+</html>

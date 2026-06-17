@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minha conta | Dalucare</title>
+  <link rel="stylesheet" href="../css/style.css?v=20260611">
+  <link rel="stylesheet" href="css/app.css?v=20260611">
+  <script src="js/auth.js?v=20260611"></script>
+</head>
+<body class="pagina-app">
+  <header class="app-topo">
+    <div class="container">
+      <a class="logo" href="../index.html">Dalucare</a>
+      <button type="button" class="btn btn-secundario" id="btn-sair" style="padding: 10px 18px; font-size: 14px;">Sair</button>
+    </div>
+  </header>
+
+  <main class="app-centro" style="align-items: flex-start; padding-top: 48px;">
+    <div class="auth-card" style="max-width: 720px;">
+      <div class="painel-header">
+        <div>
+          <h1>Olá, <span id="painel-nome"></span></h1>
+          <span class="painel-badge" id="painel-tipo"></span>
+        </div>
+      </div>
+
+      <div class="painel-grid" id="painel-paciente">
+        <div class="painel-item">
+          <h2>Agendar consulta</h2>
+          <p>Escolha um profissional e reserve seu horário (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Meus exames</h2>
+          <p>Guarde PDFs e imagens dos seus exames (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Minhas consultas</h2>
+          <p>Veja histórico e próximos agendamentos (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Autorizações</h2>
+          <p>Controle quem acessa seus dados de saúde (em breve).</p>
+        </div>
+      </div>
+
+      <div class="painel-grid" id="painel-profissional" hidden>
+        <div class="painel-item">
+          <h2>Minha agenda</h2>
+          <p>Configure horários disponíveis (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Consultas do dia</h2>
+          <p>Veja pacientes agendados (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Prontuários</h2>
+          <p>Acesse e registre evoluções clínicas (em breve).</p>
+        </div>
+        <div class="painel-item">
+          <h2>Meu perfil</h2>
+          <p>Especialidade, valores e planos aceitos (em breve).</p>
+        </div>
+      </div>
+
+      <p class="painel-aviso">
+        Esta é a <strong>versão inicial</strong> da plataforma. Login e cadastro já funcionam;
+        agendamento, pagamentos e prontuário serão adicionados nas próximas etapas.
+      </p>
+    </div>
+  </main>
+
+  <script>
+    const sessao = exigirLogin();
+    if (!sessao) {
+      throw new Error("Redirecionando...");
+    }
+
+    document.getElementById("painel-nome").textContent = sessao.nome.split(" ")[0];
+    document.getElementById("painel-tipo").textContent =
+      sessao.tipo === "profissional" ? "Profissional de saúde" : "Paciente";
+
+    if (sessao.tipo === "profissional") {
+      document.getElementById("painel-paciente").hidden = true;
+      document.getElementById("painel-profissional").hidden = false;
+    }
+
+    document.getElementById("btn-sair").addEventListener("click", function () {
+      encerrarSessao();
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

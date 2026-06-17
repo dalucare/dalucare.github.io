@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dalucare | Cuidado médico com atendimento humanizado</title>
-  <meta name="description" content="Dalucare - clínica com atendimento humanizado, consultas, exames e acompanhamento médico com praticidade, confiança e acolhimento.">
+  <meta name="description" content="Dalucare - plataforma de saúde integrada. Agende consultas, encontre profissionais e cuide da sua saúde com praticidade e acolhimento.">
   <style>
     .topo-conteudo,
     .menu {
@@ -40,7 +40,7 @@
       line-height: 1;
     }
   </style>
-  <link rel="stylesheet" href="css/style.css?v=20260609">
+  <link rel="stylesheet" href="css/style.css?v=20260610">
   <script>
     (function () {
       const salvo = localStorage.getItem("dalucare-theme");
@@ -57,9 +57,11 @@
       <nav class="menu" aria-label="Menu principal">
         <a href="#inicio">Início</a>
         <a href="#sobre">Sobre</a>
+        <a href="#profissionais">Profissionais</a>
         <a href="#servicos">Serviços</a>
-        <a href="#diferenciais">Diferenciais</a>
+        <a href="#lista-espera">Lista de espera</a>
         <a href="#contato">Contato</a>
+        <a class="menu-entrar" href="platform/login.html">Entrar</a>
         <button type="button" id="btn-tema" class="btn-tema" aria-label="Ativar modo escuro" title="Ativar modo escuro">
           <span id="icone-tema" aria-hidden="true">☾</span>
         </button>
@@ -71,24 +73,24 @@
     <section id="inicio" class="hero">
       <div class="container hero-conteudo">
         <div class="hero-texto">
-          <span class="selo">Atendimento com acolhimento e confiança</span>
+          <span class="selo">Plataforma de saúde integrada — em lançamento</span>
           <h1>Bem-vindo à Dalucare</h1>
           <p>
-            Uma clínica moderna, preparada para oferecer atendimento humanizado,
-            agilidade no agendamento e acompanhamento de qualidade para você e sua família.
+            Conectamos pacientes e profissionais de saúde com agendamento online,
+            prontuário compartilhado e cuidado humanizado — presencial ou online.
           </p>
 
           <div class="hero-botoes">
-            <a class="btn btn-principal" href="#contato">Agendar atendimento</a>
-            <a class="btn btn-secundario" href="#servicos">Ver serviços</a>
+            <a class="btn btn-principal" href="#lista-espera">Entrar na lista de espera</a>
+            <a class="btn btn-secundario" href="#profissionais">Ver profissionais</a>
           </div>
         </div>
 
         <div class="hero-card">
-          <h2>Horário de atendimento</h2>
-          <p><strong>Segunda a sexta:</strong> 08h às 18h</p>
-          <p><strong>Sábado:</strong> 08h às 12h</p>
-          <p><strong>Telefone:</strong> (11) 3333-4444</p>
+          <h2>Como funciona</h2>
+          <p><strong>1.</strong> Escolha o profissional</p>
+          <p><strong>2.</strong> Agende e pague 50% para reservar</p>
+          <p><strong>3.</strong> Consulta presencial ou online</p>
           <p><strong>E-mail:</strong> contato@dalucare.com.br</p>
         </div>
       </div>
@@ -98,10 +100,77 @@
       <div class="container">
         <h2>Sobre a Dalucare</h2>
         <p class="texto-centralizado">
-          A Dalucare nasce com a proposta de unir tecnologia, agilidade e cuidado humano.
-          Nosso objetivo é oferecer uma experiência clara, acolhedora e eficiente desde o
-          primeiro contato até o acompanhamento do paciente.
+          A Dalucare une tecnologia, agilidade e cuidado humano. Estamos construindo
+          uma plataforma onde profissionais gerenciam agenda e prontuário, e pacientes
+          agendam consultas e guardam exames em um só lugar — com rede integrada de cuidado.
         </p>
+      </div>
+    </section>
+
+    <section id="profissionais" class="secao secao-clara">
+      <div class="container">
+        <h2>Profissionais</h2>
+        <p class="texto-centralizado">
+          Equipe piloto da Dalucare. Agendamento online em breve — entre na lista de espera.
+        </p>
+
+        <div class="grade-profissionais">
+          <article class="card-profissional">
+            <span class="badge">Cirurgia geral</span>
+            <h3>Angela Couto</h3>
+            <p class="card-local">Santos</p>
+            <p>Cantoplastia, cisto epidérmico, lipoma e cisto sebáceo.</p>
+            <ul class="card-detalhes">
+              <li><strong>Consulta:</strong> R$ 150 + procedimento</li>
+              <li><strong>Sinal:</strong> 50% para reservar (R$ 75)</li>
+              <li><strong>Atendimento:</strong> Presencial</li>
+              <li><strong>Convênio:</strong> Particular</li>
+            </ul>
+            <a class="btn btn-secundario btn-card" href="#lista-espera">Quero agendar</a>
+          </article>
+
+          <article class="card-profissional">
+            <span class="badge">Fisioterapia dermatofuncional</span>
+            <h3>Priscila Couto</h3>
+            <p class="card-local">Santos</p>
+            <p>Full face, drenagem linfática e lipokavic.</p>
+            <ul class="card-detalhes">
+              <li><strong>Consulta:</strong> R$ 300</li>
+              <li><strong>Obs.:</strong> Valor abatido em procedimentos</li>
+              <li><strong>Atendimento:</strong> Apenas presencial</li>
+              <li><strong>Convênio:</strong> Particular</li>
+            </ul>
+            <a class="btn btn-secundario btn-card" href="#lista-espera">Quero agendar</a>
+          </article>
+
+          <article class="card-profissional">
+            <span class="badge">Otorrinolaringologia pediátrica</span>
+            <h3>Débora Medeiros</h3>
+            <p class="card-local">São Paulo e São Bernardo do Campo</p>
+            <p>Avaliação nasal, oral e otológica em crianças.</p>
+            <ul class="card-detalhes">
+              <li><strong>Consulta:</strong> R$ 300</li>
+              <li><strong>Procedimentos:</strong> Valores sob consulta</li>
+              <li><strong>Atendimento:</strong> Presencial e online</li>
+              <li><strong>Convênio:</strong> Particular</li>
+            </ul>
+            <a class="btn btn-secundario btn-card" href="#lista-espera">Quero agendar</a>
+          </article>
+
+          <article class="card-profissional">
+            <span class="badge">Endocrinometabólico</span>
+            <h3>Jefferson França</h3>
+            <p class="card-local">Santos e Guarujá</p>
+            <p>Emagrecimento e tratamento de afecções endocrinometabólicas.</p>
+            <ul class="card-detalhes">
+              <li><strong>Consulta:</strong> R$ 500</li>
+              <li><strong>Sinal:</strong> 50% para reservar (R$ 250)</li>
+              <li><strong>Atendimento:</strong> Presencial e online</li>
+              <li><strong>Convênio:</strong> Particular</li>
+            </ul>
+            <a class="btn btn-secundario btn-card" href="#lista-espera">Quero agendar</a>
+          </article>
+        </div>
       </div>
     </section>
 
@@ -133,30 +202,95 @@
       </div>
     </section>
 
-    <section id="diferenciais" class="secao">
+    <section id="lista-espera" class="secao">
+      <div class="container">
+        <h2>Lista de espera</h2>
+        <p class="texto-centralizado">
+          A plataforma completa está em construção. Cadastre-se e avisaremos quando
+          o agendamento online estiver disponível.
+        </p>
+
+        <form id="form-lista-espera" class="formulario">
+          <div class="linha-form linha-dupla">
+            <div class="campo">
+              <label for="espera-nome">Nome</label>
+              <input type="text" id="espera-nome" name="nome" placeholder="Seu nome completo" required>
+            </div>
+            <div class="campo">
+              <label for="espera-email">E-mail</label>
+              <input type="email" id="espera-email" name="email" placeholder="voce@exemplo.com" required>
+            </div>
+          </div>
+
+          <div class="linha-form linha-dupla">
+            <div class="campo">
+              <label for="espera-telefone">Telefone / WhatsApp</label>
+              <input type="tel" id="espera-telefone" name="telefone" placeholder="(00) 00000-0000" required>
+            </div>
+            <div class="campo">
+              <label for="espera-cidade">Cidade</label>
+              <input type="text" id="espera-cidade" name="cidade" placeholder="Ex.: Santos" required>
+            </div>
+          </div>
+
+          <div class="linha-form linha-dupla">
+            <div class="campo">
+              <label for="espera-tipo">Eu sou</label>
+              <select id="espera-tipo" name="tipo" required>
+                <option value="">Selecione</option>
+                <option value="Paciente">Paciente</option>
+                <option value="Profissional de saúde">Profissional de saúde</option>
+              </select>
+            </div>
+            <div class="campo">
+              <label for="espera-profissional">Profissional de interesse</label>
+              <select id="espera-profissional" name="profissional">
+                <option value="">Qualquer / Ainda não sei</option>
+                <option value="Angela Couto">Angela Couto — Cirurgia geral</option>
+                <option value="Priscila Couto">Priscila Couto — Fisioterapia</option>
+                <option value="Débora Medeiros">Débora Medeiros — Otorrino</option>
+                <option value="Jefferson França">Jefferson França — Endocrino</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="linha-form">
+            <div class="campo">
+              <label for="espera-mensagem">Mensagem (opcional)</label>
+              <textarea id="espera-mensagem" name="mensagem" rows="4" placeholder="Conte brevemente o que você precisa"></textarea>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-principal" id="btn-lista-espera">Entrar na lista de espera</button>
+          <p id="aviso-lista-espera" class="aviso-form"></p>
+        </form>
+      </div>
+    </section>
+
+    <section id="diferenciais" class="secao secao-clara">
       <div class="container">
         <h2>Diferenciais</h2>
 
         <div class="grade-diferenciais">
           <div class="diferencial">
-            <h3>Atendimento humanizado</h3>
-            <p>Escuta atenta, acolhimento e comunicação clara em todas as etapas.</p>
+            <h3>Rede integrada de cuidado</h3>
+            <p>Profissionais encaminham e acompanham o paciente em conjunto, com autorização.</p>
           </div>
 
           <div class="diferencial">
-            <h3>Agendamento facilitado</h3>
-            <p>Canal direto para contato, dúvidas e marcação de consulta.</p>
+            <h3>Exames sempre à mão</h3>
+            <p>Paciente guarda exames na plataforma — sem levar tudo em uma sacola.</p>
           </div>
 
           <div class="diferencial">
-            <h3>Estrutura moderna</h3>
-            <p>Ambiente organizado, confortável e preparado para melhor experiência.</p>
+            <h3>Agendamento com reserva</h3>
+            <p>Pague 50% online e garanta o horário do profissional escolhido.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <section id="contato" class="secao secao-clara">
+    <section id="contato" class="secao">
       <div class="container">
         <h2>Entre em contato</h2>
         <p class="texto-centralizado">
@@ -207,9 +341,13 @@
   <footer class="rodape">
     <div class="container">
       <p>© <span id="ano"></span> Dalucare. Todos os direitos reservados.</p>
+      <p class="rodape-extra">
+        <a href="platform/login.html">Entrar</a> ·
+        <a href="platform/cadastro.html">Cadastrar</a>
+      </p>
     </div>
   </footer>
 
-  <script src="js/script.js?v=20260609"></script>
+  <script src="js/script.js?v=20260610"></script>
 </body>
 </html>
