@@ -6,15 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722z"></script>
+  <script src="../js/force-https.js?v=20260722aa"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722z">
-  <link rel="stylesheet" href="css/dash.css?v=20260722z">
-  <script src="js/auth.js?v=20260722z"></script>
-  <script src="js/agenda-slots.js?v=20260722z"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722z"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722aa">
+  <link rel="stylesheet" href="css/dash.css?v=20260722aa">
+  <script src="js/auth.js?v=20260722aa"></script>
+  <script src="js/agenda-slots.js?v=20260722aa"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722aa"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -307,7 +307,7 @@
         <section class="aba-painel" id="aba-prescricoes-salvas">
           <div class="painel-bloco-topo presc-salvas-topo">
             <div>
-              <h1>Prescrições salvas</h1>
+              <h1>Minhas prescrições</h1>
               <p class="aba-intro">Suas medicações de uso frequente — cadastre uma vez e reutilize no próximo paciente.</p>
             </div>
             <button type="button" class="btn btn-principal" id="btn-nova-presc-salva">+ Novo medicamento</button>
@@ -432,7 +432,7 @@
         { id: "prontuarios", label: "Prontuários" },
         { id: "online", label: "Atendimento online" },
         { id: "prescricoes", label: "Prescrições" },
-        { id: "prescricoes-salvas", label: "Prescrições salvas" },
+        { id: "prescricoes-salvas", label: "Minhas prescrições" },
         { id: "exames-pro", label: "Exames" },
         { id: "relatorios", label: "Relatórios" },
         { id: "financeiro", label: "Financeiro" },
@@ -1265,7 +1265,7 @@
         renderCalendarioCompleto();
       }
 
-      /* ——— Prescrições salvas ——— */
+      /* ——— Minhas prescrições ——— */
       (function initPrescricoesSalvas() {
         var Ps = window.DalucarePrescricoesSalvas;
         if (!Ps) return;
