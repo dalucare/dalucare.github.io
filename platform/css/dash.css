@@ -1,6 +1,8 @@
 /* Estilos da plataforma Dalucare */
 
-:root {
+:root,
+[data-theme="light"] {
+  color-scheme: light;
   --dash-sidebar: #0f2d44;
   --dash-sidebar-hover: #163a56;
   --dash-sidebar-ativo: #1d6fa3;
@@ -12,6 +14,46 @@
   --dash-verde: #1f8a4c;
   --dash-laranja: #c47a12;
   --dash-ciano: #0d8aa8;
+  --dash-muted-bg: #f5f8fb;
+  --dash-hover-bg: #f3f8fc;
+  --dash-input-bg: #ffffff;
+  --dash-top-bg: #ffffff;
+  --dash-aviso-bg: #eef6fb;
+  --dash-aviso-texto: #1a4a66;
+  --dash-btn-tema-fundo: #f2f9fd;
+  --dash-btn-tema-borda: #d9e6ee;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --dash-sidebar: #0a1520;
+  --dash-sidebar-hover: #122433;
+  --dash-sidebar-ativo: #2a7eb8;
+  --dash-fundo: #0f1724;
+  --dash-card: #1a2430;
+  --dash-texto: #e8eef3;
+  --dash-suave: #9eb0c0;
+  --dash-borda: #2f4050;
+  --dash-verde: #4ade80;
+  --dash-laranja: #fbbf24;
+  --dash-ciano: #22d3ee;
+  --dash-muted-bg: #15202b;
+  --dash-hover-bg: #1e2a36;
+  --dash-input-bg: #15202b;
+  --dash-top-bg: #1a2430;
+  --dash-aviso-bg: #1e2a36;
+  --dash-aviso-texto: #c5d8e8;
+  --dash-btn-tema-fundo: #1e2a36;
+  --dash-btn-tema-borda: #3a4d5e;
+  --cor-primaria: #5eb3e4;
+  --cor-primaria-escura: #3d9fd6;
+  --cor-superficie: #1a2430;
+  --cor-borda: #2f4050;
+  --cor-texto: #e8eef3;
+  --cor-texto-suave: #9eb0c0;
+  --cor-input-fundo: #15202b;
+  --cor-input-texto: #e8eef3;
+  --cor-input-borda: #3a4d5e;
 }
 
 body.pagina-app,
@@ -77,7 +119,7 @@ body.pagina-dashboard {
 .auth-card {
   width: 100%;
   max-width: 460px;
-  background: #fff;
+  background: var(--dash-card);
   border: 1px solid var(--dash-borda);
   border-radius: 20px;
   padding: 36px;
@@ -330,7 +372,7 @@ body.pagina-dashboard {
   align-items: center;
   gap: 16px;
   padding: 18px 24px;
-  background: #fff;
+  background: var(--dash-top-bg);
   border-bottom: 1px solid var(--dash-borda);
   position: sticky;
   top: 0;
@@ -1406,6 +1448,79 @@ button.cal-cel:hover {
 .embed-frame iframe {
   display: block;
   background: #fff;
+}
+
+.dash-btn-tema {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--dash-btn-tema-borda);
+  background: var(--dash-btn-tema-fundo);
+  color: var(--dash-texto);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.dash-btn-tema:hover {
+  border-color: var(--cor-primaria, #1d6fa3);
+}
+
+[data-theme="dark"] .dash-busca input,
+[data-theme="dark"] .cal-form .campo input,
+[data-theme="dark"] .cal-form .campo select,
+[data-theme="dark"] .campo-obs textarea,
+[data-theme="dark"] .auth-card input,
+[data-theme="dark"] .auth-card select {
+  background: var(--dash-input-bg);
+  color: var(--dash-texto);
+  border-color: var(--dash-borda);
+}
+
+[data-theme="dark"] .atalho-btn,
+[data-theme="dark"] .agenda-tab.ativo,
+[data-theme="dark"] .agenda-tabs,
+[data-theme="dark"] .cal-cel,
+[data-theme="dark"] .lista-agenda-pro .agenda-item:hover,
+[data-theme="dark"] .lista-agenda-pro .agenda-item.selecionado,
+[data-theme="dark"] .cal-dia.selecionado {
+  background: var(--dash-muted-bg);
+  border-color: var(--dash-borda);
+  color: var(--dash-texto);
+}
+
+[data-theme="dark"] .modal-card {
+  background: var(--dash-card);
+  color: var(--dash-texto);
+}
+
+[data-theme="dark"] .modal-fechar {
+  background: var(--dash-muted-bg);
+  color: var(--dash-texto);
+}
+
+[data-theme="dark"] .auth-aviso-local,
+[data-theme="dark"] .aviso-troca-painel {
+  background: var(--dash-aviso-bg);
+  color: var(--dash-aviso-texto);
+}
+
+[data-theme="dark"] .kpi-azul { background: #1e3a4f; color: #7ec8f0; }
+[data-theme="dark"] .kpi-verde { background: #1a3d2e; color: #6ee7a8; }
+[data-theme="dark"] .kpi-ciano { background: #163a42; color: #67e8f9; }
+[data-theme="dark"] .kpi-laranja { background: #3d2e16; color: #fbbf24; }
+
+[data-theme="dark"] .btn-secundario {
+  background: transparent;
+  color: var(--dash-texto);
+  border-color: var(--dash-borda);
+}
+
+[data-theme="dark"] .dash-link-site {
+  color: var(--dash-suave);
 }
 
 .modal-overlay {

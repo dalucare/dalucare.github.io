@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722x"></script>
+  <script src="../js/force-https.js?v=20260722y"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722x">
-  <link rel="stylesheet" href="css/dash.css?v=20260722x">
-  <script src="js/auth.js?v=20260722x"></script>
-  <script src="js/agenda-slots.js?v=20260722x"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722y">
+  <link rel="stylesheet" href="css/dash.css?v=20260722y">
+  <script src="js/auth.js?v=20260722y"></script>
+  <script src="js/agenda-slots.js?v=20260722y"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -68,6 +68,9 @@
             <span class="dash-badge">0</span>
           </button>
           <a class="dash-link-site" href="../index.html">Site</a>
+          <button type="button" class="btn-tema dash-btn-tema" id="btn-tema" aria-label="Ativar modo escuro" title="Ativar modo escuro">
+            <span id="icone-tema" aria-hidden="true">☾</span>
+          </button>
           <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
         </div>
       </header>
@@ -656,6 +659,32 @@
             else localStorage.removeItem("dalucare_sessao");
           } catch (e) {}
           window.location.href = "login.html";
+        });
+      }
+
+      function sincronizarBotaoTema() {
+        var tema = document.documentElement.getAttribute("data-theme") || "light";
+        var icone = document.getElementById("icone-tema");
+        var btn = document.getElementById("btn-tema");
+        if (icone) icone.textContent = tema === "dark" ? "☀" : "☾";
+        if (btn) {
+          var rotulo = tema === "dark" ? "Ativar modo claro" : "Ativar modo escuro";
+          btn.setAttribute("aria-label", rotulo);
+          btn.setAttribute("title", rotulo);
+        }
+      }
+
+      var btnTema = document.getElementById("btn-tema");
+      if (btnTema) {
+        sincronizarBotaoTema();
+        btnTema.addEventListener("click", function () {
+          var atual = document.documentElement.getAttribute("data-theme") || "light";
+          var novo = atual === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", novo);
+          try {
+            localStorage.setItem("dalucare-theme", novo);
+          } catch (e) {}
+          sincronizarBotaoTema();
         });
       }
 
