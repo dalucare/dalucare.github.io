@@ -4,10 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Dalucare App</title>
-  <meta http-equiv="refresh" content="0; url=login.html">
-  <link rel="canonical" href="login.html">
+  <meta http-equiv="refresh" content="0; url=inicio.html">
+  <script>
+    (function () {
+      try {
+        var sessao = localStorage.getItem("dalucare_sessao");
+        window.location.replace(sessao ? "inicio.html" : "login.html");
+      } catch (e) {
+        window.location.replace("login.html");
+      }
+    })();
+  </script>
 </head>
 <body>
-  <p>Redirecionando para <a href="login.html">login</a>...</p>
+  <p>Redirecionando...</p>
 </body>
 </html>

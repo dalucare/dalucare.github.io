@@ -177,6 +177,182 @@ body.pagina-app {
   color: var(--cor-texto-suave);
 }
 
+/* Shell do app — menu lateral */
+body.pagina-shell {
+  background-color: var(--cor-fundo);
+}
+
+.app-topo-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+}
+
+.app-topo-esquerda,
+.app-topo-direita {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.app-usuario {
+  font-weight: 600;
+  color: var(--cor-texto);
+  font-size: 14px;
+}
+
+.btn-sair {
+  padding: 8px 14px;
+  font-size: 14px;
+}
+
+.btn-menu-lateral {
+  display: none;
+  width: 40px;
+  height: 40px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  background: var(--cor-superficie);
+  color: var(--cor-texto);
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.shell {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+  position: relative;
+}
+
+.barra-lateral {
+  width: 240px;
+  flex-shrink: 0;
+  background: var(--cor-superficie);
+  border-right: 1px solid var(--cor-borda);
+  padding: 20px 12px;
+  overflow-y: auto;
+}
+
+.barra-titulo {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--cor-texto-suave);
+  padding: 0 12px 12px;
+}
+
+.barra-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.barra-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  border: none;
+  background: transparent;
+  color: var(--cor-texto);
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.barra-item:hover {
+  background: var(--cor-diferencial-fundo);
+  color: var(--cor-primaria);
+}
+
+.barra-item.ativo {
+  background: var(--cor-selo-fundo);
+  color: var(--cor-primaria-escura);
+}
+
+.shell-conteudo {
+  flex: 1;
+  padding: 32px 28px;
+  overflow-y: auto;
+}
+
+.aba-painel {
+  display: none;
+  max-width: 900px;
+}
+
+.aba-painel.ativo {
+  display: block;
+}
+
+.aba-painel h1 {
+  color: var(--cor-titulo);
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.aba-intro {
+  color: var(--cor-texto-suave);
+  margin: 16px 0 24px;
+  font-size: 16px;
+}
+
+.painel-item.atalho {
+  cursor: pointer;
+  font: inherit;
+  text-align: left;
+  width: 100%;
+}
+
+.painel-item.atalho:hover {
+  border-color: var(--cor-primaria);
+}
+
+.shell-fundo {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  .btn-menu-lateral {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .barra-lateral {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1200;
+    transform: translateX(-105%);
+    transition: transform 0.25s ease;
+    box-shadow: var(--sombra);
+  }
+
+  .barra-lateral.aberta {
+    transform: translateX(0);
+  }
+
+  .shell-fundo {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1100;
+  }
+
+  .shell-conteudo {
+    padding: 24px 16px;
+  }
+}
+
 @media (max-width: 600px) {
   .painel-grid {
     grid-template-columns: 1fr;
@@ -184,5 +360,9 @@ body.pagina-app {
 
   .auth-card {
     padding: 24px;
+  }
+
+  .app-usuario {
+    display: none;
   }
 }
