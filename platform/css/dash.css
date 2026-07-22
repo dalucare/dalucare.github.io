@@ -95,6 +95,16 @@ body.pagina-dashboard {
   font-size: 15px;
 }
 
+.auth-aviso-local {
+  margin: 0 0 16px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  background: #eef6fb;
+  color: #1a4a66;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
 .auth-links {
   margin-top: 20px;
   text-align: center;

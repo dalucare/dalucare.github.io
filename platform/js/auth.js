@@ -93,14 +93,47 @@ function autenticarUsuario(email, senha) {
   const usuario = buscarUsuarioPorEmail(email);
 
   if (!usuario) {
-    throw new Error("E-mail ou senha incorretos.");
+    throw new Error(
+      "Conta não encontrada neste navegador. Cadastre-se de novo (comum ao mudar de http para https)."
+    );
   }
 
   if (usuario.senhaHash !== hashSenha(senha)) {
-    throw new Error("E-mail ou senha incorretos.");
+    throw new Error("Senha incorreta. Use “Esqueci minha senha” abaixo.");
   }
 
   return criarSessao(usuario);
+}
+
+function redefinirSenha(email, novaSenha, confirmarSenha) {
+  const usuario = buscarUsuarioPorEmail(email);
+
+  if (!usuario) {
+    throw new Error(
+      "Conta não encontrada neste navegador. Clique em Cadastre-se e crie a conta de novo."
+    );
+  }
+
+  if (novaSenha.length < 6) {
+    throw new Error("A senha deve ter pelo menos 6 caracteres.");
+  }
+
+  if (novaSenha !== confirmarSenha) {
+    throw new Error("As senhas não coincidem.");
+  }
+
+  const usuarios = obterUsuarios();
+  const indice = usuarios.findIndex(function (item) {
+    return item.email === usuario.email;
+  });
+
+  if (indice < 0) {
+    throw new Error("Não foi possível atualizar a senha. Cadastre-se de novo.");
+  }
+
+  usuarios[indice].senhaHash = hashSenha(novaSenha);
+  salvarUsuarios(usuarios);
+  return criarSessao(usuarios[indice]);
 }
 
 function exigirLogin() {

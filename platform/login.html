@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722i"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722i">
-  <link rel="stylesheet" href="css/dash.css?v=20260722i">
-  <script src="js/auth.js?v=20260722i"></script>
+  <script src="../js/force-https.js?v=20260722j"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722j">
+  <link rel="stylesheet" href="css/dash.css?v=20260722j">
+  <script src="js/auth.js?v=20260722j"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -21,6 +21,7 @@
     <div class="auth-card">
       <h1>Entrar</h1>
       <p class="auth-subtitulo">Acesse sua conta de paciente ou profissional.</p>
+      <p class="auth-aviso-local">Contas ficam só neste navegador (protótipo). Se o login falhar após ativar HTTPS, cadastre-se de novo.</p>
 
       <form id="form-login" class="formulario">
         <div class="linha-form">
@@ -42,19 +43,59 @@
       </form>
 
       <p class="auth-links">
-        Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a>
+        <button type="button" class="link-suave" id="btn-mostrar-recuperar">Esqueci minha senha</button>
+      </p>
+
+      <form id="form-recuperar" class="formulario" hidden>
+        <p class="auth-subtitulo">Defina uma nova senha para o e-mail já cadastrado neste navegador.</p>
+        <div class="linha-form">
+          <div class="campo">
+            <label for="recuperar-email">E-mail</label>
+            <input type="email" id="recuperar-email" required autocomplete="email">
+          </div>
+        </div>
+        <div class="linha-form">
+          <div class="campo">
+            <label for="recuperar-senha">Nova senha</label>
+            <input type="password" id="recuperar-senha" required minlength="6" autocomplete="new-password">
+          </div>
+        </div>
+        <div class="linha-form">
+          <div class="campo">
+            <label for="recuperar-confirmar">Confirmar nova senha</label>
+            <input type="password" id="recuperar-confirmar" required minlength="6" autocomplete="new-password">
+          </div>
+        </div>
+        <button type="submit" class="btn btn-principal" id="btn-recuperar" style="width: 100%;">Salvar nova senha e entrar</button>
+        <p id="aviso-recuperar" class="aviso-form"></p>
+      </form>
+
+      <p class="auth-links">
+        Não tem conta? <a href="cadastro.html?v=20260722j">Cadastre-se aqui</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722i";
+      window.location.href = "home.html?v=20260722j";
     }
 
     const formLogin = document.getElementById("form-login");
+    const formRecuperar = document.getElementById("form-recuperar");
     const avisoLogin = document.getElementById("aviso-login");
+    const avisoRecuperar = document.getElementById("aviso-recuperar");
     const btnLogin = document.getElementById("btn-login");
+    const btnRecuperar = document.getElementById("btn-recuperar");
+    const btnMostrar = document.getElementById("btn-mostrar-recuperar");
+
+    btnMostrar.addEventListener("click", function () {
+      formRecuperar.hidden = !formRecuperar.hidden;
+      if (!formRecuperar.hidden) {
+        document.getElementById("recuperar-email").value =
+          document.getElementById("login-email").value;
+      }
+    });
 
     formLogin.addEventListener("submit", function (evento) {
       evento.preventDefault();
@@ -67,11 +108,30 @@
 
       try {
         autenticarUsuario(email, senha);
-        window.location.href = "home.html?v=20260722i";
+        window.location.href = "home.html?v=20260722j";
       } catch (erro) {
         mostrarAviso(avisoLogin, erro.message, "erro");
         btnLogin.disabled = false;
         btnLogin.textContent = "Entrar";
+      }
+    });
+
+    formRecuperar.addEventListener("submit", function (evento) {
+      evento.preventDefault();
+      btnRecuperar.disabled = true;
+      btnRecuperar.textContent = "Salvando...";
+
+      try {
+        redefinirSenha(
+          document.getElementById("recuperar-email").value,
+          document.getElementById("recuperar-senha").value,
+          document.getElementById("recuperar-confirmar").value
+        );
+        window.location.href = "home.html?v=20260722j";
+      } catch (erro) {
+        mostrarAviso(avisoRecuperar, erro.message, "erro");
+        btnRecuperar.disabled = false;
+        btnRecuperar.textContent = "Salvar nova senha e entrar";
       }
     });
   </script>
