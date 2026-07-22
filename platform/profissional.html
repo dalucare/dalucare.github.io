@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abrindo painel profissional…</title>
+  <script src="../js/force-https.js?v=20260722m"></script>
+  <script src="js/auth.js?v=20260722m"></script>
+  <script>
+    (function () {
+      try {
+        garantirUsuarioDemo({
+          nome: "Dr. João Silva",
+          email: "profissional@dalucare.demo",
+          senha: "demo123",
+          tipo: "profissional",
+        });
+        autenticarUsuario("profissional@dalucare.demo", "demo123");
+      } catch (e) {
+        try {
+          localStorage.setItem(
+            "dalucare_sessao",
+            JSON.stringify({
+              id: "demo_pro",
+              nome: "Dr. João Silva",
+              email: "profissional@dalucare.demo",
+              tipo: "profissional",
+              criadoEm: new Date().toISOString(),
+            })
+          );
+        } catch (err) {}
+      }
+      window.location.replace("home.html?v=20260722m&painel=profissional");
+    })();
+  </script>
+</head>
+<body>
+  <p style="font-family: sans-serif; padding: 24px;">
+    Abrindo o painel profissional…
+    <a href="home.html?v=20260722m&painel=profissional">Clique aqui se não redirecionar</a>
+  </p>
+</body>
+</html>

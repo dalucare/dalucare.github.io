@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -6,13 +6,13 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722k"></script>
+  <script src="../js/force-https.js?v=20260722m"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722k">
-  <link rel="stylesheet" href="css/dash.css?v=20260722k">
-  <script src="js/auth.js?v=20260722k"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722m">
+  <link rel="stylesheet" href="css/dash.css?v=20260722m">
+  <script src="js/auth.js?v=20260722m"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -185,6 +185,13 @@
         </section>
 
         <section class="aba-painel ativo" id="aba-visao-geral-pac">
+          <div class="aviso-troca-painel">
+            <div>
+              <strong>O design da clínica (estilo MedPlus) é da área do profissional.</strong>
+              <p>Você está na área do paciente. Clique no botão para abrir o painel clínico agora.</p>
+            </div>
+            <a class="btn btn-principal" href="profissional.html?v=20260722m">Abrir painel profissional</a>
+          </div>
           <div class="kpi-grid">
             <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Próximas consultas</p><p class="kpi-valor">0</p><p class="kpi-meta">Agende quando quiser</p></div></article>
             <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Exames salvos</p><p class="kpi-valor">0</p><p class="kpi-meta">Anexe seus arquivos</p></div></article>
@@ -300,6 +307,33 @@
       }
 
       var sessao = lerSessao();
+      var params = new URLSearchParams(window.location.search);
+      if (params.get("painel") === "profissional") {
+        try {
+          if (typeof garantirUsuarioDemo === "function") {
+            garantirUsuarioDemo({
+              nome: "Dr. João Silva",
+              email: "profissional@dalucare.demo",
+              senha: "demo123",
+              tipo: "profissional",
+            });
+            autenticarUsuario("profissional@dalucare.demo", "demo123");
+            sessao = lerSessao();
+          } else {
+            localStorage.setItem(
+              "dalucare_sessao",
+              JSON.stringify({
+                id: "demo_pro",
+                nome: "Dr. João Silva",
+                email: "profissional@dalucare.demo",
+                tipo: "profissional",
+                criadoEm: new Date().toISOString(),
+              })
+            );
+            sessao = lerSessao();
+          }
+        } catch (e) {}
+      }
       if (!sessao) {
         window.location.replace("login.html");
         return;

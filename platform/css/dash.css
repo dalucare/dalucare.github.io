@@ -118,6 +118,39 @@ body.pagina-dashboard {
   color: var(--dash-suave);
 }
 
+.aviso-troca-painel {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  padding: 16px 18px;
+  border-radius: 16px;
+  background: linear-gradient(120deg, #12344f, #1d6fa3);
+  color: #fff;
+}
+
+.aviso-troca-painel strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.aviso-troca-painel p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.aviso-troca-painel .btn {
+  background: #fff;
+  color: #12344f;
+  border: none;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
 .auth-links {
   margin-top: 20px;
   text-align: center;

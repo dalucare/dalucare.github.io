@@ -1,13 +1,13 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722k"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722k">
-  <link rel="stylesheet" href="css/dash.css?v=20260722k">
-  <script src="js/auth.js?v=20260722k"></script>
+  <script src="../js/force-https.js?v=20260722m"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722m">
+  <link rel="stylesheet" href="css/dash.css?v=20260722m">
+  <script src="js/auth.js?v=20260722m"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -70,7 +70,7 @@
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722k";
+      window.location.href = "home.html?v=20260722m";
     }
 
     const tabs = document.querySelectorAll(".auth-tab");
@@ -106,7 +106,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "home.html?v=20260722k";
+        window.location.href = "home.html?v=20260722m";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;
