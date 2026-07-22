@@ -1398,6 +1398,16 @@ button.cal-cel:hover {
   color: var(--dash-suave);
 }
 
+.embed-frame {
+  padding: 12px;
+  overflow: hidden;
+}
+
+.embed-frame iframe {
+  display: block;
+  background: #fff;
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;

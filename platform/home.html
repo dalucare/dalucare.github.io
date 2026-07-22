@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722t"></script>
+  <script src="../js/force-https.js?v=20260722u"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722t">
-  <link rel="stylesheet" href="css/dash.css?v=20260722t">
-  <script src="js/auth.js?v=20260722t"></script>
-  <script src="js/agenda-slots.js?v=20260722t"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722u">
+  <link rel="stylesheet" href="css/dash.css?v=20260722u">
+  <script src="js/auth.js?v=20260722u"></script>
+  <script src="js/agenda-slots.js?v=20260722u"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -282,7 +282,26 @@
         <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
         <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
-        <section class="aba-painel" id="aba-prescricoes"><h1>Prescrições</h1><p class="aba-intro">Receituários e modelos.</p><div class="painel-aviso">Em breve: prescrição digital.</div></section>
+        <section class="aba-painel" id="aba-prescricoes">
+          <div class="painel-bloco-topo">
+            <div>
+              <h1>Prescrições</h1>
+              <p class="aba-intro">Receituário digital MedHub integrado ao Dalucare.</p>
+            </div>
+            <a class="link-suave" href="https://www.medhub.ia.br/embed/prescricao.html" target="_blank" rel="noopener noreferrer">Abrir em nova aba</a>
+          </div>
+          <div class="embed-frame painel-bloco">
+            <iframe
+              id="medhub-rx-embed"
+              src="https://www.medhub.ia.br/embed/prescricao.html"
+              title="Receituário MedHub"
+              style="width:100%;min-height:720px;border:0;border-radius:12px;"
+              loading="lazy"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allow="clipboard-write"
+            ></iframe>
+          </div>
+        </section>
         <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualização.</div></section>
         <section class="aba-painel" id="aba-relatorios"><h1>Relatórios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painéis gerenciais.</div></section>
         <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
