@@ -1,3 +1,4 @@
+/* auth helpers — também embutidos no home para não depender só deste arquivo */
 const CHAVE_USUARIOS = "dalucare_usuarios";
 const CHAVE_SESSAO = "dalucare_sessao";
 
@@ -24,7 +25,12 @@ function salvarUsuarios(usuarios) {
 
 function obterSessao() {
   try {
-    return JSON.parse(localStorage.getItem(CHAVE_SESSAO));
+    const bruto = localStorage.getItem(CHAVE_SESSAO);
+    if (!bruto) return null;
+    const sessao = JSON.parse(bruto);
+    if (!sessao || typeof sessao !== "object") return null;
+    if (!sessao.nome || !sessao.email) return null;
+    return sessao;
   } catch (erro) {
     return null;
   }
@@ -35,7 +41,7 @@ function criarSessao(usuario) {
     id: usuario.id,
     nome: usuario.nome,
     email: usuario.email,
-    tipo: usuario.tipo,
+    tipo: usuario.tipo || "paciente",
     criadoEm: new Date().toISOString(),
   };
   localStorage.setItem(CHAVE_SESSAO, JSON.stringify(sessao));
@@ -74,7 +80,7 @@ function cadastrarUsuario(dados) {
     nome: dados.nome.trim(),
     email: email,
     senhaHash: hashSenha(dados.senha),
-    tipo: dados.tipo,
+    tipo: dados.tipo || "paciente",
     cadastroEm: new Date().toISOString(),
   };
 
@@ -100,7 +106,7 @@ function autenticarUsuario(email, senha) {
 function exigirLogin() {
   const sessao = obterSessao();
   if (!sessao) {
-    window.location.href = "login.html";
+    window.location.replace("login.html");
     return null;
   }
   return sessao;
@@ -114,9 +120,13 @@ function mostrarAviso(elemento, texto, tipo) {
 }
 
 function aplicarTemaInicial() {
-  const salvo = localStorage.getItem("dalucare-theme");
-  const tema = salvo || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-  document.documentElement.setAttribute("data-theme", tema);
+  try {
+    const salvo = localStorage.getItem("dalucare-theme");
+    const tema = salvo || (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    document.documentElement.setAttribute("data-theme", tema);
+  } catch (e) {
+    document.documentElement.setAttribute("data-theme", "light");
+  }
 }
 
 aplicarTemaInicial();

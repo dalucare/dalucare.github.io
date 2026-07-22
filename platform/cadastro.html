@@ -69,7 +69,7 @@
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722f";
+      window.location.href = "home.html?v=20260722g";
     }
 
     const tabs = document.querySelectorAll(".auth-tab");
@@ -105,7 +105,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "home.html?v=20260722f";
+        window.location.href = "home.html?v=20260722g";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;
