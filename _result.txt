@@ -1,0 +1,8 @@
+4b4962eb8a6db6df5cc0cad702c1de240ed3e737
+?? _cmd_out.txt
+?? _cmd_out2.txt
+?? _result.txt
+4b4962eb8a6db6df5cc0cad702c1de240ed3e737
+dalucare <angelaa_couto@hotmail.com>
+dalucare <angelaa_couto@hotmail.com>
+Focus app on professional panel only; fix Pages publish.
