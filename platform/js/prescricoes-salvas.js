@@ -74,6 +74,32 @@
     return linhas.join("\n");
   }
 
+  function cabecalhoMedico(perfil) {
+    var p = perfil || {};
+    var nome = p.name || p.nome || "Médico(a)";
+    var uf = p.crmUf || "SP";
+    var crm = p.crmNumber || p.crm || "";
+    var linhas = ["RECEITUÁRIO", nome];
+    if (crm) linhas.push("CRM " + uf + " " + crm);
+    linhas.push("--------------------------------");
+    return linhas.join("\n");
+  }
+
+  function textoReceitaCompleta(itens, perfil) {
+    var lista = Array.isArray(itens) ? itens : [];
+    var blocos = [cabecalhoMedico(perfil)];
+    if (!lista.length) {
+      blocos.push("(Nenhum medicamento selecionado)");
+    } else {
+      lista.forEach(function (item, indice) {
+        blocos.push(indice + 1 + ") " + textoReceita(item));
+      });
+    }
+    blocos.push("--------------------------------");
+    blocos.push("Dalucare · Minhas prescrições");
+    return blocos.join("\n\n");
+  }
+
   function buscar(termo) {
     var q = String(termo || "")
       .trim()
@@ -143,6 +169,8 @@
     registrarUso: registrarUso,
     obter: obter,
     textoReceita: textoReceita,
+    cabecalhoMedico: cabecalhoMedico,
+    textoReceitaCompleta: textoReceitaCompleta,
     novoId: novoId,
   };
 })(window);

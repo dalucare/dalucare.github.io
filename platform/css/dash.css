@@ -1710,3 +1710,16 @@ body.modal-aberto {
   }
 }
 
+
+.presc-receita-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.presc-receita-medico strong { display:block; font-size:16px; }
+.presc-receita-medico span { color: var(--dash-suave); font-size:14px; font-weight:600; }
+.presc-receita-acoes { display:flex; gap:8px; flex-wrap:wrap; }
+.presc-salva-item.na-receita { border-color: var(--cor-primaria, #1d6fa3); box-shadow: inset 0 0 0 1px var(--cor-primaria, #1d6fa3); }

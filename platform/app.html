@@ -1,20 +1,20 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
-  <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ab"></script>
+  <title>InÃ­cio | Dalucare</title>
+  <script src="../js/force-https.js?v=20260722ac"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722ab">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ab">
-  <script src="js/auth.js?v=20260722ab"></script>
-  <script src="js/agenda-slots.js?v=20260722ab"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722ab"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ac">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ac">
+  <script src="js/auth.js?v=20260722ac"></script>
+  <script src="js/agenda-slots.js?v=20260722ac"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722ac"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -23,26 +23,26 @@
         <span class="dash-brand-mark" aria-hidden="true"></span>
         <div>
           <strong>Dalucare</strong>
-          <small id="dash-brand-sub">Plataforma de saúde</small>
+          <small id="dash-brand-sub">Plataforma de saÃºde</small>
         </div>
       </div>
 
-      <!-- Menu padrão (paciente); o JS ajusta se for profissional -->
+      <!-- Menu padrÃ£o (paciente); o JS ajusta se for profissional -->
       <nav class="dash-nav" id="dash-nav" aria-label="Funcionalidades">
-        <button type="button" class="dash-nav-item ativo" data-aba="visao-geral">Início</button>
+        <button type="button" class="dash-nav-item ativo" data-aba="visao-geral">InÃ­cio</button>
         <button type="button" class="dash-nav-item" data-aba="agendar">Agendar</button>
         <button type="button" class="dash-nav-item" data-aba="exames">Meus exames</button>
         <button type="button" class="dash-nav-item" data-aba="consultas">Consultas</button>
-        <button type="button" class="dash-nav-item" data-aba="autorizacoes">Autorizações</button>
+        <button type="button" class="dash-nav-item" data-aba="autorizacoes">AutorizaÃ§Ãµes</button>
         <button type="button" class="dash-nav-item" data-aba="profissionais">Profissionais</button>
         <button type="button" class="dash-nav-item" data-aba="mensagens">Mensagens</button>
-        <button type="button" class="dash-nav-item" data-aba="config">Configurações</button>
+        <button type="button" class="dash-nav-item" data-aba="config">ConfiguraÃ§Ãµes</button>
       </nav>
 
       <div class="dash-user">
         <div class="dash-avatar" id="dash-avatar">D</div>
         <div>
-          <strong id="dash-user-nome">Usuário</strong>
+          <strong id="dash-user-nome">UsuÃ¡rio</strong>
           <small id="dash-user-meta">Conta Dalucare</small>
         </div>
       </div>
@@ -53,9 +53,9 @@
     <div class="dash-main">
       <header class="dash-top">
         <div class="dash-top-esquerda">
-          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">☰</button>
+          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">â˜°</button>
           <div>
-            <h1 class="dash-saudacao" id="dash-saudacao">Olá</h1>
+            <h1 class="dash-saudacao" id="dash-saudacao">OlÃ¡</h1>
             <p class="dash-data" id="dash-data"></p>
           </div>
         </div>
@@ -64,13 +64,13 @@
             <span class="sr-only">Buscar</span>
             <input type="search" id="dash-busca" placeholder="Buscar..." disabled>
           </label>
-          <button type="button" class="dash-icone" title="Notificações" aria-label="Notificações">
+          <button type="button" class="dash-icone" title="NotificaÃ§Ãµes" aria-label="NotificaÃ§Ãµes">
             <span class="dash-icone-ponto" aria-hidden="true"></span>
             <span class="dash-badge">0</span>
           </button>
           <a class="dash-link-site" href="../index.html">Site</a>
           <button type="button" class="btn-tema dash-btn-tema" id="btn-tema" aria-label="Ativar modo escuro" title="Ativar modo escuro">
-            <span id="icone-tema" aria-hidden="true">☾</span>
+            <span id="icone-tema" aria-hidden="true">â˜¾</span>
           </button>
           <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
         </div>
@@ -82,7 +82,7 @@
             <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Consultas hoje</p><p class="kpi-valor">18</p><p class="kpi-meta">12 presenciais</p></div></article>
             <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Retornos</p><p class="kpi-valor">3</p><p class="kpi-meta">Aguardando</p></div></article>
             <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Teleconsultas</p><p class="kpi-valor">2</p><p class="kpi-meta">Agendadas</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Pendências</p><p class="kpi-valor">7</p><p class="kpi-meta">Em aberto</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">PendÃªncias</p><p class="kpi-valor">7</p><p class="kpi-meta">Em aberto</p></div></article>
           </div>
 
           <div class="clinica-grid">
@@ -107,7 +107,7 @@
                   <div class="agenda-avatar online-av">AL</div>
                   <div>
                     <strong>Ana Carolina Lemos</strong>
-                    <span>Teleconsulta · 09:00</span>
+                    <span>Teleconsulta Â· 09:00</span>
                   </div>
                   <button type="button" class="btn btn-principal btn-sm" data-ir="online">Entrar na sala</button>
                 </div>
@@ -116,22 +116,22 @@
 
             <div class="clinica-col clinica-col-meio">
               <section class="painel-bloco">
-                <h2>Atalhos rápidos</h2>
+                <h2>Atalhos rÃ¡pidos</h2>
                 <div class="atalhos-grid atalhos-clinica">
                   <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-azul"></span>Novo paciente</button>
                   <button type="button" class="atalho-btn" data-ir="agenda" data-nova-consulta="1"><span class="atalho-ico ico-verde"></span>Nova consulta</button>
-                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Prescrição</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>PrescriÃ§Ã£o</button>
                   <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-laranja"></span>Atestado</button>
                   <button type="button" class="atalho-btn" data-ir="exames-pro"><span class="atalho-ico ico-azul"></span>Pedir exame</button>
                   <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-verde"></span>Encaminhar</button>
-                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Evolução</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>EvoluÃ§Ã£o</button>
                   <button type="button" class="atalho-btn" data-ir="config"><span class="atalho-ico ico-laranja"></span>Modelos</button>
                 </div>
               </section>
 
               <section class="painel-bloco">
                 <div class="painel-bloco-topo">
-                  <h2>Mensagens não lidas</h2>
+                  <h2>Mensagens nÃ£o lidas</h2>
                   <button type="button" class="link-suave" data-ir="mensagens">Ver todas</button>
                 </div>
                 <ul class="lista-mensagens">
@@ -139,16 +139,16 @@
                     <div class="agenda-avatar">MS</div>
                     <div>
                       <strong>Maria Silva</strong>
-                      <span>Doutor, o resultado do exame já saiu?</span>
-                      <em>há 12 min</em>
+                      <span>Doutor, o resultado do exame jÃ¡ saiu?</span>
+                      <em>hÃ¡ 12 min</em>
                     </div>
                   </li>
                   <li>
                     <div class="agenda-avatar">JP</div>
                     <div>
-                      <strong>João Pedro Santos</strong>
-                      <span>Posso remarcar a consulta de amanhã?</span>
-                      <em>há 40 min</em>
+                      <strong>JoÃ£o Pedro Santos</strong>
+                      <span>Posso remarcar a consulta de amanhÃ£?</span>
+                      <em>hÃ¡ 40 min</em>
                     </div>
                   </li>
                 </ul>
@@ -161,27 +161,27 @@
                   <div class="dash-avatar grande" id="ficha-avatar">MS</div>
                   <div>
                     <strong id="ficha-nome">Maria Silva</strong>
-                    <p id="ficha-meta">32 anos · Feminino · Bradesco Saúde</p>
+                    <p id="ficha-meta">32 anos Â· Feminino Â· Bradesco SaÃºde</p>
                   </div>
                 </div>
                 <div class="acoes-paciente">
-                  <button type="button" class="btn btn-principal" data-ir="prontuarios">Abrir prontuário</button>
+                  <button type="button" class="btn btn-principal" data-ir="prontuarios">Abrir prontuÃ¡rio</button>
                   <button type="button" class="btn btn-secundario" data-ir="online">Iniciar teleconsulta</button>
                 </div>
                 <div class="ficha-bloco">
-                  <h3>Última consulta</h3>
-                  <p id="ficha-ultima">15/04/2026 · Retorno · Hipertensão controlada</p>
+                  <h3>Ãšltima consulta</h3>
+                  <p id="ficha-ultima">15/04/2026 Â· Retorno Â· HipertensÃ£o controlada</p>
                 </div>
                 <div class="campo-obs">
-                  <label for="obs-rapidas">Observações rápidas</label>
-                  <textarea id="obs-rapidas" rows="3" placeholder="Anotações do atendimento...">Paciente refere melhora com a medicação atual.</textarea>
+                  <label for="obs-rapidas">ObservaÃ§Ãµes rÃ¡pidas</label>
+                  <textarea id="obs-rapidas" rows="3" placeholder="AnotaÃ§Ãµes do atendimento...">Paciente refere melhora com a medicaÃ§Ã£o atual.</textarea>
                 </div>
                 <div class="ficha-bloco">
                   <h3>Documentos e exames</h3>
                   <ul class="lista-docs" id="ficha-docs">
                     <li><span>Hemograma</span><span class="status status-ok">Normal</span></li>
-                    <li><span>Ressonância</span><span class="status status-atencao">Atenção</span></li>
-                    <li><span>Raio-X tórax</span><span class="status status-ok">Normal</span></li>
+                    <li><span>RessonÃ¢ncia</span><span class="status status-atencao">AtenÃ§Ã£o</span></li>
+                    <li><span>Raio-X tÃ³rax</span><span class="status status-ok">Normal</span></li>
                   </ul>
                 </div>
               </section>
@@ -190,19 +190,19 @@
         </section>
 
         <section class="aba-painel" id="aba-visao-geral-pac" hidden>
-          <div class="painel-aviso">Área do paciente em construção. Por enquanto o app está focado no profissional.</div>
+          <div class="painel-aviso">Ãrea do paciente em construÃ§Ã£o. Por enquanto o app estÃ¡ focado no profissional.</div>
         </section>
 
         <section class="aba-painel" id="aba-agendar"><h1>Agendar consulta</h1><p class="aba-intro">Escolha o profissional e pague 50% para reservar.</p><div class="painel-aviso">Em breve: agenda com Mercado Pago.</div></section>
         <section class="aba-painel" id="aba-exames"><h1>Meus exames</h1><p class="aba-intro">Anexe PDFs ou fotos dos exames.</p><div class="painel-aviso">Em breve: upload seguro.</div></section>
-        <section class="aba-painel" id="aba-consultas"><h1>Minhas consultas</h1><p class="aba-intro">Histórico e próximos horários.</p><div class="painel-aviso">Em breve: lista com status.</div></section>
-        <section class="aba-painel" id="aba-autorizacoes"><h1>Autorizações</h1><p class="aba-intro">Controle quem acessa seus dados.</p><div class="painel-aviso">Em breve: consentimento LGPD.</div></section>
-        <section class="aba-painel" id="aba-profissionais"><h1>Profissionais</h1><div class="dash-grid-2"><article class="painel-bloco"><h2>Angela Couto</h2><p>Cirurgia geral · Santos · R$ 150</p></article><article class="painel-bloco"><h2>Priscila Couto</h2><p>Fisioterapia · Santos · R$ 300</p></article><article class="painel-bloco"><h2>Débora Medeiros</h2><p>Otorrino · SP/SBC · R$ 300</p></article><article class="painel-bloco"><h2>Jefferson França</h2><p>Endocrino · Santos/Guarujá · R$ 500</p></article></div></section>
+        <section class="aba-painel" id="aba-consultas"><h1>Minhas consultas</h1><p class="aba-intro">HistÃ³rico e prÃ³ximos horÃ¡rios.</p><div class="painel-aviso">Em breve: lista com status.</div></section>
+        <section class="aba-painel" id="aba-autorizacoes"><h1>AutorizaÃ§Ãµes</h1><p class="aba-intro">Controle quem acessa seus dados.</p><div class="painel-aviso">Em breve: consentimento LGPD.</div></section>
+        <section class="aba-painel" id="aba-profissionais"><h1>Profissionais</h1><div class="dash-grid-2"><article class="painel-bloco"><h2>Angela Couto</h2><p>Cirurgia geral Â· Santos Â· R$ 150</p></article><article class="painel-bloco"><h2>Priscila Couto</h2><p>Fisioterapia Â· Santos Â· R$ 300</p></article><article class="painel-bloco"><h2>DÃ©bora Medeiros</h2><p>Otorrino Â· SP/SBC Â· R$ 300</p></article><article class="painel-bloco"><h2>Jefferson FranÃ§a</h2><p>Endocrino Â· Santos/GuarujÃ¡ Â· R$ 500</p></article></div></section>
         <section class="aba-painel" id="aba-agenda">
           <div class="painel-bloco-topo agenda-completa-topo">
             <div>
               <h1>Agenda</h1>
-              <p class="aba-intro">Calendário editável · referência de hoje: 22/07/2026</p>
+              <p class="aba-intro">CalendÃ¡rio editÃ¡vel Â· referÃªncia de hoje: 22/07/2026</p>
             </div>
             <button type="button" class="btn btn-principal" id="btn-cal-nova">+ Nova consulta</button>
           </div>
@@ -210,12 +210,12 @@
           <div class="cal-layout">
             <section class="painel-bloco cal-mes-bloco">
               <div class="cal-nav">
-                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-prev" aria-label="Mês anterior">‹</button>
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-prev" aria-label="MÃªs anterior">â€¹</button>
                 <h2 id="cal-mes-titulo">Julho 2026</h2>
-                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-next" aria-label="Próximo mês">›</button>
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-next" aria-label="PrÃ³ximo mÃªs">â€º</button>
                 <button type="button" class="link-suave" id="btn-cal-hoje">Hoje</button>
               </div>
-              <div class="cal-grade" id="cal-grade" aria-label="Calendário mensal"></div>
+              <div class="cal-grade" id="cal-grade" aria-label="CalendÃ¡rio mensal"></div>
             </section>
 
             <section class="painel-bloco cal-dia-bloco">
@@ -224,14 +224,14 @@
                 <span class="chip" id="cal-dia-contagem">0 consultas</span>
               </div>
               <ul class="lista-agenda lista-agenda-pro" id="cal-lista-dia"></ul>
-              <p class="cal-dica">Clique em um horário para editar, ou em <strong>+ Nova consulta</strong> para cadastrar.</p>
+              <p class="cal-dica">Clique em um horÃ¡rio para editar, ou em <strong>+ Nova consulta</strong> para cadastrar.</p>
             </section>
           </div>
         </section>
 
         <div class="modal-overlay" id="modal-consulta" hidden>
           <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="cal-form-titulo">
-            <button type="button" class="modal-fechar" id="modal-consulta-fechar" aria-label="Fechar">×</button>
+            <button type="button" class="modal-fechar" id="modal-consulta-fechar" aria-label="Fechar">Ã—</button>
             <form class="cal-form" id="cal-form">
               <h3 id="cal-form-titulo">Nova consulta</h3>
               <p class="auth-subtitulo" id="cal-form-sub">Preencha os dados e salve na agenda.</p>
@@ -242,9 +242,9 @@
                   <input type="date" id="cal-data" required>
                 </div>
                 <div class="campo">
-                  <label for="cal-hora">Horário</label>
+                  <label for="cal-hora">HorÃ¡rio</label>
                   <select id="cal-hora" required></select>
-                  <small class="cal-hora-ajuda" id="cal-hora-ajuda">Horários já ocupados não aparecem.</small>
+                  <small class="cal-hora-ajuda" id="cal-hora-ajuda">HorÃ¡rios jÃ¡ ocupados nÃ£o aparecem.</small>
                 </div>
                 <div class="campo cal-campo-largo">
                   <label for="cal-nome">Paciente</label>
@@ -269,7 +269,7 @@
                   </select>
                 </div>
                 <div class="campo cal-campo-largo">
-                  <label for="cal-obs">Observação</label>
+                  <label for="cal-obs">ObservaÃ§Ã£o</label>
                   <input type="text" id="cal-obs" placeholder="Opcional">
                 </div>
               </div>
@@ -283,23 +283,23 @@
           </div>
         </div>
 
-        <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
-        <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
+        <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histÃ³rico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
+        <section class="aba-painel" id="aba-prontuarios"><h1>ProntuÃ¡rios</h1><p class="aba-intro">EvoluÃ§Ãµes e anexos.</p><div class="painel-aviso">Em breve: prontuÃ¡rio eletrÃ´nico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
         <section class="aba-painel" id="aba-prescricoes">
           <div class="painel-bloco-topo">
             <div>
-              <h1>Prescrições</h1>
-              <p class="aba-intro">Receituário MedHub · nome e CRM do login Dalucare são enviados automaticamente.</p>
+              <h1>PrescriÃ§Ãµes</h1>
+              <p class="aba-intro">ReceituÃ¡rio MedHub Â· nome e CRM do login Dalucare sÃ£o enviados automaticamente.</p>
             </div>
             <a class="link-suave" href="https://www.medhub.ia.br/embed/prescricao.html?v=rx-20260722i" target="_blank" rel="noopener noreferrer">Abrir em nova aba</a>
           </div>
-          <p class="cal-dica" id="medhub-perfil-status">Aguardando envio do perfil ao MedHub…</p>
+          <p class="cal-dica" id="medhub-perfil-status">Aguardando envio do perfil ao MedHubâ€¦</p>
           <div class="embed-frame painel-bloco">
             <iframe
               id="medhub-rx-embed"
               src="https://www.medhub.ia.br/embed/prescricao.html?v=rx-20260722i"
-              title="Receituário MedHub"
+              title="ReceituÃ¡rio MedHub"
               style="width:100%;min-height:720px;border:0;"
             ></iframe>
           </div>
@@ -307,17 +307,29 @@
         <section class="aba-painel" id="aba-prescricoes-salvas">
           <div class="painel-bloco-topo presc-salvas-topo">
             <div>
-              <h1>Minhas prescrições</h1>
-              <p class="aba-intro">Suas medicações de uso frequente — cadastre uma vez e reutilize no próximo paciente.</p>
+              <h1>Minhas prescriÃ§Ãµes</h1>
+              <p class="aba-intro">Suas medicaÃ§Ãµes de uso frequente â€” cadastre uma vez e reutilize no prÃ³ximo paciente.</p>
             </div>
             <button type="button" class="btn btn-principal" id="btn-nova-presc-salva">+ Novo medicamento</button>
           </div>
+
+          <section class="painel-bloco presc-receita-barra">
+            <div class="presc-receita-medico">
+              <strong id="presc-receita-medico-nome">MÃ©dico(a)</strong>
+              <span id="presc-receita-medico-crm">CRM â€”</span>
+              <p class="cal-dica" id="presc-receita-resumo">Clique em Usar nos medicamentos para montar a receita.</p>
+            </div>
+            <div class="presc-receita-acoes">
+              <button type="button" class="btn btn-principal" id="btn-gerar-receita">Gerar receita</button>
+              <button type="button" class="btn btn-secundario" id="btn-limpar-receita">Limpar receita</button>
+            </div>
+          </section>
 
           <div class="presc-salvas-layout">
             <section class="painel-bloco">
               <label class="campo presc-busca-campo">
                 <span>Buscar medicamento</span>
-                <input type="search" id="presc-salvas-busca" placeholder="Ex.: losartana, omeprazol, jejum…" autocomplete="off">
+                <input type="search" id="presc-salvas-busca" placeholder="Ex.: losartana, omeprazol, jejumâ€¦" autocomplete="off">
               </label>
               <p class="cal-dica" id="presc-salvas-contagem">0 medicamentos</p>
               <ul class="presc-salvas-lista" id="presc-salvas-lista"></ul>
@@ -325,7 +337,7 @@
 
             <section class="painel-bloco">
               <h2 id="presc-salvas-form-titulo">Novo medicamento</h2>
-              <p class="cal-dica">Preencha e salve. Depois use “Copiar” ou “Usar” na lista.</p>
+              <p class="cal-dica">Preencha e salve. Depois use â€œCopiarâ€ ou â€œUsarâ€ na lista.</p>
               <form class="cal-form" id="form-presc-salva">
                 <input type="hidden" id="presc-salva-id" value="">
                 <div class="cal-form-grid">
@@ -344,8 +356,8 @@
                       <option value="IM">IM</option>
                       <option value="IV">IV</option>
                       <option value="SC">SC</option>
-                      <option value="Tópica">Tópica</option>
-                      <option value="Inalatória">Inalatória</option>
+                      <option value="TÃ³pica">TÃ³pica</option>
+                      <option value="InalatÃ³ria">InalatÃ³ria</option>
                       <option value="Outra">Outra</option>
                     </select>
                   </div>
@@ -358,7 +370,7 @@
                     <input type="text" id="presc-salva-qtd" placeholder="Ex.: 30 comprimidos">
                   </div>
                   <div class="campo">
-                    <label for="presc-salva-obs">Observação</label>
+                    <label for="presc-salva-obs">ObservaÃ§Ã£o</label>
                     <input type="text" id="presc-salva-obs" placeholder="Opcional">
                   </div>
                 </div>
@@ -380,13 +392,13 @@
             </section>
           </div>
         </section>
-        <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualização.</div></section>
-        <section class="aba-painel" id="aba-relatorios"><h1>Relatórios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painéis gerenciais.</div></section>
+        <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualizaÃ§Ã£o.</div></section>
+        <section class="aba-painel" id="aba-relatorios"><h1>RelatÃ³rios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painÃ©is gerenciais.</div></section>
         <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
-        <section class="aba-painel" id="aba-mensagens"><h1>Mensagens</h1><p class="aba-intro">Comunicação segura.</p><div class="painel-aviso">Em breve: chat.</div></section>
+        <section class="aba-painel" id="aba-mensagens"><h1>Mensagens</h1><p class="aba-intro">ComunicaÃ§Ã£o segura.</p><div class="painel-aviso">Em breve: chat.</div></section>
         <section class="aba-painel" id="aba-config">
-          <h1>Configurações</h1>
-          <p class="aba-intro">Dados usados no receituário MedHub.</p>
+          <h1>ConfiguraÃ§Ãµes</h1>
+          <p class="aba-intro">Dados usados no receituÃ¡rio MedHub.</p>
           <form class="painel-bloco cal-form" id="form-perfil-pro" style="max-width:520px;">
             <div class="cal-form-grid">
               <div class="campo cal-campo-largo">
@@ -415,29 +427,29 @@
   <script>
     (function () {
       var MENU_PACIENTE = [
-        { id: "visao-geral", label: "Início" },
+        { id: "visao-geral", label: "InÃ­cio" },
         { id: "agendar", label: "Agendar" },
         { id: "exames", label: "Meus exames" },
         { id: "consultas", label: "Consultas" },
-        { id: "autorizacoes", label: "Autorizações" },
+        { id: "autorizacoes", label: "AutorizaÃ§Ãµes" },
         { id: "profissionais", label: "Profissionais" },
         { id: "mensagens", label: "Mensagens" },
-        { id: "config", label: "Configurações" },
+        { id: "config", label: "ConfiguraÃ§Ãµes" },
       ];
 
       var MENU_PROFISSIONAL = [
         { id: "visao-geral", label: "Dashboard" },
         { id: "agenda", label: "Agenda" },
         { id: "pacientes", label: "Pacientes" },
-        { id: "prontuarios", label: "Prontuários" },
+        { id: "prontuarios", label: "ProntuÃ¡rios" },
         { id: "online", label: "Atendimento online" },
-        { id: "prescricoes", label: "Prescrições" },
-        { id: "prescricoes-salvas", label: "Minhas prescrições" },
+        { id: "prescricoes", label: "PrescriÃ§Ãµes" },
+        { id: "prescricoes-salvas", label: "Minhas prescriÃ§Ãµes" },
         { id: "exames-pro", label: "Exames" },
-        { id: "relatorios", label: "Relatórios" },
+        { id: "relatorios", label: "RelatÃ³rios" },
         { id: "financeiro", label: "Financeiro" },
         { id: "mensagens", label: "Mensagens" },
-        { id: "config", label: "Configurações" },
+        { id: "config", label: "ConfiguraÃ§Ãµes" },
       ];
 
       function lerSessao() {
@@ -461,7 +473,7 @@
         try {
           if (typeof garantirUsuarioDemo === "function") {
             garantirUsuarioDemo({
-              nome: "Dr. João Silva",
+              nome: "Dr. JoÃ£o Silva",
               email: "profissional@dalucare.demo",
               senha: "demo123",
               tipo: "profissional",
@@ -473,7 +485,7 @@
               "dalucare_sessao",
               JSON.stringify({
                 id: "demo_pro",
-                nome: "Dr. João Silva",
+                nome: "Dr. JoÃ£o Silva",
                 email: "profissional@dalucare.demo",
                 tipo: "profissional",
                 criadoEm: new Date().toISOString(),
@@ -488,7 +500,7 @@
         return;
       }
 
-      /* Fase 1: app focado só no profissional */
+      /* Fase 1: app focado sÃ³ no profissional */
       if (sessao.tipo !== "profissional") {
         sessao.tipo = "profissional";
         try {
@@ -497,7 +509,7 @@
       }
 
       var ehProfissional = true;
-      var primeiroNome = String(sessao.nome || "Usuário").split(" ")[0];
+      var primeiroNome = String(sessao.nome || "UsuÃ¡rio").split(" ")[0];
       var agora = new Date();
       var saudacaoHora = agora.getHours() < 12 ? "Bom dia" : agora.getHours() < 18 ? "Boa tarde" : "Boa noite";
       var menuItens = ehProfissional ? MENU_PROFISSIONAL : MENU_PACIENTE;
@@ -531,8 +543,8 @@
         })
       );
       setText("dash-user-nome", sessao.nome);
-      setText("dash-user-meta", ehProfissional ? "Profissional de saúde" : "Paciente");
-      setText("dash-brand-sub", ehProfissional ? "Área do profissional" : "Área do paciente");
+      setText("dash-user-meta", ehProfissional ? "Profissional de saÃºde" : "Paciente");
+      setText("dash-brand-sub", ehProfissional ? "Ãrea do profissional" : "Ãrea do paciente");
       setText("dash-avatar", primeiroNome.charAt(0).toUpperCase());
 
       function obterPerfilMedico() {
@@ -553,7 +565,7 @@
         if (!profile.crmNumber) {
           if (status) {
             status.textContent =
-              "Cadastre seu CRM em Configurações para preencher o receituário automaticamente.";
+              "Cadastre seu CRM em ConfiguraÃ§Ãµes para preencher o receituÃ¡rio automaticamente.";
           }
           return;
         }
@@ -571,13 +583,13 @@
             status.textContent =
               "Perfil enviado ao MedHub: " +
               profile.name +
-              " · CRM " +
+              " Â· CRM " +
               profile.crmUf +
               " " +
               profile.crmNumber;
           }
         } catch (e) {
-          if (status) status.textContent = "Não foi possível enviar o perfil ao MedHub.";
+          if (status) status.textContent = "NÃ£o foi possÃ­vel enviar o perfil ao MedHub.";
         }
       }
 
@@ -614,7 +626,7 @@
           var aviso = document.getElementById("aviso-perfil");
           try {
             if (typeof atualizarPerfilProfissional !== "function") {
-              throw new Error("Recarregue a página e tente de novo.");
+              throw new Error("Recarregue a pÃ¡gina e tente de novo.");
             }
             sessao = atualizarPerfilProfissional({
               nome: document.getElementById("perfil-nome").value,
@@ -624,13 +636,13 @@
             setText("dash-user-nome", sessao.nome);
             setText("dash-saudacao", saudacaoHora + ", " + String(sessao.nome || "").split(" ")[0]);
             if (aviso) {
-              aviso.textContent = "Perfil salvo. Abrindo Prescrições, o MedHub recebe estes dados.";
+              aviso.textContent = "Perfil salvo. Abrindo PrescriÃ§Ãµes, o MedHub recebe estes dados.";
               aviso.className = "aviso-form aviso-sucesso";
             }
             enviarPerfilMedHub();
           } catch (erro) {
             if (aviso) {
-              aviso.textContent = erro.message || "Não foi possível salvar.";
+              aviso.textContent = erro.message || "NÃ£o foi possÃ­vel salvar.";
               aviso.className = "aviso-form aviso-erro";
             }
           }
@@ -747,7 +759,7 @@
         var tema = document.documentElement.getAttribute("data-theme") || "light";
         var icone = document.getElementById("icone-tema");
         var btn = document.getElementById("btn-tema");
-        if (icone) icone.textContent = tema === "dark" ? "☀" : "☾";
+        if (icone) icone.textContent = tema === "dark" ? "â˜€" : "â˜¾";
         if (btn) {
           var rotulo = tema === "dark" ? "Ativar modo claro" : "Ativar modo escuro";
           btn.setAttribute("aria-label", rotulo);
@@ -792,7 +804,7 @@
         if (label) label.textContent = formatarDataLonga(agora);
         if (lista) {
           lista.innerHTML =
-            "<li><time>—</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horário com um profissional</span></div><span class=\"status status-livre\">Livre</span></li>";
+            "<li><time>â€”</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horÃ¡rio com um profissional</span></div><span class=\"status status-livre\">Livre</span></li>";
         }
       }
 
@@ -806,10 +818,10 @@
         if (label) {
           label.textContent =
             inicio.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }) +
-            " — " +
+            " â€” " +
             fim.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
         }
-        var nomes = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+        var nomes = ["Seg", "Ter", "Qua", "Qui", "Sex", "SÃ¡b", "Dom"];
         var html = "";
         for (var i = 0; i < 7; i += 1) {
           var dia = new Date(inicio);
@@ -905,7 +917,7 @@
               .map(function (d) {
                 return "<li><span>" + d.nome + '</span><span class="status ' + d.classe + '">' + d.status + "</span></li>";
               })
-              .join("") || "<li><span>Sem documentos</span><span class=\"status status-livre\">—</span></li>";
+              .join("") || "<li><span>Sem documentos</span><span class=\"status status-livre\">â€”</span></li>";
           }
         }
 
@@ -993,9 +1005,9 @@
           }
 
           if (!livres.length) {
-            sel.innerHTML = '<option value="">Sem horários livres neste dia</option>';
+            sel.innerHTML = '<option value="">Sem horÃ¡rios livres neste dia</option>';
             sel.disabled = true;
-            if (ajuda) ajuda.textContent = "Todos os horários deste dia estão ocupados.";
+            if (ajuda) ajuda.textContent = "Todos os horÃ¡rios deste dia estÃ£o ocupados.";
             return;
           }
 
@@ -1009,7 +1021,7 @@
           else sel.value = livres[0];
           if (ajuda) {
             ajuda.textContent =
-              livres.length + " horário(s) livre(s). Ocupados neste dia não aparecem na lista.";
+              livres.length + " horÃ¡rio(s) livre(s). Ocupados neste dia nÃ£o aparecem na lista.";
           }
         }
 
@@ -1114,7 +1126,7 @@
           var ultimo = new Date(ano, mes + 1, 0);
           var offset = primeiro.getDay();
           offset = offset === 0 ? 6 : offset - 1;
-          var cab = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+          var cab = ["Seg", "Ter", "Qua", "Qui", "Sex", "SÃ¡b", "Dom"];
           var html = cab.map(function (c) {
             return '<div class="cal-cel cal-cab">' + c + "</div>";
           }).join("");
@@ -1221,7 +1233,7 @@
             var hora = document.getElementById("cal-hora").value;
             if (!nome || !data || !hora) {
               if (aviso) {
-                aviso.textContent = "Preencha data, horário e paciente.";
+                aviso.textContent = "Preencha data, horÃ¡rio e paciente.";
                 aviso.className = "aviso-form aviso-erro";
               }
               return;
@@ -1238,7 +1250,7 @@
             try {
               Ag.upsert(registro);
             } catch (erro) {
-              var msg = erro.message || "Não foi possível salvar.";
+              var msg = erro.message || "NÃ£o foi possÃ­vel salvar.";
               if (aviso) {
                 aviso.textContent = msg;
                 aviso.className = "aviso-form aviso-erro";
@@ -1265,11 +1277,51 @@
         renderCalendarioCompleto();
       }
 
-      /* ——— Minhas prescrições ——— */
+      /* â€”â€”â€” Minhas prescriÃ§Ãµes â€”â€”â€” */
       (function initPrescricoesSalvas() {
         var Ps = window.DalucarePrescricoesSalvas;
         if (!Ps) return;
         var editandoId = null;
+        var receitaAtual = [];
+
+        function perfilMedicoAtual() {
+          if (typeof obterPerfilMedico === "function") return obterPerfilMedico();
+          if (typeof perfilMedHub === "function") return perfilMedHub(sessao);
+          return {
+            name: (sessao && sessao.nome) || "",
+            crmUf: (sessao && sessao.crmUf) || "SP",
+            crmNumber: (sessao && sessao.crm) || "",
+          };
+        }
+
+        function atualizarBarraReceita() {
+          var perfil = perfilMedicoAtual();
+          setText("presc-receita-medico-nome", perfil.name || "MÃ©dico(a)");
+          setText(
+            "presc-receita-medico-crm",
+            perfil.crmNumber
+              ? "CRM " + (perfil.crmUf || "SP") + " " + perfil.crmNumber
+              : "Cadastre o CRM em ConfiguraÃ§Ãµes"
+          );
+          var resumo = document.getElementById("presc-receita-resumo");
+          if (resumo) {
+            resumo.textContent = receitaAtual.length
+              ? receitaAtual.length +
+                (receitaAtual.length === 1
+                  ? " medicamento na receita. Clique em Gerar receita."
+                  : " medicamentos na receita. Clique em Gerar receita.")
+              : "Clique em Usar nos medicamentos para montar a receita.";
+          }
+        }
+
+        function adicionarNaReceita(item) {
+          if (!item || !item.id) return;
+          var jaTem = receitaAtual.some(function (e) {
+            return e.id === item.id;
+          });
+          if (!jaTem) receitaAtual.push(item);
+          atualizarBarraReceita();
+        }
 
         function limparFormPresc() {
           editandoId = null;
@@ -1286,8 +1338,6 @@
           if (excluir) excluir.hidden = true;
           var aviso = document.getElementById("aviso-presc-salva");
           if (aviso) aviso.textContent = "";
-          var preview = document.getElementById("presc-preview-box");
-          if (preview) preview.hidden = true;
         }
 
         function carregarNoForm(item) {
@@ -1302,16 +1352,40 @@
           document.getElementById("presc-salva-qtd").value = item.quantidade || "";
           document.getElementById("presc-salva-obs").value = item.observacao || "";
           document.getElementById("btn-presc-salva-excluir").hidden = false;
-          mostrarPreview(item);
           document.getElementById("presc-salva-nome").focus();
         }
 
-        function mostrarPreview(item) {
+        function mostrarPreviewTexto(texto) {
           var box = document.getElementById("presc-preview-box");
           var pre = document.getElementById("presc-preview-texto");
           if (!box || !pre) return;
-          pre.textContent = Ps.textoReceita(item);
+          pre.textContent = texto;
           box.hidden = false;
+        }
+
+        function gerarReceitaCompleta() {
+          var perfil = perfilMedicoAtual();
+          if (!perfil.crmNumber) {
+            window.alert("Cadastre seu CRM em ConfiguraÃ§Ãµes antes de gerar a receita.");
+            abrirAba("config");
+            return;
+          }
+          if (!receitaAtual.length) {
+            window.alert("Adicione ao menos um medicamento com o botÃ£o Usar.");
+            return;
+          }
+          var texto = Ps.textoReceitaCompleta(receitaAtual, perfil);
+          mostrarPreviewTexto(texto);
+          copiarTexto(texto).then(
+            function () {
+              var aviso = document.getElementById("aviso-presc-salva");
+              if (aviso) {
+                aviso.textContent = "Receita gerada com nome e CRM. Texto copiado.";
+                aviso.className = "aviso-form aviso-sucesso";
+              }
+            },
+            function () {}
+          );
         }
 
         function copiarTexto(texto) {
@@ -1334,6 +1408,7 @@
         }
 
         function renderPrescricoesSalvas() {
+          atualizarBarraReceita();
           var listaEl = document.getElementById("presc-salvas-lista");
           var contagem = document.getElementById("presc-salvas-contagem");
           var busca = document.getElementById("presc-salvas-busca");
@@ -1347,28 +1422,34 @@
           }
           if (!itens.length) {
             listaEl.innerHTML =
-              '<li class="presc-salvas-vazio">Nenhum medicamento nesta busca. Cadastre à direita.</li>';
+              '<li class="presc-salvas-vazio">Nenhum medicamento nesta busca. Cadastre Ã  direita.</li>';
             return;
           }
           listaEl.innerHTML = itens
             .map(function (item) {
+              var naReceita = receitaAtual.some(function (e) {
+                return e.id === item.id;
+              });
               return (
-                '<li class="presc-salva-item" data-id="' +
+                '<li class="presc-salva-item' +
+                (naReceita ? " na-receita" : "") +
+                '" data-id="' +
                 item.id +
                 '">' +
                 '<div class="presc-salva-info">' +
                 "<strong>" +
                 item.nome +
-                (item.dose ? " · " + item.dose : "") +
+                (item.dose ? " Â· " + item.dose : "") +
                 "</strong>" +
                 "<span>" +
                 (item.via || "VO") +
-                " · " +
+                " Â· " +
                 (item.posologia || "") +
                 "</span>" +
                 (item.usos
                   ? '<em>Usado ' + item.usos + (item.usos === 1 ? " vez" : " vezes") + "</em>"
                   : "") +
+                (naReceita ? "<em>Na receita atual</em>" : "") +
                 "</div>" +
                 '<div class="presc-salva-acoes">' +
                 '<button type="button" class="btn btn-principal btn-sm" data-acao="usar">Usar</button>' +
@@ -1392,22 +1473,27 @@
               }
               if (acao === "copiar" || acao === "usar") {
                 var atualizado = Ps.registrarUso(id) || item;
-                var texto = Ps.textoReceita(atualizado);
-                mostrarPreview(atualizado);
+                if (acao === "usar") adicionarNaReceita(atualizado);
+                var perfil = perfilMedicoAtual();
+                var texto =
+                  acao === "usar" && receitaAtual.length
+                    ? Ps.textoReceitaCompleta(receitaAtual, perfil)
+                    : Ps.cabecalhoMedico(perfil) + "\n\n" + Ps.textoReceita(atualizado);
+                mostrarPreviewTexto(texto);
                 copiarTexto(texto).then(
                   function () {
                     var aviso = document.getElementById("aviso-presc-salva");
                     if (aviso) {
                       aviso.textContent =
                         acao === "usar"
-                          ? "Texto copiado. Cole na receita ou prontuário do paciente."
-                          : "Medicamento copiado.";
+                          ? "IncluÃ­do na receita (com nome e CRM). Use Gerar receita para finalizar."
+                          : "Medicamento copiado com cabeÃ§alho do mÃ©dico.";
                       aviso.className = "aviso-form aviso-sucesso";
                     }
                     renderPrescricoesSalvas();
                   },
                   function () {
-                    window.alert("Não foi possível copiar. Selecione o texto em “Texto pronto”.");
+                    window.alert("NÃ£o foi possÃ­vel copiar. Veja o texto em â€œTexto prontoâ€.");
                   }
                 );
               }
@@ -1423,6 +1509,8 @@
         var btnLimpar = document.getElementById("btn-presc-salva-limpar");
         var btnExcluir = document.getElementById("btn-presc-salva-excluir");
         var btnCopiarPreview = document.getElementById("btn-presc-copiar-preview");
+        var btnGerar = document.getElementById("btn-gerar-receita");
+        var btnLimparReceita = document.getElementById("btn-limpar-receita");
 
         if (busca) {
           busca.addEventListener("input", function () {
@@ -1436,6 +1524,16 @@
           });
         }
         if (btnLimpar) btnLimpar.addEventListener("click", limparFormPresc);
+        if (btnGerar) btnGerar.addEventListener("click", gerarReceitaCompleta);
+        if (btnLimparReceita) {
+          btnLimparReceita.addEventListener("click", function () {
+            receitaAtual = [];
+            atualizarBarraReceita();
+            renderPrescricoesSalvas();
+            var box = document.getElementById("presc-preview-box");
+            if (box) box.hidden = true;
+          });
+        }
         if (btnExcluir) {
           btnExcluir.addEventListener("click", function () {
             if (!editandoId) return;
@@ -1471,17 +1569,18 @@
                 aviso.className = "aviso-form aviso-sucesso";
               }
               limparFormPresc();
-              mostrarPreview(salvo);
+              mostrarPreviewTexto(Ps.cabecalhoMedico(perfilMedicoAtual()) + "\n\n" + Ps.textoReceita(salvo));
               renderPrescricoesSalvas();
             } catch (erro) {
               if (aviso) {
-                aviso.textContent = erro.message || "Não foi possível salvar.";
+                aviso.textContent = erro.message || "NÃ£o foi possÃ­vel salvar.";
                 aviso.className = "aviso-form aviso-erro";
               }
             }
           });
         }
 
+        atualizarBarraReceita();
         renderPrescricoesSalvas();
       })();
     })();
