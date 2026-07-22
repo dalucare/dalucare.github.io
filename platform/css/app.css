@@ -191,6 +191,11 @@ body.pagina-dashboard {
   flex: 1;
 }
 
+.dash-nav[hidden],
+[hidden] {
+  display: none !important;
+}
+
 .dash-nav-item {
   appearance: none;
   border: none;
