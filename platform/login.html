@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722j"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722j">
-  <link rel="stylesheet" href="css/dash.css?v=20260722j">
-  <script src="js/auth.js?v=20260722j"></script>
+  <script src="../js/force-https.js?v=20260722k"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722k">
+  <link rel="stylesheet" href="css/dash.css?v=20260722k">
+  <script src="js/auth.js?v=20260722k"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -21,7 +21,14 @@
     <div class="auth-card">
       <h1>Entrar</h1>
       <p class="auth-subtitulo">Acesse sua conta de paciente ou profissional.</p>
-      <p class="auth-aviso-local">Contas ficam só neste navegador (protótipo). Se o login falhar após ativar HTTPS, cadastre-se de novo.</p>
+
+      <div class="demo-acessos">
+        <p class="demo-titulo">Acesso rápido (demonstração)</p>
+        <button type="button" class="btn btn-principal" id="btn-demo-pro" style="width: 100%;">Entrar como profissional</button>
+        <button type="button" class="btn btn-secundario" id="btn-demo-pac" style="width: 100%; margin-top: 8px;">Entrar como paciente</button>
+      </div>
+
+      <p class="auth-aviso-local">O painel estilo clínica (agenda + ficha do paciente) aparece só na conta de <strong>profissional</strong>.</p>
 
       <form id="form-login" class="formulario">
         <div class="linha-form">
@@ -71,14 +78,14 @@
       </form>
 
       <p class="auth-links">
-        Não tem conta? <a href="cadastro.html?v=20260722j">Cadastre-se aqui</a>
+        Não tem conta? <a href="cadastro.html?v=20260722k">Cadastre-se aqui</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722j";
+      window.location.href = "home.html?v=20260722k";
     }
 
     const formLogin = document.getElementById("form-login");
@@ -88,6 +95,42 @@
     const btnLogin = document.getElementById("btn-login");
     const btnRecuperar = document.getElementById("btn-recuperar");
     const btnMostrar = document.getElementById("btn-mostrar-recuperar");
+
+    function entrarDemo(tipo) {
+      var dados =
+        tipo === "profissional"
+          ? {
+              nome: "Dr. João Silva",
+              email: "profissional@dalucare.demo",
+              senha: "demo123",
+              tipo: "profissional",
+            }
+          : {
+              nome: "Claudio",
+              email: "paciente@dalucare.demo",
+              senha: "demo123",
+              tipo: "paciente",
+            };
+      garantirUsuarioDemo(dados);
+      autenticarUsuario(dados.email, dados.senha);
+      window.location.href = "home.html?v=20260722k";
+    }
+
+    document.getElementById("btn-demo-pro").addEventListener("click", function () {
+      try {
+        entrarDemo("profissional");
+      } catch (erro) {
+        mostrarAviso(avisoLogin, erro.message, "erro");
+      }
+    });
+
+    document.getElementById("btn-demo-pac").addEventListener("click", function () {
+      try {
+        entrarDemo("paciente");
+      } catch (erro) {
+        mostrarAviso(avisoLogin, erro.message, "erro");
+      }
+    });
 
     btnMostrar.addEventListener("click", function () {
       formRecuperar.hidden = !formRecuperar.hidden;
@@ -108,7 +151,7 @@
 
       try {
         autenticarUsuario(email, senha);
-        window.location.href = "home.html?v=20260722j";
+        window.location.href = "home.html?v=20260722k";
       } catch (erro) {
         mostrarAviso(avisoLogin, erro.message, "erro");
         btnLogin.disabled = false;
@@ -127,7 +170,7 @@
           document.getElementById("recuperar-senha").value,
           document.getElementById("recuperar-confirmar").value
         );
-        window.location.href = "home.html?v=20260722j";
+        window.location.href = "home.html?v=20260722k";
       } catch (erro) {
         mostrarAviso(avisoRecuperar, erro.message, "erro");
         btnRecuperar.disabled = false;

@@ -136,6 +136,31 @@ function redefinirSenha(email, novaSenha, confirmarSenha) {
   return criarSessao(usuarios[indice]);
 }
 
+function garantirUsuarioDemo(dados) {
+  var existente = buscarUsuarioPorEmail(dados.email);
+  if (existente) {
+    existente.senhaHash = hashSenha(dados.senha);
+    existente.tipo = dados.tipo;
+    existente.nome = dados.nome;
+    var usuarios = obterUsuarios();
+    var indice = usuarios.findIndex(function (u) {
+      return u.email === existente.email;
+    });
+    if (indice >= 0) {
+      usuarios[indice] = existente;
+      salvarUsuarios(usuarios);
+    }
+    return existente;
+  }
+  return cadastrarUsuario({
+    nome: dados.nome,
+    email: dados.email,
+    senha: dados.senha,
+    confirmarSenha: dados.senha,
+    tipo: dados.tipo,
+  });
+}
+
 function exigirLogin() {
   const sessao = obterSessao();
   if (!sessao) {

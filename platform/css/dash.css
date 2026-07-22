@@ -105,6 +105,19 @@ body.pagina-dashboard {
   line-height: 1.4;
 }
 
+.demo-acessos {
+  margin: 0 0 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--dash-borda);
+}
+
+.demo-titulo {
+  margin: 0 0 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--dash-suave);
+}
+
 .auth-links {
   margin-top: 20px;
   text-align: center;
@@ -836,6 +849,20 @@ body.pagina-dashboard {
   margin-bottom: 16px;
 }
 
+.clinica-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr 0.95fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.clinica-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 0;
+}
+
 .agenda-topo-acoes {
   display: flex;
   align-items: center;
@@ -857,11 +884,46 @@ body.pagina-dashboard {
   text-decoration: underline;
 }
 
+.lista-agenda-pro {
+  list-style: none;
+  margin: 0 0 16px;
+  padding: 0;
+  max-height: 420px;
+  overflow: auto;
+}
+
 .lista-agenda-pro .agenda-item {
   display: grid;
   grid-template-columns: 52px 1fr auto;
   gap: 12px;
   align-items: center;
+  padding: 12px 10px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.lista-agenda-pro .agenda-item:hover,
+.lista-agenda-pro .agenda-item.selecionado {
+  background: #f3f8fc;
+  border-color: #cfe0ec;
+}
+
+.lista-agenda-pro .agenda-item time {
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--dash-texto);
+}
+
+.lista-agenda-pro .agenda-item strong {
+  display: block;
+  font-size: 14px;
+}
+
+.lista-agenda-pro .agenda-item span:not(.status) {
+  font-size: 12px;
+  color: var(--dash-suave);
 }
 
 .agenda-item-corpo {
@@ -885,15 +947,180 @@ body.pagina-dashboard {
   flex-shrink: 0;
 }
 
+.status-ok {
+  background: #e5f5ec;
+  color: var(--dash-verde);
+}
+
+.status-tele {
+  background: #e6f7fb;
+  color: var(--dash-ciano);
+}
+
+.status-atencao {
+  background: #fff3e0;
+  color: var(--dash-laranja);
+}
+
+.status-livre {
+  background: #eef1f4;
+  color: var(--dash-suave);
+}
+
+.online-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.online-card > div:nth-child(2) {
+  flex: 1;
+  min-width: 0;
+}
+
+.online-card strong {
+  display: block;
+  font-size: 14px;
+}
+
+.online-card span {
+  font-size: 12px;
+  color: var(--dash-suave);
+}
+
+.online-av {
+  background: #d9f3ea;
+  color: var(--dash-verde);
+}
+
+.btn-sm {
+  padding: 8px 12px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.atalhos-clinica {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.atalho-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+
+.atalho-ico {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.ico-azul { background: #d9ebf7; }
+.ico-verde { background: #d9f3ea; }
+.ico-ciano { background: #d6f1f7; }
+.ico-laranja { background: #fde9d0; }
+
+.lista-mensagens {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-mensagens li {
+  display: flex;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--dash-borda);
+}
+
+.lista-mensagens li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.lista-mensagens strong {
+  display: block;
+  font-size: 14px;
+}
+
+.lista-mensagens span {
+  display: block;
+  font-size: 13px;
+  color: var(--dash-suave);
+}
+
+.lista-mensagens em {
+  font-style: normal;
+  font-size: 11px;
+  color: #8aa0b2;
+}
+
+.paciente-ficha .paciente-resumo {
+  margin-bottom: 14px;
+}
+
+.ficha-bloco {
+  margin-top: 14px;
+}
+
+.ficha-bloco h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: var(--dash-suave);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.ficha-bloco p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.lista-docs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lista-docs li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--dash-borda);
+  font-size: 14px;
+}
+
+.lista-docs li:last-child {
+  border-bottom: none;
+}
+
 .agenda-rodape-hint {
   margin: 0 0 14px;
   font-size: 12px;
   color: var(--dash-suave);
 }
 
+@media (max-width: 1100px) {
+  .clinica-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .clinica-col-paciente {
+    grid-column: 1 / -1;
+  }
+}
+
 @media (max-width: 900px) {
   .agenda-semana {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .clinica-grid {
+    grid-template-columns: 1fr;
   }
 }
 

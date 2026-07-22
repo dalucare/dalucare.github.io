@@ -6,13 +6,13 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722j"></script>
+  <script src="../js/force-https.js?v=20260722k"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722j">
-  <link rel="stylesheet" href="css/dash.css?v=20260722j">
-  <script src="js/auth.js?v=20260722j"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722k">
+  <link rel="stylesheet" href="css/dash.css?v=20260722k">
+  <script src="js/auth.js?v=20260722k"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -74,101 +74,113 @@
       <main class="dash-conteudo">
         <section class="aba-painel ativo" id="aba-visao-geral-pro" hidden>
           <div class="kpi-grid">
-            <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Consultas hoje</p><p class="kpi-valor">0</p><p class="kpi-meta">Agenda em configuração</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Retornos</p><p class="kpi-valor">0</p><p class="kpi-meta">Aguardando</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Teleconsultas</p><p class="kpi-valor">0</p><p class="kpi-meta">Agendadas</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Pendências</p><p class="kpi-valor">0</p><p class="kpi-meta">Em aberto</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Consultas hoje</p><p class="kpi-valor">18</p><p class="kpi-meta">12 presenciais</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Retornos</p><p class="kpi-valor">3</p><p class="kpi-meta">Aguardando</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Teleconsultas</p><p class="kpi-valor">2</p><p class="kpi-meta">Agendadas</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Pendências</p><p class="kpi-valor">7</p><p class="kpi-meta">Em aberto</p></div></article>
           </div>
 
-          <div class="dash-grid-2 agenda-pro-grid">
-            <section class="painel-bloco agenda-unificada">
-              <div class="painel-bloco-topo">
-                <h2>Agenda do dia</h2>
-                <div class="agenda-topo-acoes">
-                  <span class="chip">Hoje</span>
-                  <button type="button" class="link-suave" data-ir="agenda">Ver completa</button>
+          <div class="clinica-grid">
+            <div class="clinica-col clinica-col-agenda">
+              <section class="painel-bloco agenda-unificada">
+                <div class="painel-bloco-topo">
+                  <h2>Agenda do dia</h2>
+                  <button type="button" class="link-suave" data-ir="agenda">Ver agenda completa</button>
                 </div>
-              </div>
-              <ul class="lista-agenda lista-agenda-pro">
-                <li class="agenda-item">
-                  <time>08:00</time>
-                  <div class="agenda-item-corpo">
-                    <div class="agenda-avatar" aria-hidden="true">—</div>
-                    <div>
-                      <strong>Horário livre</strong>
-                      <span>Disponível para agendamento</span>
-                    </div>
-                  </div>
-                  <span class="status status-livre">Livre</span>
-                </li>
-                <li class="agenda-item">
-                  <time>09:00</time>
-                  <div class="agenda-item-corpo">
-                    <div class="agenda-avatar" aria-hidden="true">—</div>
-                    <div>
-                      <strong>Horário livre</strong>
-                      <span>Disponível para agendamento</span>
-                    </div>
-                  </div>
-                  <span class="status status-livre">Livre</span>
-                </li>
-                <li class="agenda-item">
-                  <time>10:00</time>
-                  <div class="agenda-item-corpo">
-                    <div class="agenda-avatar" aria-hidden="true">—</div>
-                    <div>
-                      <strong>Horário livre</strong>
-                      <span>Disponível para agendamento</span>
-                    </div>
-                  </div>
-                  <span class="status status-livre">Livre</span>
-                </li>
-              </ul>
-              <p class="agenda-rodape-hint">Quando houver consultas, o paciente e o status aparecem nesta mesma lista.</p>
-              <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda">+ Nova consulta</button>
-            </section>
+                <ul class="lista-agenda lista-agenda-pro" id="lista-agenda-pro">
+                  <!-- preenchido pelo JS com demo -->
+                </ul>
+                <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda">+ Nova consulta</button>
+              </section>
 
-            <div class="coluna-meio">
-              <section class="painel-bloco">
-                <div class="painel-abas">
-                  <button type="button" class="painel-aba ativo">Paciente</button>
-                  <button type="button" class="painel-aba">Alertas (0)</button>
+              <section class="painel-bloco online-bloco">
+                <div class="painel-bloco-topo">
+                  <h2>Atendimento online</h2>
+                  <span class="status status-tele">Em andamento</span>
                 </div>
-                <div class="paciente-resumo">
-                  <div class="dash-avatar grande">?</div>
+                <div class="online-card">
+                  <div class="agenda-avatar online-av">AL</div>
                   <div>
-                    <strong>Nenhum paciente selecionado</strong>
-                    <p>Toque em um horário da agenda para ver o resumo aqui.</p>
+                    <strong>Ana Carolina Lemos</strong>
+                    <span>Teleconsulta · 09:00</span>
+                  </div>
+                  <button type="button" class="btn btn-principal btn-sm" data-ir="online">Entrar na sala</button>
+                </div>
+              </section>
+            </div>
+
+            <div class="clinica-col clinica-col-meio">
+              <section class="painel-bloco">
+                <h2>Atalhos rápidos</h2>
+                <div class="atalhos-grid atalhos-clinica">
+                  <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-azul"></span>Novo paciente</button>
+                  <button type="button" class="atalho-btn" data-ir="agenda"><span class="atalho-ico ico-verde"></span>Nova consulta</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Prescrição</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-laranja"></span>Atestado</button>
+                  <button type="button" class="atalho-btn" data-ir="exames-pro"><span class="atalho-ico ico-azul"></span>Pedir exame</button>
+                  <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-verde"></span>Encaminhar</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Evolução</button>
+                  <button type="button" class="atalho-btn" data-ir="config"><span class="atalho-ico ico-laranja"></span>Modelos</button>
+                </div>
+              </section>
+
+              <section class="painel-bloco">
+                <div class="painel-bloco-topo">
+                  <h2>Mensagens não lidas</h2>
+                  <button type="button" class="link-suave" data-ir="mensagens">Ver todas</button>
+                </div>
+                <ul class="lista-mensagens">
+                  <li>
+                    <div class="agenda-avatar">MS</div>
+                    <div>
+                      <strong>Maria Silva</strong>
+                      <span>Doutor, o resultado do exame já saiu?</span>
+                      <em>há 12 min</em>
+                    </div>
+                  </li>
+                  <li>
+                    <div class="agenda-avatar">JP</div>
+                    <div>
+                      <strong>João Pedro Santos</strong>
+                      <span>Posso remarcar a consulta de amanhã?</span>
+                      <em>há 40 min</em>
+                    </div>
+                  </li>
+                </ul>
+              </section>
+            </div>
+
+            <div class="clinica-col clinica-col-paciente">
+              <section class="painel-bloco paciente-ficha" id="paciente-ficha">
+                <div class="paciente-resumo">
+                  <div class="dash-avatar grande" id="ficha-avatar">MS</div>
+                  <div>
+                    <strong id="ficha-nome">Maria Silva</strong>
+                    <p id="ficha-meta">32 anos · Feminino · Bradesco Saúde</p>
                   </div>
                 </div>
                 <div class="acoes-paciente">
                   <button type="button" class="btn btn-principal" data-ir="prontuarios">Abrir prontuário</button>
                   <button type="button" class="btn btn-secundario" data-ir="online">Iniciar teleconsulta</button>
                 </div>
+                <div class="ficha-bloco">
+                  <h3>Última consulta</h3>
+                  <p id="ficha-ultima">15/04/2026 · Retorno · Hipertensão controlada</p>
+                </div>
                 <div class="campo-obs">
                   <label for="obs-rapidas">Observações rápidas</label>
-                  <textarea id="obs-rapidas" rows="4" placeholder="Anotações do atendimento..."></textarea>
+                  <textarea id="obs-rapidas" rows="3" placeholder="Anotações do atendimento...">Paciente refere melhora com a medicação atual.</textarea>
                 </div>
-              </section>
-
-              <section class="painel-bloco">
-                <h2>Atalhos rápidos</h2>
-                <div class="atalhos-grid">
-                  <button type="button" class="atalho-btn" data-ir="pacientes">Novo paciente</button>
-                  <button type="button" class="atalho-btn" data-ir="prontuarios">Prontuário</button>
-                  <button type="button" class="atalho-btn" data-ir="exames-pro">Exames</button>
-                  <button type="button" class="atalho-btn" data-ir="online">Teleconsulta</button>
-                  <button type="button" class="atalho-btn" data-ir="financeiro">Financeiro</button>
-                  <button type="button" class="atalho-btn" data-ir="mensagens">Mensagens</button>
+                <div class="ficha-bloco">
+                  <h3>Documentos e exames</h3>
+                  <ul class="lista-docs" id="ficha-docs">
+                    <li><span>Hemograma</span><span class="status status-ok">Normal</span></li>
+                    <li><span>Ressonância</span><span class="status status-atencao">Atenção</span></li>
+                    <li><span>Raio-X tórax</span><span class="status status-ok">Normal</span></li>
+                  </ul>
                 </div>
               </section>
             </div>
-          </div>
-
-          <div class="dash-grid-3">
-            <section class="painel-bloco"><h2>Atendimento online</h2><p class="vazio-texto">Nenhuma teleconsulta em andamento.</p></section>
-            <section class="painel-bloco"><h2>Mensagens</h2><p class="vazio-texto">Caixa de entrada vazia.</p></section>
-            <section class="painel-bloco"><h2>Documentos e exames</h2><p class="vazio-texto">Arquivos autorizados aparecerão aqui.</p></section>
           </div>
         </section>
 
@@ -235,7 +247,9 @@
         <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
         <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
+        <section class="aba-painel" id="aba-prescricoes"><h1>Prescrições</h1><p class="aba-intro">Receituários e modelos.</p><div class="painel-aviso">Em breve: prescrição digital.</div></section>
         <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualização.</div></section>
+        <section class="aba-painel" id="aba-relatorios"><h1>Relatórios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painéis gerenciais.</div></section>
         <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
         <section class="aba-painel" id="aba-mensagens"><h1>Mensagens</h1><p class="aba-intro">Comunicação segura.</p><div class="painel-aviso">Em breve: chat.</div></section>
         <section class="aba-painel" id="aba-config"><h1>Configurações</h1><p class="aba-intro">Conta e preferências.</p><div class="painel-aviso">Em breve: edição de perfil.</div></section>
@@ -262,7 +276,9 @@
         { id: "pacientes", label: "Pacientes" },
         { id: "prontuarios", label: "Prontuários" },
         { id: "online", label: "Atendimento online" },
+        { id: "prescricoes", label: "Prescrições" },
         { id: "exames-pro", label: "Exames" },
+        { id: "relatorios", label: "Relatórios" },
         { id: "financeiro", label: "Financeiro" },
         { id: "mensagens", label: "Mensagens" },
         { id: "config", label: "Configurações" },
@@ -532,6 +548,153 @@
 
       if (!ehProfissional) {
         mostrarPeriodoAgenda("dia");
+      } else {
+        var AGENDA_DEMO = [
+          {
+            hora: "08:00",
+            nome: "Maria Silva",
+            tipo: "Consulta",
+            status: "Confirmado",
+            statusClass: "status-ok",
+            iniciais: "MS",
+            meta: "32 anos · Feminino · Bradesco Saúde",
+            ultima: "15/04/2026 · Retorno · Hipertensão controlada",
+            obs: "Paciente refere melhora com a medicação atual.",
+            docs: [
+              { nome: "Hemograma", status: "Normal", classe: "status-ok" },
+              { nome: "Ressonância", status: "Atenção", classe: "status-atencao" },
+              { nome: "Raio-X tórax", status: "Normal", classe: "status-ok" },
+            ],
+          },
+          {
+            hora: "08:30",
+            nome: "João Pedro Santos",
+            tipo: "Retorno",
+            status: "Confirmado",
+            statusClass: "status-ok",
+            iniciais: "JP",
+            meta: "45 anos · Masculino · Unimed",
+            ultima: "02/06/2026 · Consulta · Ajuste de dose",
+            obs: "Trazer exames laboratoriais da última semana.",
+            docs: [
+              { nome: "Glicemia", status: "Atenção", classe: "status-atencao" },
+              { nome: "HbA1c", status: "Normal", classe: "status-ok" },
+            ],
+          },
+          {
+            hora: "09:00",
+            nome: "Ana Carolina Lemos",
+            tipo: "Teleconsulta",
+            status: "Teleconsulta",
+            statusClass: "status-tele",
+            iniciais: "AL",
+            meta: "28 anos · Feminino · SulAmérica",
+            ultima: "10/05/2026 · Teleconsulta · Acompanhamento",
+            obs: "Sala online já liberada.",
+            docs: [{ nome: "Receita", status: "Normal", classe: "status-ok" }],
+          },
+          {
+            hora: "09:30",
+            nome: "Horário livre",
+            tipo: "Disponível",
+            status: "Livre",
+            statusClass: "status-livre",
+            iniciais: "—",
+            livre: true,
+          },
+          {
+            hora: "10:00",
+            nome: "Carlos Alberto",
+            tipo: "Consulta",
+            status: "Confirmado",
+            statusClass: "status-ok",
+            iniciais: "CA",
+            meta: "61 anos · Masculino · Particular",
+            ultima: "20/03/2026 · Consulta · Check-up",
+            obs: "Revisar pressão arterial e medicação.",
+            docs: [{ nome: "ECG", status: "Normal", classe: "status-ok" }],
+          },
+          {
+            hora: "10:30",
+            nome: "Fernanda Costa",
+            tipo: "Retorno",
+            status: "Confirmado",
+            statusClass: "status-ok",
+            iniciais: "FC",
+            meta: "39 anos · Feminino · Bradesco Saúde",
+            ultima: "08/07/2026 · Retorno · Pós-procedimento",
+            obs: "Avaliar cicatrização.",
+            docs: [{ nome: "Ultrassom", status: "Normal", classe: "status-ok" }],
+          },
+        ];
+
+        function preencherFicha(item) {
+          if (!item || item.livre) return;
+          setText("ficha-avatar", item.iniciais);
+          setText("ficha-nome", item.nome);
+          setText("ficha-meta", item.meta);
+          setText("ficha-ultima", item.ultima);
+          var obs = document.getElementById("obs-rapidas");
+          if (obs) obs.value = item.obs || "";
+          var docs = document.getElementById("ficha-docs");
+          if (docs && item.docs) {
+            docs.innerHTML = item.docs
+              .map(function (d) {
+                return "<li><span>" + d.nome + '</span><span class="status ' + d.classe + '">' + d.status + "</span></li>";
+              })
+              .join("");
+          }
+        }
+
+        function renderAgendaPro() {
+          var lista = document.getElementById("lista-agenda-pro");
+          if (!lista) return;
+          lista.innerHTML = AGENDA_DEMO.map(function (item, indice) {
+            return (
+              '<li class="agenda-item' +
+              (indice === 0 ? " selecionado" : "") +
+              '" data-indice="' +
+              indice +
+              '" role="button" tabindex="0">' +
+              "<time>" +
+              item.hora +
+              "</time>" +
+              '<div class="agenda-item-corpo">' +
+              '<div class="agenda-avatar" aria-hidden="true">' +
+              item.iniciais +
+              "</div>" +
+              "<div><strong>" +
+              item.nome +
+              "</strong><span>" +
+              item.tipo +
+              "</span></div>" +
+              "</div>" +
+              '<span class="status ' +
+              item.statusClass +
+              '">' +
+              item.status +
+              "</span>" +
+              "</li>"
+            );
+          }).join("");
+
+          lista.querySelectorAll(".agenda-item").forEach(function (el) {
+            el.addEventListener("click", function () {
+              var i = Number(el.getAttribute("data-indice"));
+              var item = AGENDA_DEMO[i];
+              if (!item || item.livre) return;
+              lista.querySelectorAll(".agenda-item").forEach(function (n) {
+                n.classList.remove("selecionado");
+              });
+              el.classList.add("selecionado");
+              preencherFicha(item);
+            });
+          });
+
+          preencherFicha(AGENDA_DEMO[0]);
+        }
+
+        renderAgendaPro();
       }
     })();
   </script>
