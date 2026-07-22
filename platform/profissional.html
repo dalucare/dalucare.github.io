@@ -4,16 +4,21 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Abrindo painel profissional…</title>
-  <script src="../js/force-https.js?v=20260722aa"></script>
-  <script src="js/auth.js?v=20260722aa"></script>
+  <script src="../js/force-https.js?v=20260722ab"></script>
+  <script src="js/auth.js?v=20260722ab"></script>
   <script>
     (function () {
+      try {
+        localStorage.removeItem("dalucare_sessao");
+      } catch (e) {}
       try {
         garantirUsuarioDemo({
           nome: "Dr. João Silva",
           email: "profissional@dalucare.demo",
           senha: "demo123",
           tipo: "profissional",
+          crm: "123456",
+          crmUf: "SP",
         });
         autenticarUsuario("profissional@dalucare.demo", "demo123");
       } catch (e) {
@@ -25,19 +30,21 @@
               nome: "Dr. João Silva",
               email: "profissional@dalucare.demo",
               tipo: "profissional",
+              crm: "123456",
+              crmUf: "SP",
               criadoEm: new Date().toISOString(),
             })
           );
         } catch (err) {}
       }
-      window.location.replace("app.html?v=20260722aa&painel=profissional");
+      window.location.replace("app.html?v=20260722ab");
     })();
   </script>
 </head>
 <body>
   <p style="font-family: sans-serif; padding: 24px;">
     Abrindo o painel profissional…
-    <a href="app.html?v=20260722aa&painel=profissional">Clique aqui se não redirecionar</a>
+    <a href="entrar.html?v=20260722ab">Clique aqui se não redirecionar</a>
   </p>
 </body>
 </html>

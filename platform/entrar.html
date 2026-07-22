@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entrando no painel…</title>
+  <script src="../js/force-https.js?v=20260722ab"></script>
+  <script src="js/auth.js?v=20260722ab"></script>
+  <script>
+    (function () {
+      var DESTINO = "app.html?v=20260722ab";
+      try {
+        localStorage.removeItem("dalucare_sessao");
+      } catch (e) {}
+
+      try {
+        if (typeof garantirUsuarioDemo === "function") {
+          garantirUsuarioDemo({
+            nome: "Dr. João Silva",
+            email: "profissional@dalucare.demo",
+            senha: "demo123",
+            tipo: "profissional",
+            crm: "123456",
+            crmUf: "SP",
+          });
+        }
+        if (typeof autenticarUsuario === "function") {
+          autenticarUsuario("profissional@dalucare.demo", "demo123");
+        } else {
+          throw new Error("auth");
+        }
+      } catch (erro) {
+        try {
+          localStorage.setItem(
+            "dalucare_sessao",
+            JSON.stringify({
+              id: "demo_pro",
+              nome: "Dr. João Silva",
+              email: "profissional@dalucare.demo",
+              tipo: "profissional",
+              crm: "123456",
+              crmUf: "SP",
+              criadoEm: new Date().toISOString(),
+            })
+          );
+        } catch (err) {}
+      }
+
+      window.location.replace(DESTINO);
+    })();
+  </script>
+</head>
+<body style="font-family: sans-serif; padding: 24px; background: #eef3f7; color: #1a2b3a;">
+  <h1>Abrindo o painel Dalucare…</h1>
+  <p>Se não redirecionar em 2 segundos:</p>
+  <p><a href="app.html?v=20260722ab">Clique aqui para abrir o app</a></p>
+  <p><a href="login.html?v=20260722ab">Ou volte ao login</a></p>
+</body>
+</html>

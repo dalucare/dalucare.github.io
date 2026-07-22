@@ -177,7 +177,7 @@ function garantirUsuarioDemo(dados) {
     senha: dados.senha,
     confirmarSenha: dados.senha,
     tipo: dados.tipo,
-    crm: dados.crm || "",
+    crm: dados.crm || (dados.tipo === "profissional" ? "123456" : ""),
     crmUf: dados.crmUf || "SP",
   });
 }
