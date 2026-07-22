@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722r"></script>
+  <script src="../js/force-https.js?v=20260722s"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722r">
-  <link rel="stylesheet" href="css/dash.css?v=20260722r">
-  <script src="js/auth.js?v=20260722r"></script>
-  <script src="js/agenda.js?v=20260722r"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722s">
+  <link rel="stylesheet" href="css/dash.css?v=20260722s">
+  <script src="js/auth.js?v=20260722s"></script>
+  <script src="js/agenda.js?v=20260722s"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -937,7 +937,15 @@
               status: document.getElementById("cal-status").value,
               obs: document.getElementById("cal-obs").value.trim(),
             };
-            Ag.upsert(registro);
+            try {
+              Ag.upsert(registro);
+            } catch (erro) {
+              if (aviso) {
+                aviso.textContent = erro.message || "Não foi possível salvar.";
+                aviso.className = "aviso-form aviso-erro";
+              }
+              return;
+            }
             diaSelecionado = data;
             mesVisivel = new Date(Ag.parseISO(data).getFullYear(), Ag.parseISO(data).getMonth(), 1);
             fecharModalConsulta();
