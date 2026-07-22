@@ -1,30 +1,30 @@
 # HTTPS e aviso “Não seguro”
 
-## Por que aparece “Não seguro”
+## O que está acontecendo
 
-O domínio `dalucare.com.br` estava em **HTTP** (sem cadeado).  
-O certificado HTTPS do GitHub Pages ainda **não estava ativo**.
+O certificado HTTPS de `dalucare.com.br` **já funciona**.  
+O aviso “Não seguro” aparece quando o navegador abre em **http://** (sem o “s”).
 
-## Use este endereço seguro agora
+O GitHub ainda **não força** HTTPS: quem entra por `http://` permanece em HTTP.  
+Além disso, `https://dalucare.github.io` redireciona para `http://dalucare.com.br` enquanto o Enforce HTTPS não estiver ligado.
 
-**https://dalucare.github.io/platform/home.html?v=20260722g**
+## Use este endereço agora (com cadeado)
 
-(O arquivo CNAME foi removido temporariamente para o GitHub.io voltar a funcionar com HTTPS sem redirecionar para HTTP.)
+**https://dalucare.com.br/platform/home.html?v=20260722i**
 
-## Ativar HTTPS no dalucare.com.br (depois)
+Digite o `https://` na barra de endereço. Não use só `dalucare.com.br` sem o prefixo.
+
+## Ativar Enforce HTTPS (definitivo)
 
 1. Abra: https://github.com/dalucare/dalucare.github.io/settings/pages  
-2. Em **Custom domain**, digite de novo: `dalucare.com.br` e salve  
-3. Aguarde o DNS check ficar verde  
+2. Em **Custom domain**, confirme: `dalucare.com.br`  
+3. Aguarde o DNS check verde  
 4. Marque **Enforce HTTPS**  
-5. Aguarde até 24h para o certificado  
+5. Depois disso, qualquer `http://` passa a redirecionar para `https://`
 
-DNS no Registro.br (já deve estar):
+## Por que o F5 “não atualiza” a agenda unificada
 
-| Tipo | Nome | Valor |
-|---|---|---|
-| A | @ | 185.199.108.153 |
-| A | @ | 185.199.109.153 |
-| A | @ | 185.199.110.153 |
-| A | @ | 185.199.111.153 |
-| CNAME | www | dalucare.github.io |
+A união de “Agenda do dia” + “Próximos pacientes” vale só para a **área do profissional**.
+
+Se o menu lateral diz **Área do paciente** (ex.: Claudio), você está vendo outra tela.  
+Faça **Sair**, entre de novo com conta **profissional**, e abra o link acima.
