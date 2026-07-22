@@ -1523,6 +1523,120 @@ button.cal-cel:hover {
   color: var(--dash-suave);
 }
 
+/* Prescrições salvas */
+.presc-salvas-topo {
+  margin-bottom: 16px;
+  align-items: flex-start;
+}
+
+.presc-salvas-layout {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 16px;
+  align-items: start;
+}
+
+.presc-busca-campo {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.presc-busca-campo span {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.presc-busca-campo input {
+  width: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--dash-borda);
+  border-radius: 12px;
+  padding: 12px 14px;
+  font: inherit;
+  background: var(--dash-input-bg);
+  color: var(--dash-texto);
+}
+
+.presc-salvas-lista {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  max-height: 560px;
+  overflow: auto;
+}
+
+.presc-salva-item {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 14px 12px;
+  border: 1px solid var(--dash-borda);
+  border-radius: 14px;
+  margin-bottom: 10px;
+  background: var(--dash-muted-bg);
+}
+
+.presc-salva-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.presc-salva-info strong {
+  display: block;
+  font-size: 15px;
+  margin-bottom: 4px;
+}
+
+.presc-salva-info span,
+.presc-salva-info em {
+  display: block;
+  font-size: 13px;
+  color: var(--dash-suave);
+  font-style: normal;
+}
+
+.presc-salva-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.presc-salvas-vazio {
+  padding: 18px 8px;
+  color: var(--dash-suave);
+  font-size: 14px;
+}
+
+.presc-preview {
+  margin-top: 16px;
+  background: var(--dash-muted-bg);
+}
+
+.presc-preview h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+}
+
+.presc-preview pre {
+  margin: 0 0 12px;
+  white-space: pre-wrap;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1.45;
+  color: var(--dash-texto);
+}
+
+@media (max-width: 1000px) {
+  .presc-salvas-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
 .modal-overlay {
   position: fixed;
   inset: 0;

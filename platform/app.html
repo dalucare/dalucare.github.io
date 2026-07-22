@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
@@ -6,14 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722y"></script>
+  <script src="../js/force-https.js?v=20260722z"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722y">
-  <link rel="stylesheet" href="css/dash.css?v=20260722y">
-  <script src="js/auth.js?v=20260722y"></script>
-  <script src="js/agenda-slots.js?v=20260722y"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722z">
+  <link rel="stylesheet" href="css/dash.css?v=20260722z">
+  <script src="js/auth.js?v=20260722z"></script>
+  <script src="js/agenda-slots.js?v=20260722z"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722z"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -303,6 +304,82 @@
             ></iframe>
           </div>
         </section>
+        <section class="aba-painel" id="aba-prescricoes-salvas">
+          <div class="painel-bloco-topo presc-salvas-topo">
+            <div>
+              <h1>Prescrições salvas</h1>
+              <p class="aba-intro">Suas medicações de uso frequente — cadastre uma vez e reutilize no próximo paciente.</p>
+            </div>
+            <button type="button" class="btn btn-principal" id="btn-nova-presc-salva">+ Novo medicamento</button>
+          </div>
+
+          <div class="presc-salvas-layout">
+            <section class="painel-bloco">
+              <label class="campo presc-busca-campo">
+                <span>Buscar medicamento</span>
+                <input type="search" id="presc-salvas-busca" placeholder="Ex.: losartana, omeprazol, jejum…" autocomplete="off">
+              </label>
+              <p class="cal-dica" id="presc-salvas-contagem">0 medicamentos</p>
+              <ul class="presc-salvas-lista" id="presc-salvas-lista"></ul>
+            </section>
+
+            <section class="painel-bloco">
+              <h2 id="presc-salvas-form-titulo">Novo medicamento</h2>
+              <p class="cal-dica">Preencha e salve. Depois use “Copiar” ou “Usar” na lista.</p>
+              <form class="cal-form" id="form-presc-salva">
+                <input type="hidden" id="presc-salva-id" value="">
+                <div class="cal-form-grid">
+                  <div class="campo cal-campo-largo">
+                    <label for="presc-salva-nome">Medicamento</label>
+                    <input type="text" id="presc-salva-nome" required placeholder="Nome do medicamento" minlength="2">
+                  </div>
+                  <div class="campo">
+                    <label for="presc-salva-dose">Dose</label>
+                    <input type="text" id="presc-salva-dose" placeholder="Ex.: 50 mg">
+                  </div>
+                  <div class="campo">
+                    <label for="presc-salva-via">Via</label>
+                    <select id="presc-salva-via">
+                      <option value="VO">VO</option>
+                      <option value="IM">IM</option>
+                      <option value="IV">IV</option>
+                      <option value="SC">SC</option>
+                      <option value="Tópica">Tópica</option>
+                      <option value="Inalatória">Inalatória</option>
+                      <option value="Outra">Outra</option>
+                    </select>
+                  </div>
+                  <div class="campo cal-campo-largo">
+                    <label for="presc-salva-posologia">Posologia</label>
+                    <input type="text" id="presc-salva-posologia" required placeholder="Ex.: 1 comprimido a cada 12 horas">
+                  </div>
+                  <div class="campo">
+                    <label for="presc-salva-qtd">Quantidade</label>
+                    <input type="text" id="presc-salva-qtd" placeholder="Ex.: 30 comprimidos">
+                  </div>
+                  <div class="campo">
+                    <label for="presc-salva-obs">Observação</label>
+                    <input type="text" id="presc-salva-obs" placeholder="Opcional">
+                  </div>
+                </div>
+                <div class="cal-form-acoes">
+                  <button type="submit" class="btn btn-principal">Salvar</button>
+                  <button type="button" class="btn btn-secundario" id="btn-presc-salva-limpar">Limpar</button>
+                  <button type="button" class="btn btn-secundario" id="btn-presc-salva-excluir" hidden>Excluir</button>
+                </div>
+                <p class="aviso-form" id="aviso-presc-salva"></p>
+              </form>
+
+              <div class="presc-preview painel-bloco" id="presc-preview-box" hidden>
+                <h3>Texto pronto</h3>
+                <pre id="presc-preview-texto"></pre>
+                <div class="cal-form-acoes">
+                  <button type="button" class="btn btn-principal" id="btn-presc-copiar-preview">Copiar texto</button>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
         <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualização.</div></section>
         <section class="aba-painel" id="aba-relatorios"><h1>Relatórios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painéis gerenciais.</div></section>
         <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
@@ -355,6 +432,7 @@
         { id: "prontuarios", label: "Prontuários" },
         { id: "online", label: "Atendimento online" },
         { id: "prescricoes", label: "Prescrições" },
+        { id: "prescricoes-salvas", label: "Prescrições salvas" },
         { id: "exames-pro", label: "Exames" },
         { id: "relatorios", label: "Relatórios" },
         { id: "financeiro", label: "Financeiro" },
@@ -598,6 +676,9 @@
           }
           if (id === "prescricoes") {
             setTimeout(enviarPerfilMedHub, 200);
+          }
+          if (id === "prescricoes-salvas" && typeof window.renderPrescricoesSalvas === "function") {
+            window.renderPrescricoesSalvas();
           }
           if (id === "config") {
             preencherFormPerfil();
@@ -1183,6 +1264,226 @@
         atualizarAgendaDoDia();
         renderCalendarioCompleto();
       }
+
+      /* ——— Prescrições salvas ——— */
+      (function initPrescricoesSalvas() {
+        var Ps = window.DalucarePrescricoesSalvas;
+        if (!Ps) return;
+        var editandoId = null;
+
+        function limparFormPresc() {
+          editandoId = null;
+          setText("presc-salvas-form-titulo", "Novo medicamento");
+          var idEl = document.getElementById("presc-salva-id");
+          if (idEl) idEl.value = "";
+          ["presc-salva-nome", "presc-salva-dose", "presc-salva-posologia", "presc-salva-qtd", "presc-salva-obs"].forEach(function (id) {
+            var el = document.getElementById(id);
+            if (el) el.value = "";
+          });
+          var via = document.getElementById("presc-salva-via");
+          if (via) via.value = "VO";
+          var excluir = document.getElementById("btn-presc-salva-excluir");
+          if (excluir) excluir.hidden = true;
+          var aviso = document.getElementById("aviso-presc-salva");
+          if (aviso) aviso.textContent = "";
+          var preview = document.getElementById("presc-preview-box");
+          if (preview) preview.hidden = true;
+        }
+
+        function carregarNoForm(item) {
+          if (!item) return;
+          editandoId = item.id;
+          setText("presc-salvas-form-titulo", "Editar medicamento");
+          document.getElementById("presc-salva-id").value = item.id;
+          document.getElementById("presc-salva-nome").value = item.nome || "";
+          document.getElementById("presc-salva-dose").value = item.dose || "";
+          document.getElementById("presc-salva-via").value = item.via || "VO";
+          document.getElementById("presc-salva-posologia").value = item.posologia || "";
+          document.getElementById("presc-salva-qtd").value = item.quantidade || "";
+          document.getElementById("presc-salva-obs").value = item.observacao || "";
+          document.getElementById("btn-presc-salva-excluir").hidden = false;
+          mostrarPreview(item);
+          document.getElementById("presc-salva-nome").focus();
+        }
+
+        function mostrarPreview(item) {
+          var box = document.getElementById("presc-preview-box");
+          var pre = document.getElementById("presc-preview-texto");
+          if (!box || !pre) return;
+          pre.textContent = Ps.textoReceita(item);
+          box.hidden = false;
+        }
+
+        function copiarTexto(texto) {
+          if (navigator.clipboard && navigator.clipboard.writeText) {
+            return navigator.clipboard.writeText(texto);
+          }
+          return new Promise(function (resolve, reject) {
+            var ta = document.createElement("textarea");
+            ta.value = texto;
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+              resolve();
+            } catch (e) {
+              reject(e);
+            }
+            document.body.removeChild(ta);
+          });
+        }
+
+        function renderPrescricoesSalvas() {
+          var listaEl = document.getElementById("presc-salvas-lista");
+          var contagem = document.getElementById("presc-salvas-contagem");
+          var busca = document.getElementById("presc-salvas-busca");
+          if (!listaEl) return;
+          var termo = busca ? busca.value : "";
+          var itens = Ps.buscar(termo);
+          if (contagem) {
+            contagem.textContent =
+              itens.length + (itens.length === 1 ? " medicamento" : " medicamentos") +
+              (termo ? " encontrados" : " salvos");
+          }
+          if (!itens.length) {
+            listaEl.innerHTML =
+              '<li class="presc-salvas-vazio">Nenhum medicamento nesta busca. Cadastre à direita.</li>';
+            return;
+          }
+          listaEl.innerHTML = itens
+            .map(function (item) {
+              return (
+                '<li class="presc-salva-item" data-id="' +
+                item.id +
+                '">' +
+                '<div class="presc-salva-info">' +
+                "<strong>" +
+                item.nome +
+                (item.dose ? " · " + item.dose : "") +
+                "</strong>" +
+                "<span>" +
+                (item.via || "VO") +
+                " · " +
+                (item.posologia || "") +
+                "</span>" +
+                (item.usos
+                  ? '<em>Usado ' + item.usos + (item.usos === 1 ? " vez" : " vezes") + "</em>"
+                  : "") +
+                "</div>" +
+                '<div class="presc-salva-acoes">' +
+                '<button type="button" class="btn btn-principal btn-sm" data-acao="usar">Usar</button>' +
+                '<button type="button" class="btn btn-secundario btn-sm" data-acao="copiar">Copiar</button>' +
+                '<button type="button" class="link-suave" data-acao="editar">Editar</button>' +
+                "</div></li>"
+              );
+            })
+            .join("");
+
+          listaEl.querySelectorAll(".presc-salva-item").forEach(function (li) {
+            li.addEventListener("click", function (evento) {
+              var acaoBtn = evento.target.closest("[data-acao]");
+              var id = li.getAttribute("data-id");
+              var item = Ps.obter(id);
+              if (!item) return;
+              var acao = acaoBtn ? acaoBtn.getAttribute("data-acao") : "editar";
+              if (acao === "editar") {
+                carregarNoForm(item);
+                return;
+              }
+              if (acao === "copiar" || acao === "usar") {
+                var atualizado = Ps.registrarUso(id) || item;
+                var texto = Ps.textoReceita(atualizado);
+                mostrarPreview(atualizado);
+                copiarTexto(texto).then(
+                  function () {
+                    var aviso = document.getElementById("aviso-presc-salva");
+                    if (aviso) {
+                      aviso.textContent =
+                        acao === "usar"
+                          ? "Texto copiado. Cole na receita ou prontuário do paciente."
+                          : "Medicamento copiado.";
+                      aviso.className = "aviso-form aviso-sucesso";
+                    }
+                    renderPrescricoesSalvas();
+                  },
+                  function () {
+                    window.alert("Não foi possível copiar. Selecione o texto em “Texto pronto”.");
+                  }
+                );
+              }
+            });
+          });
+        }
+
+        window.renderPrescricoesSalvas = renderPrescricoesSalvas;
+
+        var form = document.getElementById("form-presc-salva");
+        var busca = document.getElementById("presc-salvas-busca");
+        var btnNovo = document.getElementById("btn-nova-presc-salva");
+        var btnLimpar = document.getElementById("btn-presc-salva-limpar");
+        var btnExcluir = document.getElementById("btn-presc-salva-excluir");
+        var btnCopiarPreview = document.getElementById("btn-presc-copiar-preview");
+
+        if (busca) {
+          busca.addEventListener("input", function () {
+            renderPrescricoesSalvas();
+          });
+        }
+        if (btnNovo) {
+          btnNovo.addEventListener("click", function () {
+            limparFormPresc();
+            document.getElementById("presc-salva-nome").focus();
+          });
+        }
+        if (btnLimpar) btnLimpar.addEventListener("click", limparFormPresc);
+        if (btnExcluir) {
+          btnExcluir.addEventListener("click", function () {
+            if (!editandoId) return;
+            if (!window.confirm("Excluir este medicamento salvo?")) return;
+            Ps.remover(editandoId);
+            limparFormPresc();
+            renderPrescricoesSalvas();
+          });
+        }
+        if (btnCopiarPreview) {
+          btnCopiarPreview.addEventListener("click", function () {
+            var pre = document.getElementById("presc-preview-texto");
+            if (!pre || !pre.textContent) return;
+            copiarTexto(pre.textContent);
+          });
+        }
+        if (form) {
+          form.addEventListener("submit", function (evento) {
+            evento.preventDefault();
+            var aviso = document.getElementById("aviso-presc-salva");
+            try {
+              var salvo = Ps.upsert({
+                id: editandoId || "",
+                nome: document.getElementById("presc-salva-nome").value,
+                dose: document.getElementById("presc-salva-dose").value,
+                via: document.getElementById("presc-salva-via").value,
+                posologia: document.getElementById("presc-salva-posologia").value,
+                quantidade: document.getElementById("presc-salva-qtd").value,
+                observacao: document.getElementById("presc-salva-obs").value,
+              });
+              if (aviso) {
+                aviso.textContent = "Medicamento salvo.";
+                aviso.className = "aviso-form aviso-sucesso";
+              }
+              limparFormPresc();
+              mostrarPreview(salvo);
+              renderPrescricoesSalvas();
+            } catch (erro) {
+              if (aviso) {
+                aviso.textContent = erro.message || "Não foi possível salvar.";
+                aviso.className = "aviso-form aviso-erro";
+              }
+            }
+          });
+        }
+
+        renderPrescricoesSalvas();
+      })();
     })();
   </script>
 </body>
