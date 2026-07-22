@@ -48,7 +48,7 @@
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722e";
+      window.location.href = "home.html?v=20260722f";
     }
 
     const formLogin = document.getElementById("form-login");
@@ -66,7 +66,7 @@
 
       try {
         autenticarUsuario(email, senha);
-        window.location.href = "home.html?v=20260722e";
+        window.location.href = "home.html?v=20260722f";
       } catch (erro) {
         mostrarAviso(avisoLogin, erro.message, "erro");
         btnLogin.disabled = false;

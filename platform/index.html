@@ -2,14 +2,12 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <title>Dalucare App</title>
   <script>
     (function () {
       try {
         var sessao = localStorage.getItem("dalucare_sessao");
-        var destino = sessao ? "home.html?v=20260722e" : "login.html";
-        window.location.replace(destino);
+        window.location.replace(sessao ? "home.html?v=20260722f" : "login.html");
       } catch (e) {
         window.location.replace("login.html");
       }
