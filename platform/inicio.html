@@ -9,9 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722c">
-  <link rel="stylesheet" href="css/app.css?v=20260722c">
-  <script src="js/auth.js?v=20260722c"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722d">
+  <link rel="stylesheet" href="css/app.css?v=20260722d">
+  <script src="js/auth.js?v=20260722d"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -146,14 +146,30 @@
                 <button type="button" class="atalho-btn" data-ir="autorizacoes">Autorizações</button>
               </div>
             </section>
-            <section class="painel-bloco">
-              <h2>Profissionais piloto</h2>
-              <ul class="lista-simples">
-                <li><strong>Angela Couto</strong><span>Cirurgia geral · Santos</span></li>
-                <li><strong>Priscila Couto</strong><span>Fisioterapia · Santos</span></li>
-                <li><strong>Débora Medeiros</strong><span>Otorrino · SP / SBC</span></li>
-                <li><strong>Jefferson França</strong><span>Endocrino · Santos / Guarujá</span></li>
-              </ul>
+
+            <section class="painel-bloco agenda-paciente">
+              <div class="painel-bloco-topo">
+                <h2>Minha agenda</h2>
+                <div class="agenda-tabs" role="tablist" aria-label="Período da agenda">
+                  <button type="button" class="agenda-tab ativo" data-periodo="dia" role="tab" aria-selected="true">Dia</button>
+                  <button type="button" class="agenda-tab" data-periodo="semana" role="tab" aria-selected="false">Semana</button>
+                  <button type="button" class="agenda-tab" data-periodo="mes" role="tab" aria-selected="false">Mês</button>
+                </div>
+              </div>
+              <p class="agenda-periodo-label" id="agenda-periodo-label"></p>
+
+              <div class="agenda-vista ativo" id="agenda-vista-dia" role="tabpanel">
+                <ul class="lista-agenda" id="agenda-lista-dia"></ul>
+                <button type="button" class="btn btn-principal btn-bloco" data-ir="agendar">Agendar horário</button>
+              </div>
+
+              <div class="agenda-vista" id="agenda-vista-semana" role="tabpanel" hidden>
+                <div class="agenda-semana" id="agenda-grade-semana"></div>
+              </div>
+
+              <div class="agenda-vista" id="agenda-vista-mes" role="tabpanel" hidden>
+                <div class="agenda-mes" id="agenda-grade-mes"></div>
+              </div>
             </section>
           </div>
         </section>
@@ -299,6 +315,126 @@
       encerrarSessao();
       window.location.href = "login.html";
     });
-  </script>
+
+    /* Agenda do paciente: Dia / Semana / Mês */
+    function formatarDataLonga(data) {
+      return data.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+      });
+    }
+
+    function inicioDaSemana(data) {
+      const d = new Date(data);
+      const dia = d.getDay();
+      const diff = dia === 0 ? -6 : 1 - dia;
+      d.setDate(d.getDate() + diff);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    function renderAgendaDia() {
+      const lista = document.getElementById("agenda-lista-dia");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!lista || !label) return;
+
+      label.textContent = formatarDataLonga(agora);
+      lista.innerHTML =
+        '<li><time>—</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horário com um profissional</span></div><span class="status status-livre">Livre</span></li>';
+    }
+
+    function renderAgendaSemana() {
+      const grade = document.getElementById("agenda-grade-semana");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!grade || !label) return;
+
+      const inicio = inicioDaSemana(agora);
+      const fim = new Date(inicio);
+      fim.setDate(inicio.getDate() + 6);
+      label.textContent =
+        inicio.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }) +
+        " — " +
+        fim.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+
+      const nomes = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+      let html = "";
+      for (let i = 0; i < 7; i += 1) {
+        const dia = new Date(inicio);
+        dia.setDate(inicio.getDate() + i);
+        const hoje = dia.toDateString() === agora.toDateString();
+        html +=
+          '<div class="agenda-dia-card' +
+          (hoje ? " hoje" : "") +
+          '"><strong>' +
+          nomes[i] +
+          " " +
+          String(dia.getDate()).padStart(2, "0") +
+          '</strong><span>Sem consultas</span></div>';
+      }
+      grade.innerHTML = html;
+    }
+
+    function renderAgendaMes() {
+      const grade = document.getElementById("agenda-grade-mes");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!grade || !label) return;
+
+      const ano = agora.getFullYear();
+      const mes = agora.getMonth();
+      label.textContent = agora.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+
+      const primeiro = new Date(ano, mes, 1);
+      const ultimo = new Date(ano, mes + 1, 0);
+      let offset = primeiro.getDay();
+      offset = offset === 0 ? 6 : offset - 1;
+
+      const cabecalhos = ["S", "T", "Q", "Q", "S", "S", "D"];
+      let html = cabecalhos.map(function (c) {
+        return '<div class="agenda-mes-cab">' + c + "</div>";
+      }).join("");
+
+      for (let i = 0; i < offset; i += 1) {
+        html += '<div class="agenda-mes-cel vazia"></div>';
+      }
+      for (let dia = 1; dia <= ultimo.getDate(); dia += 1) {
+        const ehHoje = dia === agora.getDate();
+        html +=
+          '<div class="agenda-mes-cel' +
+          (ehHoje ? " hoje" : "") +
+          '"><span>' +
+          dia +
+          "</span></div>";
+      }
+      grade.innerHTML = html;
+    }
+
+    function mostrarPeriodoAgenda(periodo) {
+      document.querySelectorAll(".agenda-tab").forEach(function (tab) {
+        const ativo = tab.dataset.periodo === periodo;
+        tab.classList.toggle("ativo", ativo);
+        tab.setAttribute("aria-selected", ativo ? "true" : "false");
+      });
+      document.querySelectorAll(".agenda-vista").forEach(function (vista) {
+        const id = "agenda-vista-" + periodo;
+        const ativo = vista.id === id;
+        vista.classList.toggle("ativo", ativo);
+        vista.hidden = !ativo;
+      });
+
+      if (periodo === "dia") renderAgendaDia();
+      if (periodo === "semana") renderAgendaSemana();
+      if (periodo === "mes") renderAgendaMes();
+    }
+
+    document.querySelectorAll(".agenda-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        mostrarPeriodoAgenda(tab.dataset.periodo);
+      });
+    });
+
+    if (!ehProfissional) {
+      mostrarPeriodoAgenda("dia");
+    }
 </body>
 </html>
