@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722s"></script>
+  <script src="../js/force-https.js?v=20260722t"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722s">
-  <link rel="stylesheet" href="css/dash.css?v=20260722s">
-  <script src="js/auth.js?v=20260722s"></script>
-  <script src="js/agenda.js?v=20260722s"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722t">
+  <link rel="stylesheet" href="css/dash.css?v=20260722t">
+  <script src="js/auth.js?v=20260722t"></script>
+  <script src="js/agenda-slots.js?v=20260722t"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -239,7 +239,8 @@
                 </div>
                 <div class="campo">
                   <label for="cal-hora">Horário</label>
-                  <input type="time" id="cal-hora" required value="08:00">
+                  <select id="cal-hora" required></select>
+                  <small class="cal-hora-ajuda" id="cal-hora-ajuda">Horários já ocupados não aparecem.</small>
                 </div>
                 <div class="campo cal-campo-largo">
                   <label for="cal-nome">Paciente</label>
@@ -720,12 +721,47 @@
           if (kpiTele) kpiTele.textContent = String(tele);
         }
 
-        function abrirModalConsulta() {
+        function atualizarSelectHorarios(horaPreferida) {
+          var sel = document.getElementById("cal-hora");
+          var ajuda = document.getElementById("cal-hora-ajuda");
+          var dataEl = document.getElementById("cal-data");
+          if (!sel || !Ag || !dataEl) return;
+          var data = dataEl.value || diaSelecionado;
+          var livres = Ag.slotsDisponiveis(data, editandoId);
+          var preferida = Ag.normalizarHora(horaPreferida || "");
+
+          if (preferida && editandoId && livres.indexOf(preferida) < 0) {
+            livres = [preferida].concat(livres);
+          }
+
+          if (!livres.length) {
+            sel.innerHTML = '<option value="">Sem horários livres neste dia</option>';
+            sel.disabled = true;
+            if (ajuda) ajuda.textContent = "Todos os horários deste dia estão ocupados.";
+            return;
+          }
+
+          sel.disabled = false;
+          sel.innerHTML = livres
+            .map(function (h) {
+              return '<option value="' + h + '">' + h + "</option>";
+            })
+            .join("");
+          if (preferida && livres.indexOf(preferida) >= 0) sel.value = preferida;
+          else sel.value = livres[0];
+          if (ajuda) {
+            ajuda.textContent =
+              livres.length + " horário(s) livre(s). Ocupados neste dia não aparecem na lista.";
+          }
+        }
+
+        function abrirModalConsulta(horaPreferida) {
           var modal = document.getElementById("modal-consulta");
           if (modal) {
             modal.hidden = false;
             document.body.classList.add("modal-aberto");
           }
+          atualizarSelectHorarios(horaPreferida);
           setTimeout(function () {
             var nome = document.getElementById("cal-nome");
             if (nome) nome.focus();
@@ -748,8 +784,6 @@
           if (idEl) idEl.value = "";
           var dataEl = document.getElementById("cal-data");
           if (dataEl) dataEl.value = diaSelecionado;
-          var horaEl = document.getElementById("cal-hora");
-          if (horaEl) horaEl.value = "08:00";
           var nomeEl = document.getElementById("cal-nome");
           if (nomeEl) nomeEl.value = "";
           var tipoEl = document.getElementById("cal-tipo");
@@ -762,6 +796,7 @@
           if (excluir) excluir.hidden = true;
           var aviso = document.getElementById("cal-aviso");
           if (aviso) aviso.textContent = "";
+          atualizarSelectHorarios();
         }
 
         function carregarForm(item) {
@@ -776,14 +811,13 @@
           });
           if (!ev) return;
           document.getElementById("cal-data").value = ev.data;
-          document.getElementById("cal-hora").value = ev.hora;
           document.getElementById("cal-nome").value = ev.nome;
           document.getElementById("cal-tipo").value = ev.tipo;
           document.getElementById("cal-status").value = ev.status;
           document.getElementById("cal-obs").value = ev.obs || "";
           document.getElementById("cal-excluir").hidden = false;
           diaSelecionado = ev.data;
-          abrirModalConsulta();
+          abrirModalConsulta(ev.hora);
         }
 
         function renderDiaSelecionado() {
@@ -896,6 +930,12 @@
             abrirModalConsulta();
           });
         }
+        var calDataInput = document.getElementById("cal-data");
+        if (calDataInput) {
+          calDataInput.addEventListener("change", function () {
+            atualizarSelectHorarios();
+          });
+        }
         var btnFecharModal = document.getElementById("modal-consulta-fechar");
         var modalConsulta = document.getElementById("modal-consulta");
         if (btnFecharModal) btnFecharModal.addEventListener("click", fecharModalConsulta);
@@ -940,10 +980,13 @@
             try {
               Ag.upsert(registro);
             } catch (erro) {
+              var msg = erro.message || "Não foi possível salvar.";
               if (aviso) {
-                aviso.textContent = erro.message || "Não foi possível salvar.";
+                aviso.textContent = msg;
                 aviso.className = "aviso-form aviso-erro";
               }
+              window.alert(msg);
+              atualizarSelectHorarios(hora);
               return;
             }
             diaSelecionado = data;
