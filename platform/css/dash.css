@@ -1385,6 +1385,64 @@ button.cal-cel:hover {
   margin-top: 14px;
 }
 
+.cal-dica {
+  margin: 12px 0 0;
+  font-size: 13px;
+  color: var(--dash-suave);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(8, 20, 32, 0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay[hidden] {
+  display: none !important;
+}
+
+.modal-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  max-height: calc(100vh - 40px);
+  overflow: auto;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px 24px 20px;
+  box-shadow: 0 20px 50px rgba(15, 45, 68, 0.25);
+}
+
+.modal-fechar {
+  position: absolute;
+  top: 12px;
+  right: 14px;
+  border: none;
+  background: #eef3f7;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 22px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--dash-texto);
+}
+
+.modal-card .cal-form {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+body.modal-aberto {
+  overflow: hidden;
+}
+
 #cal-lista-dia {
   max-height: 280px;
 }

@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722q"></script>
+  <script src="../js/force-https.js?v=20260722r"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722q">
-  <link rel="stylesheet" href="css/dash.css?v=20260722q">
-  <script src="js/auth.js?v=20260722q"></script>
-  <script src="js/agenda.js?v=20260722q"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722r">
+  <link rel="stylesheet" href="css/dash.css?v=20260722r">
+  <script src="js/auth.js?v=20260722r"></script>
+  <script src="js/agenda.js?v=20260722r"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -91,7 +91,7 @@
                 <ul class="lista-agenda lista-agenda-pro" id="lista-agenda-pro">
                   <!-- preenchido pelo JS com demo -->
                 </ul>
-                <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda">+ Nova consulta</button>
+                <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda" data-nova-consulta="1">+ Nova consulta</button>
               </section>
 
               <section class="painel-bloco online-bloco">
@@ -115,7 +115,7 @@
                 <h2>Atalhos rápidos</h2>
                 <div class="atalhos-grid atalhos-clinica">
                   <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-azul"></span>Novo paciente</button>
-                  <button type="button" class="atalho-btn" data-ir="agenda"><span class="atalho-ico ico-verde"></span>Nova consulta</button>
+                  <button type="button" class="atalho-btn" data-ir="agenda" data-nova-consulta="1"><span class="atalho-ico ico-verde"></span>Nova consulta</button>
                   <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Prescrição</button>
                   <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-laranja"></span>Atestado</button>
                   <button type="button" class="atalho-btn" data-ir="exames-pro"><span class="atalho-ico ico-azul"></span>Pedir exame</button>
@@ -220,56 +220,64 @@
                 <span class="chip" id="cal-dia-contagem">0 consultas</span>
               </div>
               <ul class="lista-agenda lista-agenda-pro" id="cal-lista-dia"></ul>
-
-              <form class="cal-form" id="cal-form">
-                <h3 id="cal-form-titulo">Nova consulta</h3>
-                <input type="hidden" id="cal-id" value="">
-                <div class="cal-form-grid">
-                  <div class="campo">
-                    <label for="cal-data">Data</label>
-                    <input type="date" id="cal-data" required>
-                  </div>
-                  <div class="campo">
-                    <label for="cal-hora">Horário</label>
-                    <input type="time" id="cal-hora" required value="08:00">
-                  </div>
-                  <div class="campo cal-campo-largo">
-                    <label for="cal-nome">Paciente</label>
-                    <input type="text" id="cal-nome" required placeholder="Nome do paciente" minlength="2">
-                  </div>
-                  <div class="campo">
-                    <label for="cal-tipo">Tipo</label>
-                    <select id="cal-tipo">
-                      <option>Consulta</option>
-                      <option>Retorno</option>
-                      <option>Teleconsulta</option>
-                      <option>Procedimento</option>
-                    </select>
-                  </div>
-                  <div class="campo">
-                    <label for="cal-status">Status</label>
-                    <select id="cal-status">
-                      <option>Confirmado</option>
-                      <option>Teleconsulta</option>
-                      <option>Pendente</option>
-                      <option>Cancelado</option>
-                    </select>
-                  </div>
-                  <div class="campo cal-campo-largo">
-                    <label for="cal-obs">Observação</label>
-                    <input type="text" id="cal-obs" placeholder="Opcional">
-                  </div>
-                </div>
-                <div class="cal-form-acoes">
-                  <button type="submit" class="btn btn-principal" id="cal-salvar">Salvar</button>
-                  <button type="button" class="btn btn-secundario" id="cal-cancelar">Limpar</button>
-                  <button type="button" class="btn btn-secundario" id="cal-excluir" hidden>Excluir</button>
-                </div>
-                <p class="aviso-form" id="cal-aviso"></p>
-              </form>
+              <p class="cal-dica">Clique em um horário para editar, ou em <strong>+ Nova consulta</strong> para cadastrar.</p>
             </section>
           </div>
         </section>
+
+        <div class="modal-overlay" id="modal-consulta" hidden>
+          <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="cal-form-titulo">
+            <button type="button" class="modal-fechar" id="modal-consulta-fechar" aria-label="Fechar">×</button>
+            <form class="cal-form" id="cal-form">
+              <h3 id="cal-form-titulo">Nova consulta</h3>
+              <p class="auth-subtitulo" id="cal-form-sub">Preencha os dados e salve na agenda.</p>
+              <input type="hidden" id="cal-id" value="">
+              <div class="cal-form-grid">
+                <div class="campo">
+                  <label for="cal-data">Data</label>
+                  <input type="date" id="cal-data" required>
+                </div>
+                <div class="campo">
+                  <label for="cal-hora">Horário</label>
+                  <input type="time" id="cal-hora" required value="08:00">
+                </div>
+                <div class="campo cal-campo-largo">
+                  <label for="cal-nome">Paciente</label>
+                  <input type="text" id="cal-nome" required placeholder="Nome do paciente" minlength="2">
+                </div>
+                <div class="campo">
+                  <label for="cal-tipo">Tipo</label>
+                  <select id="cal-tipo">
+                    <option>Consulta</option>
+                    <option>Retorno</option>
+                    <option>Teleconsulta</option>
+                    <option>Procedimento</option>
+                  </select>
+                </div>
+                <div class="campo">
+                  <label for="cal-status">Status</label>
+                  <select id="cal-status">
+                    <option>Confirmado</option>
+                    <option>Teleconsulta</option>
+                    <option>Pendente</option>
+                    <option>Cancelado</option>
+                  </select>
+                </div>
+                <div class="campo cal-campo-largo">
+                  <label for="cal-obs">Observação</label>
+                  <input type="text" id="cal-obs" placeholder="Opcional">
+                </div>
+              </div>
+              <div class="cal-form-acoes">
+                <button type="submit" class="btn btn-principal" id="cal-salvar">Salvar consulta</button>
+                <button type="button" class="btn btn-secundario" id="cal-cancelar">Cancelar</button>
+                <button type="button" class="btn btn-secundario" id="cal-excluir" hidden>Excluir</button>
+              </div>
+              <p class="aviso-form" id="cal-aviso"></p>
+            </form>
+          </div>
+        </div>
+
         <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
         <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
@@ -463,6 +471,11 @@
         botao.addEventListener("click", function () {
           var id = botao.getAttribute("data-ir");
           if (id) abrirAba(id);
+          if (botao.getAttribute("data-nova-consulta") === "1") {
+            setTimeout(function () {
+              if (typeof window.abrirModalConsulta === "function") window.abrirModalConsulta();
+            }, 80);
+          }
         });
       });
 
@@ -707,9 +720,30 @@
           if (kpiTele) kpiTele.textContent = String(tele);
         }
 
+        function abrirModalConsulta() {
+          var modal = document.getElementById("modal-consulta");
+          if (modal) {
+            modal.hidden = false;
+            document.body.classList.add("modal-aberto");
+          }
+          setTimeout(function () {
+            var nome = document.getElementById("cal-nome");
+            if (nome) nome.focus();
+          }, 50);
+        }
+
+        function fecharModalConsulta() {
+          var modal = document.getElementById("modal-consulta");
+          if (modal) modal.hidden = true;
+          document.body.classList.remove("modal-aberto");
+          limparFormCal();
+        }
+
         function limparFormCal() {
           editandoId = null;
           setText("cal-form-titulo", "Nova consulta");
+          var sub = document.getElementById("cal-form-sub");
+          if (sub) sub.textContent = "Preencha os dados e salve na agenda.";
           var idEl = document.getElementById("cal-id");
           if (idEl) idEl.value = "";
           var dataEl = document.getElementById("cal-data");
@@ -734,6 +768,8 @@
           if (!item || !item.id) return;
           editandoId = item.id;
           setText("cal-form-titulo", "Editar consulta");
+          var sub = document.getElementById("cal-form-sub");
+          if (sub) sub.textContent = "Altere os dados e salve, ou exclua a consulta.";
           document.getElementById("cal-id").value = item.id;
           var ev = Ag.carregar().find(function (e) {
             return e.id === item.id;
@@ -747,6 +783,7 @@
           document.getElementById("cal-obs").value = ev.obs || "";
           document.getElementById("cal-excluir").hidden = false;
           diaSelecionado = ev.data;
+          abrirModalConsulta();
         }
 
         function renderDiaSelecionado() {
@@ -856,16 +893,24 @@
         if (btnNova) {
           btnNova.addEventListener("click", function () {
             limparFormCal();
-            document.getElementById("cal-nome").focus();
+            abrirModalConsulta();
           });
         }
-        if (btnCancelar) btnCancelar.addEventListener("click", limparFormCal);
+        var btnFecharModal = document.getElementById("modal-consulta-fechar");
+        var modalConsulta = document.getElementById("modal-consulta");
+        if (btnFecharModal) btnFecharModal.addEventListener("click", fecharModalConsulta);
+        if (modalConsulta) {
+          modalConsulta.addEventListener("click", function (evento) {
+            if (evento.target === modalConsulta) fecharModalConsulta();
+          });
+        }
+        if (btnCancelar) btnCancelar.addEventListener("click", fecharModalConsulta);
         if (btnExcluir) {
           btnExcluir.addEventListener("click", function () {
             if (!editandoId) return;
             if (!window.confirm("Excluir esta consulta?")) return;
             Ag.remover(editandoId);
-            limparFormCal();
+            fecharModalConsulta();
             renderCalendarioCompleto();
           });
         }
@@ -895,17 +940,17 @@
             Ag.upsert(registro);
             diaSelecionado = data;
             mesVisivel = new Date(Ag.parseISO(data).getFullYear(), Ag.parseISO(data).getMonth(), 1);
-            limparFormCal();
-            if (aviso) {
-              aviso.textContent = "Consulta salva.";
-              aviso.className = "aviso-form aviso-sucesso";
-            }
+            fecharModalConsulta();
             renderCalendarioCompleto();
           });
         }
 
         window.atualizarAgendaDoDia = atualizarAgendaDoDia;
         window.renderCalendarioCompleto = renderCalendarioCompleto;
+        window.abrirModalConsulta = function () {
+          limparFormCal();
+          abrirModalConsulta();
+        };
         limparFormCal();
         atualizarAgendaDoDia();
         renderCalendarioCompleto();
