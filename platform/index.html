@@ -3,14 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <title>Dalucare App</title>
-  <script src="../js/force-https.js?v=20260722m"></script>
+  <script src="../js/force-https.js?v=20260722n"></script>
   <script>
     (function () {
       try {
         var sessao = localStorage.getItem("dalucare_sessao");
-        window.location.replace(sessao ? "home.html?v=20260722m" : "login.html");
+        window.location.replace(sessao ? "home.html?v=20260722n" : "login.html?v=20260722n");
       } catch (e) {
-        window.location.replace("login.html");
+        window.location.replace("login.html?v=20260722n");
       }
     })();
   </script>

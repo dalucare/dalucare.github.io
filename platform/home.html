@@ -6,13 +6,13 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722m"></script>
+  <script src="../js/force-https.js?v=20260722n"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722m">
-  <link rel="stylesheet" href="css/dash.css?v=20260722m">
-  <script src="js/auth.js?v=20260722m"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722n">
+  <link rel="stylesheet" href="css/dash.css?v=20260722n">
+  <script src="js/auth.js?v=20260722n"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -184,65 +184,8 @@
           </div>
         </section>
 
-        <section class="aba-painel ativo" id="aba-visao-geral-pac">
-          <div class="aviso-troca-painel">
-            <div>
-              <strong>O design da clínica (estilo MedPlus) é da área do profissional.</strong>
-              <p>Você está na área do paciente. Clique no botão para abrir o painel clínico agora.</p>
-            </div>
-            <a class="btn btn-principal" href="profissional.html?v=20260722m">Abrir painel profissional</a>
-          </div>
-          <div class="kpi-grid">
-            <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Próximas consultas</p><p class="kpi-valor">0</p><p class="kpi-meta">Agende quando quiser</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Exames salvos</p><p class="kpi-valor">0</p><p class="kpi-meta">Anexe seus arquivos</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Autorizações</p><p class="kpi-valor">0</p><p class="kpi-meta">Acesso aos seus dados</p></div></article>
-            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Mensagens</p><p class="kpi-valor">0</p><p class="kpi-meta">Sem novidades</p></div></article>
-          </div>
-          <div class="dash-grid-2">
-            <section class="painel-bloco">
-              <h2>Comece por aqui</h2>
-              <div class="atalhos-grid">
-                <button type="button" class="atalho-btn" data-ir="agendar">Agendar consulta</button>
-                <button type="button" class="atalho-btn" data-ir="exames">Enviar exame</button>
-                <button type="button" class="atalho-btn" data-ir="profissionais">Ver profissionais</button>
-                <button type="button" class="atalho-btn" data-ir="autorizacoes">Autorizações</button>
-              </div>
-            </section>
-
-            <section class="painel-bloco agenda-paciente">
-              <div class="painel-bloco-topo">
-                <h2>Minha agenda</h2>
-                <div class="agenda-tabs" role="tablist" aria-label="Período da agenda">
-                  <button type="button" class="agenda-tab ativo" data-periodo="dia" role="tab" aria-selected="true">Dia</button>
-                  <button type="button" class="agenda-tab" data-periodo="semana" role="tab" aria-selected="false">Semana</button>
-                  <button type="button" class="agenda-tab" data-periodo="mes" role="tab" aria-selected="false">Mês</button>
-                </div>
-              </div>
-              <p class="agenda-periodo-label" id="agenda-periodo-label">Hoje</p>
-
-              <div class="agenda-vista ativo" id="agenda-vista-dia" role="tabpanel">
-                <ul class="lista-agenda" id="agenda-lista-dia">
-                  <li>
-                    <time>—</time>
-                    <div>
-                      <strong>Nenhuma consulta hoje</strong>
-                      <span>Agende um horário com um profissional</span>
-                    </div>
-                    <span class="status status-livre">Livre</span>
-                  </li>
-                </ul>
-                <button type="button" class="btn btn-principal btn-bloco" data-ir="agendar">Agendar horário</button>
-              </div>
-
-              <div class="agenda-vista" id="agenda-vista-semana" role="tabpanel" hidden>
-                <div class="agenda-semana" id="agenda-grade-semana"></div>
-              </div>
-
-              <div class="agenda-vista" id="agenda-vista-mes" role="tabpanel" hidden>
-                <div class="agenda-mes" id="agenda-grade-mes"></div>
-              </div>
-            </section>
-          </div>
+        <section class="aba-painel" id="aba-visao-geral-pac" hidden>
+          <div class="painel-aviso">Área do paciente em construção. Por enquanto o app está focado no profissional.</div>
         </section>
 
         <section class="aba-painel" id="aba-agendar"><h1>Agendar consulta</h1><p class="aba-intro">Escolha o profissional e pague 50% para reservar.</p><div class="painel-aviso">Em breve: agenda com Mercado Pago.</div></section>
@@ -339,7 +282,15 @@
         return;
       }
 
-      var ehProfissional = sessao.tipo === "profissional";
+      /* Fase 1: app focado só no profissional */
+      if (sessao.tipo !== "profissional") {
+        sessao.tipo = "profissional";
+        try {
+          localStorage.setItem("dalucare_sessao", JSON.stringify(sessao));
+        } catch (e) {}
+      }
+
+      var ehProfissional = true;
       var primeiroNome = String(sessao.nome || "Usuário").split(" ")[0];
       var agora = new Date();
       var saudacaoHora = agora.getHours() < 12 ? "Bom dia" : agora.getHours() < 18 ? "Boa tarde" : "Boa noite";

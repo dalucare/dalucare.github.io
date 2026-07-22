@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cadastro | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722m"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722m">
-  <link rel="stylesheet" href="css/dash.css?v=20260722m">
-  <script src="js/auth.js?v=20260722m"></script>
+  <title>Cadastro profissional | Dalucare</title>
+  <script src="../js/force-https.js?v=20260722n"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722n">
+  <link rel="stylesheet" href="css/dash.css?v=20260722n">
+  <script src="js/auth.js?v=20260722n"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -19,16 +19,11 @@
 
   <main class="app-centro">
     <div class="auth-card">
-      <h1>Criar conta</h1>
-      <p class="auth-subtitulo">Cadastre-se como paciente ou profissional de saúde.</p>
-
-      <div class="auth-tabs">
-        <button type="button" class="auth-tab ativo" data-tipo="paciente">Sou paciente</button>
-        <button type="button" class="auth-tab" data-tipo="profissional">Sou profissional</button>
-      </div>
+      <h1>Criar conta profissional</h1>
+      <p class="auth-subtitulo">Fase 1: cadastro só para profissionais de saúde. A área do paciente virá depois.</p>
 
       <form id="form-cadastro" class="formulario">
-        <input type="hidden" id="cadastro-tipo" name="tipo" value="paciente">
+        <input type="hidden" id="cadastro-tipo" name="tipo" value="profissional">
 
         <div class="linha-form">
           <div class="campo">
@@ -63,31 +58,19 @@
       </form>
 
       <p class="auth-links">
-        Já tem conta? <a href="login.html">Faça login</a>
+        Já tem conta? <a href="login.html?v=20260722n">Faça login</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722m";
+      window.location.href = "home.html?v=20260722n";
     }
 
-    const tabs = document.querySelectorAll(".auth-tab");
-    const inputTipo = document.getElementById("cadastro-tipo");
     const formCadastro = document.getElementById("form-cadastro");
     const avisoCadastro = document.getElementById("aviso-cadastro");
     const btnCadastro = document.getElementById("btn-cadastro");
-
-    tabs.forEach(function (tab) {
-      tab.addEventListener("click", function () {
-        tabs.forEach(function (item) {
-          item.classList.remove("ativo");
-        });
-        tab.classList.add("ativo");
-        inputTipo.value = tab.dataset.tipo;
-      });
-    });
 
     formCadastro.addEventListener("submit", function (evento) {
       evento.preventDefault();
@@ -97,7 +80,7 @@
         email: document.getElementById("cadastro-email").value,
         senha: document.getElementById("cadastro-senha").value,
         confirmarSenha: document.getElementById("cadastro-confirmar").value,
-        tipo: inputTipo.value,
+        tipo: "profissional",
       };
 
       btnCadastro.disabled = true;
@@ -106,7 +89,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "home.html?v=20260722m";
+        window.location.href = "home.html?v=20260722n";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;

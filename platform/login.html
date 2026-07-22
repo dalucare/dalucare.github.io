@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Entrar | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722m"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722m">
-  <link rel="stylesheet" href="css/dash.css?v=20260722m">
-  <script src="js/auth.js?v=20260722m"></script>
+  <title>Entrar | Dalucare Profissional</title>
+  <script src="../js/force-https.js?v=20260722n"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722n">
+  <link rel="stylesheet" href="css/dash.css?v=20260722n">
+  <script src="js/auth.js?v=20260722n"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -19,16 +19,13 @@
 
   <main class="app-centro">
     <div class="auth-card">
-      <h1>Entrar</h1>
-      <p class="auth-subtitulo">Acesse sua conta de paciente ou profissional.</p>
+      <h1>Área do profissional</h1>
+      <p class="auth-subtitulo">Painel clínico Dalucare (agenda, pacientes e prontuário).</p>
 
       <div class="demo-acessos">
-        <p class="demo-titulo">Acesso rápido (demonstração)</p>
-        <button type="button" class="btn btn-principal" id="btn-demo-pro" style="width: 100%;">Entrar como profissional</button>
-        <button type="button" class="btn btn-secundario" id="btn-demo-pac" style="width: 100%; margin-top: 8px;">Entrar como paciente</button>
+        <button type="button" class="btn btn-principal" id="btn-demo-pro" style="width: 100%;">Entrar no painel agora</button>
+        <p class="demo-titulo" style="margin-top: 12px;">Ou use seu e-mail e senha</p>
       </div>
-
-      <p class="auth-aviso-local">O painel estilo clínica (agenda + ficha do paciente) aparece só na conta de <strong>profissional</strong>.</p>
 
       <form id="form-login" class="formulario">
         <div class="linha-form">
@@ -78,14 +75,14 @@
       </form>
 
       <p class="auth-links">
-        Não tem conta? <a href="cadastro.html?v=20260722m">Cadastre-se aqui</a>
+        Não tem conta? <a href="cadastro.html?v=20260722n">Cadastre-se como profissional</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "home.html?v=20260722m";
+      window.location.href = "home.html?v=20260722n";
     }
 
     const formLogin = document.getElementById("form-login");
@@ -95,38 +92,22 @@
     const btnLogin = document.getElementById("btn-login");
     const btnRecuperar = document.getElementById("btn-recuperar");
     const btnMostrar = document.getElementById("btn-mostrar-recuperar");
+    const DESTINO = "home.html?v=20260722n";
 
-    function entrarDemo(tipo) {
-      var dados =
-        tipo === "profissional"
-          ? {
-              nome: "Dr. João Silva",
-              email: "profissional@dalucare.demo",
-              senha: "demo123",
-              tipo: "profissional",
-            }
-          : {
-              nome: "Claudio",
-              email: "paciente@dalucare.demo",
-              senha: "demo123",
-              tipo: "paciente",
-            };
-      garantirUsuarioDemo(dados);
-      autenticarUsuario(dados.email, dados.senha);
-      window.location.href = "home.html?v=20260722m";
+    function entrarPainelDemo() {
+      garantirUsuarioDemo({
+        nome: "Dr. João Silva",
+        email: "profissional@dalucare.demo",
+        senha: "demo123",
+        tipo: "profissional",
+      });
+      autenticarUsuario("profissional@dalucare.demo", "demo123");
+      window.location.href = DESTINO;
     }
 
     document.getElementById("btn-demo-pro").addEventListener("click", function () {
       try {
-        entrarDemo("profissional");
-      } catch (erro) {
-        mostrarAviso(avisoLogin, erro.message, "erro");
-      }
-    });
-
-    document.getElementById("btn-demo-pac").addEventListener("click", function () {
-      try {
-        entrarDemo("paciente");
+        entrarPainelDemo();
       } catch (erro) {
         mostrarAviso(avisoLogin, erro.message, "erro");
       }
@@ -142,16 +123,16 @@
 
     formLogin.addEventListener("submit", function (evento) {
       evento.preventDefault();
-
       const email = document.getElementById("login-email").value;
       const senha = document.getElementById("login-senha").value;
-
       btnLogin.disabled = true;
       btnLogin.textContent = "Entrando...";
 
       try {
-        autenticarUsuario(email, senha);
-        window.location.href = "home.html?v=20260722m";
+        var sessao = autenticarUsuario(email, senha);
+        sessao.tipo = "profissional";
+        localStorage.setItem("dalucare_sessao", JSON.stringify(sessao));
+        window.location.href = DESTINO;
       } catch (erro) {
         mostrarAviso(avisoLogin, erro.message, "erro");
         btnLogin.disabled = false;
@@ -163,14 +144,15 @@
       evento.preventDefault();
       btnRecuperar.disabled = true;
       btnRecuperar.textContent = "Salvando...";
-
       try {
-        redefinirSenha(
+        var sessao = redefinirSenha(
           document.getElementById("recuperar-email").value,
           document.getElementById("recuperar-senha").value,
           document.getElementById("recuperar-confirmar").value
         );
-        window.location.href = "home.html?v=20260722m";
+        sessao.tipo = "profissional";
+        localStorage.setItem("dalucare_sessao", JSON.stringify(sessao));
+        window.location.href = DESTINO;
       } catch (erro) {
         mostrarAviso(avisoRecuperar, erro.message, "erro");
         btnRecuperar.disabled = false;
