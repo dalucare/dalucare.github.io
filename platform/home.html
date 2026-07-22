@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <title>Início | Dalucare</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=20260722e">
+  <link rel="stylesheet" href="css/dash.css?v=20260722e">
+  <script src="js/auth.js?v=20260722e"></script>
+</head>
+<body class="pagina-dashboard">
+  <div class="dash">
+    <aside class="dash-sidebar" id="barra-lateral" aria-label="Menu do aplicativo">
+      <div class="dash-brand">
+        <span class="dash-brand-mark" aria-hidden="true"></span>
+        <div>
+          <strong>Dalucare</strong>
+          <small id="dash-brand-sub">Plataforma de saúde</small>
+        </div>
+      </div>
+
+      <!-- Um único menu — preenchido conforme o tipo de conta -->
+      <nav class="dash-nav" id="dash-nav" aria-label="Funcionalidades"></nav>
+
+      <div class="dash-user">
+        <div class="dash-avatar" id="dash-avatar">D</div>
+        <div>
+          <strong id="dash-user-nome">Usuário</strong>
+          <small id="dash-user-meta">Conta Dalucare</small>
+        </div>
+      </div>
+    </aside>
+
+    <div class="dash-fundo" id="shell-fundo" hidden></div>
+
+    <div class="dash-main">
+      <header class="dash-top">
+        <div class="dash-top-esquerda">
+          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">☰</button>
+          <div>
+            <h1 class="dash-saudacao" id="dash-saudacao">Olá</h1>
+            <p class="dash-data" id="dash-data"></p>
+          </div>
+        </div>
+        <div class="dash-top-direita">
+          <label class="dash-busca">
+            <span class="sr-only">Buscar</span>
+            <input type="search" id="dash-busca" placeholder="Buscar..." disabled>
+          </label>
+          <button type="button" class="dash-icone" title="Notificações" aria-label="Notificações">
+            <span class="dash-icone-ponto" aria-hidden="true"></span>
+            <span class="dash-badge">0</span>
+          </button>
+          <a class="dash-link-site" href="../index.html">Site</a>
+          <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
+        </div>
+      </header>
+
+      <main class="dash-conteudo">
+        <section class="aba-painel ativo" id="aba-visao-geral-pro" hidden>
+          <div class="kpi-grid">
+            <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Consultas hoje</p><p class="kpi-valor">0</p><p class="kpi-meta">Agenda em configuração</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Retornos</p><p class="kpi-valor">0</p><p class="kpi-meta">Aguardando</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Teleconsultas</p><p class="kpi-valor">0</p><p class="kpi-meta">Agendadas</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Pendências</p><p class="kpi-valor">0</p><p class="kpi-meta">Em aberto</p></div></article>
+          </div>
+
+          <div class="dash-grid-3">
+            <section class="painel-bloco">
+              <div class="painel-bloco-topo"><h2>Agenda do dia</h2><span class="chip">Hoje</span></div>
+              <ul class="lista-agenda">
+                <li><time>08:00</time><div><strong>Horário livre</strong><span>Disponível para agendamento</span></div><span class="status status-livre">Livre</span></li>
+                <li><time>09:00</time><div><strong>Horário livre</strong><span>Disponível para agendamento</span></div><span class="status status-livre">Livre</span></li>
+                <li><time>10:00</time><div><strong>Horário livre</strong><span>Disponível para agendamento</span></div><span class="status status-livre">Livre</span></li>
+              </ul>
+              <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda">+ Nova consulta</button>
+            </section>
+
+            <div class="coluna-meio">
+              <section class="painel-bloco">
+                <h2>Próximos pacientes</h2>
+                <p class="vazio-texto">Nenhum paciente agendado ainda.</p>
+              </section>
+              <section class="painel-bloco">
+                <h2>Atalhos rápidos</h2>
+                <div class="atalhos-grid">
+                  <button type="button" class="atalho-btn" data-ir="pacientes">Novo paciente</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios">Prontuário</button>
+                  <button type="button" class="atalho-btn" data-ir="exames-pro">Exames</button>
+                  <button type="button" class="atalho-btn" data-ir="online">Teleconsulta</button>
+                  <button type="button" class="atalho-btn" data-ir="financeiro">Financeiro</button>
+                  <button type="button" class="atalho-btn" data-ir="mensagens">Mensagens</button>
+                </div>
+              </section>
+            </div>
+
+            <section class="painel-bloco">
+              <div class="painel-abas">
+                <button type="button" class="painel-aba ativo">Paciente</button>
+                <button type="button" class="painel-aba">Alertas (0)</button>
+              </div>
+              <div class="paciente-resumo">
+                <div class="dash-avatar grande">?</div>
+                <div>
+                  <strong>Nenhum paciente selecionado</strong>
+                  <p>Selecione um horário na agenda para ver o resumo.</p>
+                </div>
+              </div>
+              <div class="acoes-paciente">
+                <button type="button" class="btn btn-principal" data-ir="prontuarios">Abrir prontuário</button>
+                <button type="button" class="btn btn-secundario" data-ir="online">Iniciar teleconsulta</button>
+              </div>
+              <div class="campo-obs">
+                <label for="obs-rapidas">Observações rápidas</label>
+                <textarea id="obs-rapidas" rows="4" placeholder="Anotações do atendimento..."></textarea>
+              </div>
+            </section>
+          </div>
+
+          <div class="dash-grid-3">
+            <section class="painel-bloco"><h2>Atendimento online</h2><p class="vazio-texto">Nenhuma teleconsulta em andamento.</p></section>
+            <section class="painel-bloco"><h2>Mensagens</h2><p class="vazio-texto">Caixa de entrada vazia.</p></section>
+            <section class="painel-bloco"><h2>Documentos e exames</h2><p class="vazio-texto">Arquivos autorizados aparecerão aqui.</p></section>
+          </div>
+        </section>
+
+        <section class="aba-painel" id="aba-visao-geral-pac">
+          <div class="kpi-grid">
+            <article class="kpi-card"><span class="kpi-icone kpi-azul" aria-hidden="true"></span><div><p class="kpi-rotulo">Próximas consultas</p><p class="kpi-valor">0</p><p class="kpi-meta">Agende quando quiser</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-verde" aria-hidden="true"></span><div><p class="kpi-rotulo">Exames salvos</p><p class="kpi-valor">0</p><p class="kpi-meta">Anexe seus arquivos</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-ciano" aria-hidden="true"></span><div><p class="kpi-rotulo">Autorizações</p><p class="kpi-valor">0</p><p class="kpi-meta">Acesso aos seus dados</p></div></article>
+            <article class="kpi-card"><span class="kpi-icone kpi-laranja" aria-hidden="true"></span><div><p class="kpi-rotulo">Mensagens</p><p class="kpi-valor">0</p><p class="kpi-meta">Sem novidades</p></div></article>
+          </div>
+          <div class="dash-grid-2">
+            <section class="painel-bloco">
+              <h2>Comece por aqui</h2>
+              <div class="atalhos-grid">
+                <button type="button" class="atalho-btn" data-ir="agendar">Agendar consulta</button>
+                <button type="button" class="atalho-btn" data-ir="exames">Enviar exame</button>
+                <button type="button" class="atalho-btn" data-ir="profissionais">Ver profissionais</button>
+                <button type="button" class="atalho-btn" data-ir="autorizacoes">Autorizações</button>
+              </div>
+            </section>
+
+            <section class="painel-bloco agenda-paciente">
+              <div class="painel-bloco-topo">
+                <h2>Minha agenda</h2>
+                <div class="agenda-tabs" role="tablist" aria-label="Período da agenda">
+                  <button type="button" class="agenda-tab ativo" data-periodo="dia" role="tab" aria-selected="true">Dia</button>
+                  <button type="button" class="agenda-tab" data-periodo="semana" role="tab" aria-selected="false">Semana</button>
+                  <button type="button" class="agenda-tab" data-periodo="mes" role="tab" aria-selected="false">Mês</button>
+                </div>
+              </div>
+              <p class="agenda-periodo-label" id="agenda-periodo-label"></p>
+
+              <div class="agenda-vista ativo" id="agenda-vista-dia" role="tabpanel">
+                <ul class="lista-agenda" id="agenda-lista-dia"></ul>
+                <button type="button" class="btn btn-principal btn-bloco" data-ir="agendar">Agendar horário</button>
+              </div>
+
+              <div class="agenda-vista" id="agenda-vista-semana" role="tabpanel" hidden>
+                <div class="agenda-semana" id="agenda-grade-semana"></div>
+              </div>
+
+              <div class="agenda-vista" id="agenda-vista-mes" role="tabpanel" hidden>
+                <div class="agenda-mes" id="agenda-grade-mes"></div>
+              </div>
+            </section>
+          </div>
+        </section>
+
+        <section class="aba-painel" id="aba-agendar"><h1>Agendar consulta</h1><p class="aba-intro">Escolha o profissional e pague 50% para reservar.</p><div class="painel-aviso">Em breve: agenda com Mercado Pago.</div></section>
+        <section class="aba-painel" id="aba-exames"><h1>Meus exames</h1><p class="aba-intro">Anexe PDFs ou fotos dos exames.</p><div class="painel-aviso">Em breve: upload seguro.</div></section>
+        <section class="aba-painel" id="aba-consultas"><h1>Minhas consultas</h1><p class="aba-intro">Histórico e próximos horários.</p><div class="painel-aviso">Em breve: lista com status.</div></section>
+        <section class="aba-painel" id="aba-autorizacoes"><h1>Autorizações</h1><p class="aba-intro">Controle quem acessa seus dados.</p><div class="painel-aviso">Em breve: consentimento LGPD.</div></section>
+        <section class="aba-painel" id="aba-profissionais"><h1>Profissionais</h1><div class="dash-grid-2"><article class="painel-bloco"><h2>Angela Couto</h2><p>Cirurgia geral · Santos · R$ 150</p></article><article class="painel-bloco"><h2>Priscila Couto</h2><p>Fisioterapia · Santos · R$ 300</p></article><article class="painel-bloco"><h2>Débora Medeiros</h2><p>Otorrino · SP/SBC · R$ 300</p></article><article class="painel-bloco"><h2>Jefferson França</h2><p>Endocrino · Santos/Guarujá · R$ 500</p></article></div></section>
+        <section class="aba-painel" id="aba-agenda"><h1>Agenda</h1><p class="aba-intro">Horários presenciais e online.</p><div class="painel-aviso">Em breve: calendário editável.</div></section>
+        <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
+        <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
+        <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
+        <section class="aba-painel" id="aba-exames-pro"><h1>Exames</h1><p class="aba-intro">Arquivos autorizados pelos pacientes.</p><div class="painel-aviso">Em breve: visualização.</div></section>
+        <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
+        <section class="aba-painel" id="aba-mensagens"><h1>Mensagens</h1><p class="aba-intro">Comunicação segura.</p><div class="painel-aviso">Em breve: chat.</div></section>
+        <section class="aba-painel" id="aba-config"><h1>Configurações</h1><p class="aba-intro">Conta e preferências.</p><div class="painel-aviso">Em breve: edição de perfil.</div></section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const MENU_PACIENTE = [
+      { id: "visao-geral", label: "Início" },
+      { id: "agendar", label: "Agendar" },
+      { id: "exames", label: "Meus exames" },
+      { id: "consultas", label: "Consultas" },
+      { id: "autorizacoes", label: "Autorizações" },
+      { id: "profissionais", label: "Profissionais" },
+      { id: "mensagens", label: "Mensagens" },
+      { id: "config", label: "Configurações" },
+    ];
+
+    const MENU_PROFISSIONAL = [
+      { id: "visao-geral", label: "Dashboard" },
+      { id: "agenda", label: "Agenda" },
+      { id: "pacientes", label: "Pacientes" },
+      { id: "prontuarios", label: "Prontuários" },
+      { id: "online", label: "Atendimento online" },
+      { id: "exames-pro", label: "Exames" },
+      { id: "financeiro", label: "Financeiro" },
+      { id: "mensagens", label: "Mensagens" },
+      { id: "config", label: "Configurações" },
+    ];
+
+    const sessao = exigirLogin();
+    if (!sessao) {
+      throw new Error("Redirecionando...");
+    }
+
+    const ehProfissional = sessao.tipo === "profissional";
+    const primeiroNome = sessao.nome.split(" ")[0];
+    const agora = new Date();
+    const saudacaoHora = agora.getHours() < 12 ? "Bom dia" : agora.getHours() < 18 ? "Boa tarde" : "Boa noite";
+    const menuItens = ehProfissional ? MENU_PROFISSIONAL : MENU_PACIENTE;
+    const nav = document.getElementById("dash-nav");
+
+    nav.innerHTML = "";
+    menuItens.forEach(function (item, indice) {
+      const botao = document.createElement("button");
+      botao.type = "button";
+      botao.className = "dash-nav-item" + (indice === 0 ? " ativo" : "");
+      botao.dataset.aba = item.id;
+      botao.textContent = item.label;
+      nav.appendChild(botao);
+    });
+
+    document.getElementById("dash-saudacao").textContent = saudacaoHora + ", " + primeiroNome;
+    document.getElementById("dash-data").textContent = agora.toLocaleDateString("pt-BR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+    document.getElementById("dash-user-nome").textContent = sessao.nome;
+    document.getElementById("dash-user-meta").textContent = ehProfissional ? "Profissional de saúde" : "Paciente";
+    document.getElementById("dash-brand-sub").textContent = ehProfissional ? "Área do profissional" : "Área do paciente";
+    document.getElementById("dash-avatar").textContent = primeiroNome.charAt(0).toUpperCase();
+    document.getElementById("dash-busca").placeholder = ehProfissional ? "Buscar paciente..." : "Buscar profissional...";
+
+    document.getElementById("aba-visao-geral-pac").classList.remove("ativo");
+    document.getElementById("aba-visao-geral-pro").classList.remove("ativo");
+    if (ehProfissional) {
+      document.getElementById("aba-visao-geral-pro").hidden = false;
+      document.getElementById("aba-visao-geral-pro").classList.add("ativo");
+    } else {
+      document.getElementById("aba-visao-geral-pac").classList.add("ativo");
+    }
+
+    function abrirAba(id) {
+      document.querySelectorAll(".aba-painel").forEach(function (aba) {
+        aba.classList.remove("ativo");
+      });
+      document.querySelectorAll(".dash-nav-item").forEach(function (item) {
+        item.classList.toggle("ativo", item.dataset.aba === id);
+      });
+
+      if (id === "visao-geral") {
+        const alvo = document.getElementById(ehProfissional ? "aba-visao-geral-pro" : "aba-visao-geral-pac");
+        if (alvo) {
+          alvo.hidden = false;
+          alvo.classList.add("ativo");
+        }
+      } else {
+        const alvo = document.getElementById("aba-" + id);
+        if (alvo) {
+          alvo.classList.add("ativo");
+        }
+      }
+
+      document.getElementById("barra-lateral").classList.remove("aberta");
+      document.getElementById("shell-fundo").hidden = true;
+    }
+
+    document.getElementById("dash-nav").addEventListener("click", function (evento) {
+      const botao = evento.target.closest(".dash-nav-item");
+      if (botao && botao.dataset.aba) {
+        abrirAba(botao.dataset.aba);
+      }
+    });
+
+    document.querySelectorAll("[data-ir]").forEach(function (botao) {
+      botao.addEventListener("click", function () {
+        if (botao.dataset.ir) {
+          abrirAba(botao.dataset.ir);
+        }
+      });
+    });
+
+    document.getElementById("btn-menu-lateral").addEventListener("click", function () {
+      const barra = document.getElementById("barra-lateral");
+      const fundo = document.getElementById("shell-fundo");
+      const aberta = barra.classList.toggle("aberta");
+      fundo.hidden = !aberta;
+    });
+
+    document.getElementById("shell-fundo").addEventListener("click", function () {
+      document.getElementById("barra-lateral").classList.remove("aberta");
+      document.getElementById("shell-fundo").hidden = true;
+    });
+
+    document.getElementById("btn-sair").addEventListener("click", function () {
+      encerrarSessao();
+      window.location.href = "login.html";
+    });
+
+    /* Agenda do paciente: Dia / Semana / Mês */
+    function formatarDataLonga(data) {
+      return data.toLocaleDateString("pt-BR", {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+      });
+    }
+
+    function inicioDaSemana(data) {
+      const d = new Date(data);
+      const dia = d.getDay();
+      const diff = dia === 0 ? -6 : 1 - dia;
+      d.setDate(d.getDate() + diff);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
+
+    function renderAgendaDia() {
+      const lista = document.getElementById("agenda-lista-dia");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!lista || !label) return;
+
+      label.textContent = formatarDataLonga(agora);
+      lista.innerHTML =
+        '<li><time>—</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horário com um profissional</span></div><span class="status status-livre">Livre</span></li>';
+    }
+
+    function renderAgendaSemana() {
+      const grade = document.getElementById("agenda-grade-semana");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!grade || !label) return;
+
+      const inicio = inicioDaSemana(agora);
+      const fim = new Date(inicio);
+      fim.setDate(inicio.getDate() + 6);
+      label.textContent =
+        inicio.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }) +
+        " — " +
+        fim.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
+
+      const nomes = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+      let html = "";
+      for (let i = 0; i < 7; i += 1) {
+        const dia = new Date(inicio);
+        dia.setDate(inicio.getDate() + i);
+        const hoje = dia.toDateString() === agora.toDateString();
+        html +=
+          '<div class="agenda-dia-card' +
+          (hoje ? " hoje" : "") +
+          '"><strong>' +
+          nomes[i] +
+          " " +
+          String(dia.getDate()).padStart(2, "0") +
+          '</strong><span>Sem consultas</span></div>';
+      }
+      grade.innerHTML = html;
+    }
+
+    function renderAgendaMes() {
+      const grade = document.getElementById("agenda-grade-mes");
+      const label = document.getElementById("agenda-periodo-label");
+      if (!grade || !label) return;
+
+      const ano = agora.getFullYear();
+      const mes = agora.getMonth();
+      label.textContent = agora.toLocaleDateString("pt-BR", { month: "long", year: "numeric" });
+
+      const primeiro = new Date(ano, mes, 1);
+      const ultimo = new Date(ano, mes + 1, 0);
+      let offset = primeiro.getDay();
+      offset = offset === 0 ? 6 : offset - 1;
+
+      const cabecalhos = ["S", "T", "Q", "Q", "S", "S", "D"];
+      let html = cabecalhos.map(function (c) {
+        return '<div class="agenda-mes-cab">' + c + "</div>";
+      }).join("");
+
+      for (let i = 0; i < offset; i += 1) {
+        html += '<div class="agenda-mes-cel vazia"></div>';
+      }
+      for (let dia = 1; dia <= ultimo.getDate(); dia += 1) {
+        const ehHoje = dia === agora.getDate();
+        html +=
+          '<div class="agenda-mes-cel' +
+          (ehHoje ? " hoje" : "") +
+          '"><span>' +
+          dia +
+          "</span></div>";
+      }
+      grade.innerHTML = html;
+    }
+
+    function mostrarPeriodoAgenda(periodo) {
+      document.querySelectorAll(".agenda-tab").forEach(function (tab) {
+        const ativo = tab.dataset.periodo === periodo;
+        tab.classList.toggle("ativo", ativo);
+        tab.setAttribute("aria-selected", ativo ? "true" : "false");
+      });
+      document.querySelectorAll(".agenda-vista").forEach(function (vista) {
+        const id = "agenda-vista-" + periodo;
+        const ativo = vista.id === id;
+        vista.classList.toggle("ativo", ativo);
+        vista.hidden = !ativo;
+      });
+
+      if (periodo === "dia") renderAgendaDia();
+      if (periodo === "semana") renderAgendaSemana();
+      if (periodo === "mes") renderAgendaMes();
+    }
+
+    document.querySelectorAll(".agenda-tab").forEach(function (tab) {
+      tab.addEventListener("click", function () {
+        mostrarPeriodoAgenda(tab.dataset.periodo);
+      });
+    });
+
+    if (!ehProfissional) {
+      mostrarPeriodoAgenda("dia");
+    }
+</body>
+</html>
