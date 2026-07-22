@@ -4,135 +4,345 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Início | Dalucare</title>
-  <link rel="stylesheet" href="../css/style.css?v=20260722">
-  <link rel="stylesheet" href="css/app.css?v=20260722">
-  <script src="js/auth.js?v=20260722"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css?v=20260722b">
+  <link rel="stylesheet" href="css/app.css?v=20260722b">
+  <script src="js/auth.js?v=20260722b"></script>
 </head>
-<body class="pagina-app pagina-shell">
-  <header class="app-topo">
-    <div class="container app-topo-barra">
-      <div class="app-topo-esquerda">
-        <button type="button" class="btn-menu-lateral" id="btn-menu-lateral" aria-label="Abrir menu">☰</button>
-        <a class="logo" href="inicio.html">Dalucare</a>
+<body class="pagina-dashboard">
+  <div class="dash">
+    <aside class="dash-sidebar" id="barra-lateral" aria-label="Menu do aplicativo">
+      <div class="dash-brand">
+        <span class="dash-brand-mark" aria-hidden="true"></span>
+        <div>
+          <strong>Dalucare</strong>
+          <small>Plataforma de saúde</small>
+        </div>
       </div>
-      <div class="app-topo-direita">
-        <span class="app-usuario" id="app-usuario"></span>
-        <a class="link-voltar" href="../index.html">Site</a>
-        <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
-      </div>
-    </div>
-  </header>
 
-  <div class="shell">
-    <aside class="barra-lateral" id="barra-lateral" aria-label="Funcionalidades do aplicativo">
-      <p class="barra-titulo">Menu</p>
-      <nav class="barra-nav" id="barra-nav-paciente">
-        <button type="button" class="barra-item ativo" data-aba="visao-geral">Início</button>
-        <button type="button" class="barra-item" data-aba="agendar">Agendar consulta</button>
-        <button type="button" class="barra-item" data-aba="exames">Meus exames</button>
-        <button type="button" class="barra-item" data-aba="consultas">Minhas consultas</button>
-        <button type="button" class="barra-item" data-aba="autorizacoes">Autorizações</button>
-        <button type="button" class="barra-item" data-aba="profissionais">Profissionais</button>
+      <nav class="dash-nav" id="barra-nav-paciente">
+        <button type="button" class="dash-nav-item ativo" data-aba="visao-geral">Início</button>
+        <button type="button" class="dash-nav-item" data-aba="agendar">Agendar</button>
+        <button type="button" class="dash-nav-item" data-aba="exames">Meus exames</button>
+        <button type="button" class="dash-nav-item" data-aba="consultas">Consultas</button>
+        <button type="button" class="dash-nav-item" data-aba="autorizacoes">Autorizações</button>
+        <button type="button" class="dash-nav-item" data-aba="profissionais">Profissionais</button>
+        <button type="button" class="dash-nav-item" data-aba="mensagens">Mensagens</button>
+        <button type="button" class="dash-nav-item" data-aba="config">Configurações</button>
       </nav>
-      <nav class="barra-nav" id="barra-nav-profissional" hidden>
-        <button type="button" class="barra-item ativo" data-aba="visao-geral">Início</button>
-        <button type="button" class="barra-item" data-aba="agenda">Minha agenda</button>
-        <button type="button" class="barra-item" data-aba="consultas-dia">Consultas do dia</button>
-        <button type="button" class="barra-item" data-aba="prontuarios">Prontuários</button>
-        <button type="button" class="barra-item" data-aba="perfil">Meu perfil</button>
-        <button type="button" class="barra-item" data-aba="conteudos">Conteúdos</button>
+
+      <nav class="dash-nav" id="barra-nav-profissional" hidden>
+        <button type="button" class="dash-nav-item ativo" data-aba="visao-geral">Dashboard</button>
+        <button type="button" class="dash-nav-item" data-aba="agenda">Agenda</button>
+        <button type="button" class="dash-nav-item" data-aba="pacientes">Pacientes</button>
+        <button type="button" class="dash-nav-item" data-aba="prontuarios">Prontuários</button>
+        <button type="button" class="dash-nav-item" data-aba="online">Atendimento online</button>
+        <button type="button" class="dash-nav-item" data-aba="exames-pro">Exames</button>
+        <button type="button" class="dash-nav-item" data-aba="financeiro">Financeiro</button>
+        <button type="button" class="dash-nav-item" data-aba="mensagens">Mensagens</button>
+        <button type="button" class="dash-nav-item" data-aba="config">Configurações</button>
       </nav>
+
+      <div class="dash-user">
+        <div class="dash-avatar" id="dash-avatar">D</div>
+        <div>
+          <strong id="dash-user-nome">Usuário</strong>
+          <small id="dash-user-meta">Conta Dalucare</small>
+        </div>
+      </div>
     </aside>
 
-    <div class="shell-fundo" id="shell-fundo" hidden></div>
+    <div class="dash-fundo" id="shell-fundo" hidden></div>
 
-    <main class="shell-conteudo">
-      <!-- Visão geral -->
-      <section class="aba-painel ativo" id="aba-visao-geral">
-        <h1>Olá, <span id="painel-nome"></span></h1>
-        <span class="painel-badge" id="painel-tipo"></span>
-        <p class="aba-intro">Escolha uma funcionalidade no menu à esquerda para começar.</p>
-        <div class="painel-grid" id="atalhos-paciente">
-          <button type="button" class="painel-item atalho" data-ir="agendar"><h2>Agendar consulta</h2><p>Reserve horário e pague 50% de sinal.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="exames"><h2>Meus exames</h2><p>Guarde PDFs e imagens dos seus exames.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="consultas"><h2>Minhas consultas</h2><p>Histórico e próximos agendamentos.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="autorizacoes"><h2>Autorizações</h2><p>Controle quem acessa seus dados.</p></button>
+    <div class="dash-main">
+      <header class="dash-top">
+        <div class="dash-top-esquerda">
+          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">☰</button>
+          <div>
+            <h1 class="dash-saudacao" id="dash-saudacao">Olá</h1>
+            <p class="dash-data" id="dash-data"></p>
+          </div>
         </div>
-        <div class="painel-grid" id="atalhos-profissional" hidden>
-          <button type="button" class="painel-item atalho" data-ir="agenda"><h2>Minha agenda</h2><p>Configure horários disponíveis.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="consultas-dia"><h2>Consultas do dia</h2><p>Pacientes agendados para hoje.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="prontuarios"><h2>Prontuários</h2><p>Evoluções clínicas e anexos.</p></button>
-          <button type="button" class="painel-item atalho" data-ir="perfil"><h2>Meu perfil</h2><p>Especialidade, valores e planos.</p></button>
+        <div class="dash-top-direita">
+          <label class="dash-busca">
+            <span class="sr-only">Buscar</span>
+            <input type="search" id="dash-busca" placeholder="Buscar paciente..." disabled>
+          </label>
+          <button type="button" class="dash-icone" title="Notificações" aria-label="Notificações">
+            <span class="dash-icone-ponto" aria-hidden="true"></span>
+            <span class="dash-badge">3</span>
+          </button>
+          <a class="dash-link-site" href="../index.html">Site</a>
+          <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
         </div>
-      </section>
+      </header>
 
-      <!-- Paciente -->
-      <section class="aba-painel" id="aba-agendar">
-        <h1>Agendar consulta</h1>
-        <p class="aba-intro">Escolha o profissional, a data e pague 50% para reservar o horário.</p>
-        <div class="painel-aviso">Em breve: agenda online com pagamento via Mercado Pago.</div>
-      </section>
+      <main class="dash-conteudo">
+        <!-- DASHBOARD PROFISSIONAL -->
+        <section class="aba-painel ativo" id="aba-visao-geral-pro" hidden>
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-azul" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Consultas hoje</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Agenda em configuração</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-verde" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Retornos</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Aguardando</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-ciano" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Teleconsultas</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Agendadas</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-laranja" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Pendências</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Em aberto</p>
+              </div>
+            </article>
+          </div>
 
-      <section class="aba-painel" id="aba-exames">
-        <h1>Meus exames</h1>
-        <p class="aba-intro">Anexe PDFs ou fotos dos exames. O profissional autorizado poderá visualizar.</p>
-        <div class="painel-aviso">Em breve: upload seguro de exames e código de laboratório.</div>
-      </section>
+          <div class="dash-grid-3">
+            <section class="painel-bloco">
+              <div class="painel-bloco-topo">
+                <h2>Agenda do dia</h2>
+                <span class="chip">Hoje</span>
+              </div>
+              <ul class="lista-agenda">
+                <li>
+                  <time>08:00</time>
+                  <div>
+                    <strong>Horário livre</strong>
+                    <span>Disponível para agendamento</span>
+                  </div>
+                  <span class="status status-livre">Livre</span>
+                </li>
+                <li>
+                  <time>09:00</time>
+                  <div>
+                    <strong>Horário livre</strong>
+                    <span>Disponível para agendamento</span>
+                  </div>
+                  <span class="status status-livre">Livre</span>
+                </li>
+                <li>
+                  <time>10:00</time>
+                  <div>
+                    <strong>Horário livre</strong>
+                    <span>Disponível para agendamento</span>
+                  </div>
+                  <span class="status status-livre">Livre</span>
+                </li>
+              </ul>
+              <button type="button" class="btn btn-principal btn-bloco" data-ir="agenda">+ Nova consulta</button>
+            </section>
 
-      <section class="aba-painel" id="aba-consultas">
-        <h1>Minhas consultas</h1>
-        <p class="aba-intro">Acompanhe consultas futuras, histórico e links de teleconsulta.</p>
-        <div class="painel-aviso">Em breve: lista de agendamentos com status e cancelamento.</div>
-      </section>
+            <div class="coluna-meio">
+              <section class="painel-bloco">
+                <h2>Próximos pacientes</h2>
+                <p class="vazio-texto">Nenhum paciente agendado ainda. Quando a agenda estiver ativa, eles aparecerão aqui.</p>
+              </section>
+              <section class="painel-bloco">
+                <h2>Atalhos rápidos</h2>
+                <div class="atalhos-grid">
+                  <button type="button" class="atalho-btn" data-ir="pacientes">Novo paciente</button>
+                  <button type="button" class="atalho-btn" data-ir="prontuarios">Prontuário</button>
+                  <button type="button" class="atalho-btn" data-ir="exames-pro">Exames</button>
+                  <button type="button" class="atalho-btn" data-ir="online">Teleconsulta</button>
+                  <button type="button" class="atalho-btn" data-ir="financeiro">Financeiro</button>
+                  <button type="button" class="atalho-btn" data-ir="mensagens">Mensagens</button>
+                </div>
+              </section>
+            </div>
 
-      <section class="aba-painel" id="aba-autorizacoes">
-        <h1>Autorizações</h1>
-        <p class="aba-intro">Autorize ou revogue o acesso do profissional ao prontuário e exames.</p>
-        <div class="painel-aviso">Em breve: consentimento LGPD por profissional.</div>
-      </section>
+            <section class="painel-bloco">
+              <div class="painel-abas">
+                <button type="button" class="painel-aba ativo">Paciente</button>
+                <button type="button" class="painel-aba">Alertas (0)</button>
+              </div>
+              <div class="paciente-resumo">
+                <div class="dash-avatar grande">?</div>
+                <div>
+                  <strong>Nenhum paciente selecionado</strong>
+                  <p>Selecione um horário ou paciente na agenda para ver o resumo aqui.</p>
+                </div>
+              </div>
+              <div class="acoes-paciente">
+                <button type="button" class="btn btn-principal" data-ir="prontuarios">Abrir prontuário</button>
+                <button type="button" class="btn btn-secundario" data-ir="online">Iniciar teleconsulta</button>
+              </div>
+              <div class="campo-obs">
+                <label for="obs-rapidas">Observações rápidas</label>
+                <textarea id="obs-rapidas" rows="4" placeholder="Anotações do atendimento..."></textarea>
+              </div>
+            </section>
+          </div>
 
-      <section class="aba-painel" id="aba-profissionais">
-        <h1>Profissionais</h1>
-        <p class="aba-intro">Equipe piloto da Dalucare disponível para agendamento.</p>
-        <div class="painel-grid">
-          <article class="painel-item"><h2>Angela Couto</h2><p>Cirurgia geral · Santos · R$ 150 + procedimento</p></article>
-          <article class="painel-item"><h2>Priscila Couto</h2><p>Fisioterapia dermatofuncional · Santos · R$ 300</p></article>
-          <article class="painel-item"><h2>Débora Medeiros</h2><p>Otorrino pediátrica · SP / SBC · R$ 300</p></article>
-          <article class="painel-item"><h2>Jefferson França</h2><p>Endocrinometabólico · Santos / Guarujá · R$ 500</p></article>
-        </div>
-      </section>
+          <div class="dash-grid-3">
+            <section class="painel-bloco">
+              <h2>Atendimento online</h2>
+              <p class="vazio-texto">Nenhuma teleconsulta em andamento.</p>
+              <button type="button" class="btn btn-secundario btn-bloco" data-ir="online">Configurar sala</button>
+            </section>
+            <section class="painel-bloco">
+              <h2>Mensagens</h2>
+              <p class="vazio-texto">Caixa de entrada vazia. Em breve: mensagens com pacientes.</p>
+            </section>
+            <section class="painel-bloco">
+              <h2>Documentos e exames</h2>
+              <p class="vazio-texto">Quando o paciente autorizar, os arquivos aparecerão aqui.</p>
+            </section>
+          </div>
+        </section>
 
-      <!-- Profissional -->
-      <section class="aba-painel" id="aba-agenda">
-        <h1>Minha agenda</h1>
-        <p class="aba-intro">Defina dias e horários disponíveis para consultas presenciais ou online.</p>
-        <div class="painel-aviso">Em breve: calendário editável com bloqueios e duração de consulta.</div>
-      </section>
+        <!-- DASHBOARD PACIENTE -->
+        <section class="aba-painel" id="aba-visao-geral-pac">
+          <div class="kpi-grid">
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-azul" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Próximas consultas</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Agende quando quiser</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-verde" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Exames salvos</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Anexe seus arquivos</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-ciano" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Autorizações</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Acesso aos seus dados</p>
+              </div>
+            </article>
+            <article class="kpi-card">
+              <span class="kpi-icone kpi-laranja" aria-hidden="true"></span>
+              <div>
+                <p class="kpi-rotulo">Mensagens</p>
+                <p class="kpi-valor">0</p>
+                <p class="kpi-meta">Sem novidades</p>
+              </div>
+            </article>
+          </div>
 
-      <section class="aba-painel" id="aba-consultas-dia">
-        <h1>Consultas do dia</h1>
-        <p class="aba-intro">Veja os pacientes agendados, status do sinal e modalidade.</p>
-        <div class="painel-aviso">Em breve: lista do dia com acesso rápido ao prontuário.</div>
-      </section>
+          <div class="dash-grid-2">
+            <section class="painel-bloco">
+              <h2>Comece por aqui</h2>
+              <div class="atalhos-grid">
+                <button type="button" class="atalho-btn" data-ir="agendar">Agendar consulta</button>
+                <button type="button" class="atalho-btn" data-ir="exames">Enviar exame</button>
+                <button type="button" class="atalho-btn" data-ir="profissionais">Ver profissionais</button>
+                <button type="button" class="atalho-btn" data-ir="autorizacoes">Autorizações</button>
+              </div>
+            </section>
+            <section class="painel-bloco">
+              <h2>Profissionais piloto</h2>
+              <ul class="lista-simples">
+                <li><strong>Angela Couto</strong><span>Cirurgia geral · Santos</span></li>
+                <li><strong>Priscila Couto</strong><span>Fisioterapia · Santos</span></li>
+                <li><strong>Débora Medeiros</strong><span>Otorrino · SP / SBC</span></li>
+                <li><strong>Jefferson França</strong><span>Endocrino · Santos / Guarujá</span></li>
+              </ul>
+            </section>
+          </div>
+        </section>
 
-      <section class="aba-painel" id="aba-prontuarios">
-        <h1>Prontuários</h1>
-        <p class="aba-intro">Registre evoluções e visualize exames autorizados pelo paciente.</p>
-        <div class="painel-aviso">Em breve: prontuário eletrônico com compartilhamento entre colegas.</div>
-      </section>
+        <!-- ABAS COMPARTILHADAS / PACIENTE -->
+        <section class="aba-painel" id="aba-agendar">
+          <h1>Agendar consulta</h1>
+          <p class="aba-intro">Escolha o profissional, a data e pague 50% para reservar.</p>
+          <div class="painel-aviso">Em breve: agenda online com Mercado Pago.</div>
+        </section>
+        <section class="aba-painel" id="aba-exames">
+          <h1>Meus exames</h1>
+          <p class="aba-intro">Anexe PDFs ou fotos. O profissional autorizado poderá visualizar.</p>
+          <div class="painel-aviso">Em breve: upload seguro e código de laboratório.</div>
+        </section>
+        <section class="aba-painel" id="aba-consultas">
+          <h1>Minhas consultas</h1>
+          <p class="aba-intro">Histórico, próximos horários e links de teleconsulta.</p>
+          <div class="painel-aviso">Em breve: lista com status e cancelamento.</div>
+        </section>
+        <section class="aba-painel" id="aba-autorizacoes">
+          <h1>Autorizações</h1>
+          <p class="aba-intro">Controle quem acessa prontuário e exames.</p>
+          <div class="painel-aviso">Em breve: consentimento LGPD por profissional.</div>
+        </section>
+        <section class="aba-painel" id="aba-profissionais">
+          <h1>Profissionais</h1>
+          <div class="dash-grid-2">
+            <article class="painel-bloco"><h2>Angela Couto</h2><p>Cirurgia geral · Santos · R$ 150 + procedimento</p></article>
+            <article class="painel-bloco"><h2>Priscila Couto</h2><p>Fisioterapia dermatofuncional · Santos · R$ 300</p></article>
+            <article class="painel-bloco"><h2>Débora Medeiros</h2><p>Otorrino pediátrica · SP / SBC · R$ 300</p></article>
+            <article class="painel-bloco"><h2>Jefferson França</h2><p>Endocrinometabólico · Santos / Guarujá · R$ 500</p></article>
+          </div>
+        </section>
 
-      <section class="aba-painel" id="aba-perfil">
-        <h1>Meu perfil</h1>
-        <p class="aba-intro">Especialidade, formação acadêmica, valores e planos que atende.</p>
-        <div class="painel-aviso">Em breve: edição completa do perfil profissional.</div>
-      </section>
-
-      <section class="aba-painel" id="aba-conteudos">
-        <h1>Conteúdos</h1>
-        <p class="aba-intro">Publique artigos e orientações para pacientes.</p>
-        <div class="painel-aviso">Em breve: blog por profissional na plataforma.</div>
-      </section>
-    </main>
+        <!-- ABAS PROFISSIONAL -->
+        <section class="aba-painel" id="aba-agenda">
+          <h1>Agenda</h1>
+          <p class="aba-intro">Defina horários presenciais e online.</p>
+          <div class="painel-aviso">Em breve: calendário editável com bloqueios.</div>
+        </section>
+        <section class="aba-painel" id="aba-pacientes">
+          <h1>Pacientes</h1>
+          <p class="aba-intro">Cadastro e histórico dos pacientes atendidos.</p>
+          <div class="painel-aviso">Em breve: busca e ficha completa.</div>
+        </section>
+        <section class="aba-painel" id="aba-prontuarios">
+          <h1>Prontuários</h1>
+          <p class="aba-intro">Evoluções clínicas e anexos autorizados.</p>
+          <div class="painel-aviso">Em breve: prontuário compartilhado entre colegas.</div>
+        </section>
+        <section class="aba-painel" id="aba-online">
+          <h1>Atendimento online</h1>
+          <p class="aba-intro">Teleconsultas com link do Google Meet no MVP.</p>
+          <div class="painel-aviso">Em breve: sala integrada e histórico.</div>
+        </section>
+        <section class="aba-painel" id="aba-exames-pro">
+          <h1>Exames</h1>
+          <p class="aba-intro">Exames enviados pelos pacientes com autorização.</p>
+          <div class="painel-aviso">Em breve: visualização e laudos.</div>
+        </section>
+        <section class="aba-painel" id="aba-financeiro">
+          <h1>Financeiro</h1>
+          <p class="aba-intro">Sinais de 50%, taxas da plataforma e repasses.</p>
+          <div class="painel-aviso">Em breve: integração Mercado Pago.</div>
+        </section>
+        <section class="aba-painel" id="aba-mensagens">
+          <h1>Mensagens</h1>
+          <p class="aba-intro">Comunicação segura entre paciente e profissional.</p>
+          <div class="painel-aviso">Em breve: chat e notificações.</div>
+        </section>
+        <section class="aba-painel" id="aba-config">
+          <h1>Configurações</h1>
+          <p class="aba-intro">Dados da conta, senha e preferências.</p>
+          <div class="painel-aviso">Em breve: edição de perfil e notificações.</div>
+        </section>
+      </main>
+    </div>
   </div>
 
   <script>
@@ -143,38 +353,61 @@
 
     const ehProfissional = sessao.tipo === "profissional";
     const primeiroNome = sessao.nome.split(" ")[0];
+    const agora = new Date();
+    const saudacaoHora = agora.getHours() < 12 ? "Bom dia" : agora.getHours() < 18 ? "Boa tarde" : "Boa noite";
 
-    document.getElementById("painel-nome").textContent = primeiroNome;
-    document.getElementById("app-usuario").textContent = primeiroNome;
-    document.getElementById("painel-tipo").textContent = ehProfissional
+    document.getElementById("dash-saudacao").textContent = ehProfissional
+      ? saudacaoHora + ", " + primeiroNome
+      : saudacaoHora + ", " + primeiroNome;
+    document.getElementById("dash-data").textContent = agora.toLocaleDateString("pt-BR", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    });
+    document.getElementById("dash-user-nome").textContent = sessao.nome;
+    document.getElementById("dash-user-meta").textContent = ehProfissional
       ? "Profissional de saúde"
       : "Paciente";
+    document.getElementById("dash-avatar").textContent = primeiroNome.charAt(0).toUpperCase();
+    document.getElementById("dash-busca").placeholder = ehProfissional
+      ? "Buscar paciente..."
+      : "Buscar profissional...";
 
     if (ehProfissional) {
       document.getElementById("barra-nav-paciente").hidden = true;
       document.getElementById("barra-nav-profissional").hidden = false;
-      document.getElementById("atalhos-paciente").hidden = true;
-      document.getElementById("atalhos-profissional").hidden = false;
+      document.getElementById("aba-visao-geral-pac").classList.remove("ativo");
+      document.getElementById("aba-visao-geral-pro").hidden = false;
+      document.getElementById("aba-visao-geral-pro").classList.add("ativo");
     }
 
     function abrirAba(id) {
       document.querySelectorAll(".aba-painel").forEach(function (aba) {
         aba.classList.remove("ativo");
       });
-      document.querySelectorAll(".barra-item").forEach(function (item) {
+      document.querySelectorAll(".dash-nav-item").forEach(function (item) {
         item.classList.toggle("ativo", item.dataset.aba === id);
       });
 
-      const alvo = document.getElementById("aba-" + id);
-      if (alvo) {
-        alvo.classList.add("ativo");
+      if (id === "visao-geral") {
+        const alvo = document.getElementById(ehProfissional ? "aba-visao-geral-pro" : "aba-visao-geral-pac");
+        if (alvo) {
+          alvo.hidden = false;
+          alvo.classList.add("ativo");
+        }
+      } else {
+        const alvo = document.getElementById("aba-" + id);
+        if (alvo) {
+          alvo.classList.add("ativo");
+        }
       }
 
       document.getElementById("barra-lateral").classList.remove("aberta");
       document.getElementById("shell-fundo").hidden = true;
     }
 
-    document.querySelectorAll(".barra-item, .atalho").forEach(function (botao) {
+    document.querySelectorAll(".dash-nav-item, [data-ir]").forEach(function (botao) {
       botao.addEventListener("click", function () {
         const id = botao.dataset.aba || botao.dataset.ir;
         if (id) {
