@@ -1,0 +1,12 @@
+#node_modules
+.vercel
+_cmd_out.txt
+_cmd_out2.txt
+_result.txt
+.env
+.env.*
+!.env.example
+
+.tools/
+_find_node.ps1
+_node_find.txt
