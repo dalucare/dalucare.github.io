@@ -6,13 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722n"></script>
+  <script src="../js/force-https.js?v=20260722p"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722n">
-  <link rel="stylesheet" href="css/dash.css?v=20260722n">
-  <script src="js/auth.js?v=20260722n"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722p">
+  <link rel="stylesheet" href="css/dash.css?v=20260722p">
+  <script src="js/auth.js?v=20260722p"></script>
+  <script src="js/agenda.js?v=20260722p"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -193,7 +194,82 @@
         <section class="aba-painel" id="aba-consultas"><h1>Minhas consultas</h1><p class="aba-intro">Histórico e próximos horários.</p><div class="painel-aviso">Em breve: lista com status.</div></section>
         <section class="aba-painel" id="aba-autorizacoes"><h1>Autorizações</h1><p class="aba-intro">Controle quem acessa seus dados.</p><div class="painel-aviso">Em breve: consentimento LGPD.</div></section>
         <section class="aba-painel" id="aba-profissionais"><h1>Profissionais</h1><div class="dash-grid-2"><article class="painel-bloco"><h2>Angela Couto</h2><p>Cirurgia geral · Santos · R$ 150</p></article><article class="painel-bloco"><h2>Priscila Couto</h2><p>Fisioterapia · Santos · R$ 300</p></article><article class="painel-bloco"><h2>Débora Medeiros</h2><p>Otorrino · SP/SBC · R$ 300</p></article><article class="painel-bloco"><h2>Jefferson França</h2><p>Endocrino · Santos/Guarujá · R$ 500</p></article></div></section>
-        <section class="aba-painel" id="aba-agenda"><h1>Agenda</h1><p class="aba-intro">Horários presenciais e online.</p><div class="painel-aviso">Em breve: calendário editável.</div></section>
+        <section class="aba-painel" id="aba-agenda">
+          <div class="painel-bloco-topo agenda-completa-topo">
+            <div>
+              <h1>Agenda</h1>
+              <p class="aba-intro">Calendário editável · referência de hoje: 22/07/2026</p>
+            </div>
+            <button type="button" class="btn btn-principal" id="btn-cal-nova">+ Nova consulta</button>
+          </div>
+
+          <div class="cal-layout">
+            <section class="painel-bloco cal-mes-bloco">
+              <div class="cal-nav">
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-prev" aria-label="Mês anterior">‹</button>
+                <h2 id="cal-mes-titulo">Julho 2026</h2>
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-next" aria-label="Próximo mês">›</button>
+                <button type="button" class="link-suave" id="btn-cal-hoje">Hoje</button>
+              </div>
+              <div class="cal-grade" id="cal-grade" aria-label="Calendário mensal"></div>
+            </section>
+
+            <section class="painel-bloco cal-dia-bloco">
+              <div class="painel-bloco-topo">
+                <h2 id="cal-dia-titulo">Quarta-feira, 22 de julho</h2>
+                <span class="chip" id="cal-dia-contagem">0 consultas</span>
+              </div>
+              <ul class="lista-agenda lista-agenda-pro" id="cal-lista-dia"></ul>
+
+              <form class="cal-form" id="cal-form">
+                <h3 id="cal-form-titulo">Nova consulta</h3>
+                <input type="hidden" id="cal-id" value="">
+                <div class="cal-form-grid">
+                  <div class="campo">
+                    <label for="cal-data">Data</label>
+                    <input type="date" id="cal-data" required>
+                  </div>
+                  <div class="campo">
+                    <label for="cal-hora">Horário</label>
+                    <input type="time" id="cal-hora" required value="08:00">
+                  </div>
+                  <div class="campo cal-campo-largo">
+                    <label for="cal-nome">Paciente</label>
+                    <input type="text" id="cal-nome" required placeholder="Nome do paciente" minlength="2">
+                  </div>
+                  <div class="campo">
+                    <label for="cal-tipo">Tipo</label>
+                    <select id="cal-tipo">
+                      <option>Consulta</option>
+                      <option>Retorno</option>
+                      <option>Teleconsulta</option>
+                      <option>Procedimento</option>
+                    </select>
+                  </div>
+                  <div class="campo">
+                    <label for="cal-status">Status</label>
+                    <select id="cal-status">
+                      <option>Confirmado</option>
+                      <option>Teleconsulta</option>
+                      <option>Pendente</option>
+                      <option>Cancelado</option>
+                    </select>
+                  </div>
+                  <div class="campo cal-campo-largo">
+                    <label for="cal-obs">Observação</label>
+                    <input type="text" id="cal-obs" placeholder="Opcional">
+                  </div>
+                </div>
+                <div class="cal-form-acoes">
+                  <button type="submit" class="btn btn-principal" id="cal-salvar">Salvar</button>
+                  <button type="button" class="btn btn-secundario" id="cal-cancelar">Limpar</button>
+                  <button type="button" class="btn btn-secundario" id="cal-excluir" hidden>Excluir</button>
+                </div>
+                <p class="aviso-form" id="cal-aviso"></p>
+              </form>
+            </section>
+          </div>
+        </section>
         <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
         <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
@@ -359,9 +435,13 @@
             alvo.hidden = false;
             alvo.classList.add("ativo");
           }
+          if (ehProfissional && typeof window.atualizarAgendaDoDia === "function") window.atualizarAgendaDoDia();
         } else {
           var painel = document.getElementById("aba-" + id);
           if (painel) painel.classList.add("ativo");
+          if (id === "agenda" && typeof window.renderCalendarioCompleto === "function") {
+            window.renderCalendarioCompleto();
+          }
         }
 
         var barra = document.getElementById("barra-lateral");
@@ -534,152 +614,301 @@
       if (!ehProfissional) {
         mostrarPeriodoAgenda("dia");
       } else {
-        var AGENDA_DEMO = [
-          {
-            hora: "08:00",
-            nome: "Maria Silva",
-            tipo: "Consulta",
-            status: "Confirmado",
-            statusClass: "status-ok",
-            iniciais: "MS",
-            meta: "32 anos · Feminino · Bradesco Saúde",
-            ultima: "15/04/2026 · Retorno · Hipertensão controlada",
-            obs: "Paciente refere melhora com a medicação atual.",
-            docs: [
-              { nome: "Hemograma", status: "Normal", classe: "status-ok" },
-              { nome: "Ressonância", status: "Atenção", classe: "status-atencao" },
-              { nome: "Raio-X tórax", status: "Normal", classe: "status-ok" },
-            ],
-          },
-          {
-            hora: "08:30",
-            nome: "João Pedro Santos",
-            tipo: "Retorno",
-            status: "Confirmado",
-            statusClass: "status-ok",
-            iniciais: "JP",
-            meta: "45 anos · Masculino · Unimed",
-            ultima: "02/06/2026 · Consulta · Ajuste de dose",
-            obs: "Trazer exames laboratoriais da última semana.",
-            docs: [
-              { nome: "Glicemia", status: "Atenção", classe: "status-atencao" },
-              { nome: "HbA1c", status: "Normal", classe: "status-ok" },
-            ],
-          },
-          {
-            hora: "09:00",
-            nome: "Ana Carolina Lemos",
-            tipo: "Teleconsulta",
-            status: "Teleconsulta",
-            statusClass: "status-tele",
-            iniciais: "AL",
-            meta: "28 anos · Feminino · SulAmérica",
-            ultima: "10/05/2026 · Teleconsulta · Acompanhamento",
-            obs: "Sala online já liberada.",
-            docs: [{ nome: "Receita", status: "Normal", classe: "status-ok" }],
-          },
-          {
-            hora: "09:30",
-            nome: "Horário livre",
-            tipo: "Disponível",
-            status: "Livre",
-            statusClass: "status-livre",
-            iniciais: "—",
-            livre: true,
-          },
-          {
-            hora: "10:00",
-            nome: "Carlos Alberto",
-            tipo: "Consulta",
-            status: "Confirmado",
-            statusClass: "status-ok",
-            iniciais: "CA",
-            meta: "61 anos · Masculino · Particular",
-            ultima: "20/03/2026 · Consulta · Check-up",
-            obs: "Revisar pressão arterial e medicação.",
-            docs: [{ nome: "ECG", status: "Normal", classe: "status-ok" }],
-          },
-          {
-            hora: "10:30",
-            nome: "Fernanda Costa",
-            tipo: "Retorno",
-            status: "Confirmado",
-            statusClass: "status-ok",
-            iniciais: "FC",
-            meta: "39 anos · Feminino · Bradesco Saúde",
-            ultima: "08/07/2026 · Retorno · Pós-procedimento",
-            obs: "Avaliar cicatrização.",
-            docs: [{ nome: "Ultrassom", status: "Normal", classe: "status-ok" }],
-          },
-        ];
+        var Ag = window.DalucareAgenda;
+        var diaSelecionado = Ag ? Ag.dataISO(Ag.HOJE) : "2026-07-22";
+        var mesVisivel = Ag ? new Date(Ag.HOJE.getFullYear(), Ag.HOJE.getMonth(), 1) : new Date(2026, 6, 1);
+        var editandoId = null;
 
         function preencherFicha(item) {
           if (!item || item.livre) return;
           setText("ficha-avatar", item.iniciais);
           setText("ficha-nome", item.nome);
-          setText("ficha-meta", item.meta);
-          setText("ficha-ultima", item.ultima);
+          setText("ficha-meta", item.meta || item.tipo);
+          setText("ficha-ultima", item.ultima || "");
           var obs = document.getElementById("obs-rapidas");
           if (obs) obs.value = item.obs || "";
           var docs = document.getElementById("ficha-docs");
-          if (docs && item.docs) {
-            docs.innerHTML = item.docs
+          if (docs) {
+            docs.innerHTML = (item.docs || [])
               .map(function (d) {
                 return "<li><span>" + d.nome + '</span><span class="status ' + d.classe + '">' + d.status + "</span></li>";
               })
-              .join("");
+              .join("") || "<li><span>Sem documentos</span><span class=\"status status-livre\">—</span></li>";
           }
         }
 
-        function renderAgendaPro() {
-          var lista = document.getElementById("lista-agenda-pro");
+        function renderListaItens(containerId, itens, onPick) {
+          var lista = document.getElementById(containerId);
           if (!lista) return;
-          lista.innerHTML = AGENDA_DEMO.map(function (item, indice) {
-            return (
-              '<li class="agenda-item' +
-              (indice === 0 ? " selecionado" : "") +
-              '" data-indice="' +
-              indice +
-              '" role="button" tabindex="0">' +
-              "<time>" +
-              item.hora +
-              "</time>" +
-              '<div class="agenda-item-corpo">' +
-              '<div class="agenda-avatar" aria-hidden="true">' +
-              item.iniciais +
-              "</div>" +
-              "<div><strong>" +
-              item.nome +
-              "</strong><span>" +
-              item.tipo +
-              "</span></div>" +
-              "</div>" +
-              '<span class="status ' +
-              item.statusClass +
-              '">' +
-              item.status +
-              "</span>" +
-              "</li>"
-            );
-          }).join("");
+          lista.innerHTML = itens
+            .map(function (item, indice) {
+              return (
+                '<li class="agenda-item' +
+                (indice === 0 && !item.livre ? " selecionado" : "") +
+                '" data-indice="' +
+                indice +
+                '" data-id="' +
+                (item.id || "") +
+                '" role="button" tabindex="0">' +
+                "<time>" +
+                item.hora +
+                "</time>" +
+                '<div class="agenda-item-corpo">' +
+                '<div class="agenda-avatar" aria-hidden="true">' +
+                item.iniciais +
+                "</div>" +
+                "<div><strong>" +
+                item.nome +
+                "</strong><span>" +
+                item.tipo +
+                "</span></div></div>" +
+                '<span class="status ' +
+                item.statusClass +
+                '">' +
+                item.status +
+                "</span></li>"
+              );
+            })
+            .join("");
 
           lista.querySelectorAll(".agenda-item").forEach(function (el) {
             el.addEventListener("click", function () {
               var i = Number(el.getAttribute("data-indice"));
-              var item = AGENDA_DEMO[i];
+              var item = itens[i];
               if (!item || item.livre) return;
               lista.querySelectorAll(".agenda-item").forEach(function (n) {
                 n.classList.remove("selecionado");
               });
               el.classList.add("selecionado");
-              preencherFicha(item);
+              if (onPick) onPick(item);
             });
           });
-
-          preencherFicha(AGENDA_DEMO[0]);
         }
 
-        renderAgendaPro();
+        function atualizarAgendaDoDia() {
+          if (!Ag) return;
+          var hojeIso = Ag.dataISO(Ag.HOJE);
+          var itens = Ag.paraListaDia(hojeIso);
+          renderListaItens("lista-agenda-pro", itens, preencherFicha);
+          if (itens[0] && !itens[0].livre) preencherFicha(itens[0]);
+
+          var total = Ag.eventosDoDia(hojeIso).length;
+          var tele = Ag.eventosDoDia(hojeIso).filter(function (e) {
+            return e.tipo === "Teleconsulta" || e.status === "Teleconsulta";
+          }).length;
+          var retornos = Ag.eventosDoDia(hojeIso).filter(function (e) {
+            return e.tipo === "Retorno";
+          }).length;
+          var kpiConsultas = document.querySelector("#aba-visao-geral-pro .kpi-card:nth-child(1) .kpi-valor");
+          var kpiRetornos = document.querySelector("#aba-visao-geral-pro .kpi-card:nth-child(2) .kpi-valor");
+          var kpiTele = document.querySelector("#aba-visao-geral-pro .kpi-card:nth-child(3) .kpi-valor");
+          if (kpiConsultas) kpiConsultas.textContent = String(total);
+          if (kpiRetornos) kpiRetornos.textContent = String(retornos);
+          if (kpiTele) kpiTele.textContent = String(tele);
+        }
+
+        function limparFormCal() {
+          editandoId = null;
+          setText("cal-form-titulo", "Nova consulta");
+          var idEl = document.getElementById("cal-id");
+          if (idEl) idEl.value = "";
+          var dataEl = document.getElementById("cal-data");
+          if (dataEl) dataEl.value = diaSelecionado;
+          var horaEl = document.getElementById("cal-hora");
+          if (horaEl) horaEl.value = "08:00";
+          var nomeEl = document.getElementById("cal-nome");
+          if (nomeEl) nomeEl.value = "";
+          var tipoEl = document.getElementById("cal-tipo");
+          if (tipoEl) tipoEl.value = "Consulta";
+          var statusEl = document.getElementById("cal-status");
+          if (statusEl) statusEl.value = "Confirmado";
+          var obsEl = document.getElementById("cal-obs");
+          if (obsEl) obsEl.value = "";
+          var excluir = document.getElementById("cal-excluir");
+          if (excluir) excluir.hidden = true;
+          var aviso = document.getElementById("cal-aviso");
+          if (aviso) aviso.textContent = "";
+        }
+
+        function carregarForm(item) {
+          if (!item || !item.id) return;
+          editandoId = item.id;
+          setText("cal-form-titulo", "Editar consulta");
+          document.getElementById("cal-id").value = item.id;
+          var ev = Ag.carregar().find(function (e) {
+            return e.id === item.id;
+          });
+          if (!ev) return;
+          document.getElementById("cal-data").value = ev.data;
+          document.getElementById("cal-hora").value = ev.hora;
+          document.getElementById("cal-nome").value = ev.nome;
+          document.getElementById("cal-tipo").value = ev.tipo;
+          document.getElementById("cal-status").value = ev.status;
+          document.getElementById("cal-obs").value = ev.obs || "";
+          document.getElementById("cal-excluir").hidden = false;
+          diaSelecionado = ev.data;
+        }
+
+        function renderDiaSelecionado() {
+          if (!Ag) return;
+          var data = Ag.parseISO(diaSelecionado);
+          setText(
+            "cal-dia-titulo",
+            data.toLocaleDateString("pt-BR", {
+              weekday: "long",
+              day: "2-digit",
+              month: "long",
+              year: "numeric",
+            })
+          );
+          var eventos = Ag.eventosDoDia(diaSelecionado);
+          setText("cal-dia-contagem", eventos.length + (eventos.length === 1 ? " consulta" : " consultas"));
+          var itens = Ag.paraListaDia(diaSelecionado);
+          renderListaItens("cal-lista-dia", itens, function (item) {
+            carregarForm(item);
+          });
+          var dataEl = document.getElementById("cal-data");
+          if (dataEl && !editandoId) dataEl.value = diaSelecionado;
+        }
+
+        function renderGradeMes() {
+          var grade = document.getElementById("cal-grade");
+          if (!grade || !Ag) return;
+          var ano = mesVisivel.getFullYear();
+          var mes = mesVisivel.getMonth();
+          setText(
+            "cal-mes-titulo",
+            mesVisivel.toLocaleDateString("pt-BR", { month: "long", year: "numeric" })
+          );
+          var contagem = Ag.contagemPorDia(ano, mes);
+          var primeiro = new Date(ano, mes, 1);
+          var ultimo = new Date(ano, mes + 1, 0);
+          var offset = primeiro.getDay();
+          offset = offset === 0 ? 6 : offset - 1;
+          var cab = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
+          var html = cab.map(function (c) {
+            return '<div class="cal-cel cal-cab">' + c + "</div>";
+          }).join("");
+          for (var i = 0; i < offset; i += 1) html += '<div class="cal-cel cal-vazia"></div>';
+          var hojeIso = Ag.dataISO(Ag.HOJE);
+          for (var d = 1; d <= ultimo.getDate(); d += 1) {
+            var iso = ano + "-" + String(mes + 1).padStart(2, "0") + "-" + String(d).padStart(2, "0");
+            var classes = "cal-cel cal-dia";
+            if (iso === hojeIso) classes += " hoje";
+            if (iso === diaSelecionado) classes += " selecionado";
+            var qtd = contagem[iso] || 0;
+            html +=
+              '<button type="button" class="' +
+              classes +
+              '" data-data="' +
+              iso +
+              '"><span class="cal-num">' +
+              d +
+              "</span>" +
+              (qtd ? '<span class="cal-dot">' + qtd + "</span>" : "") +
+              "</button>";
+          }
+          grade.innerHTML = html;
+          grade.querySelectorAll("[data-data]").forEach(function (btn) {
+            btn.addEventListener("click", function () {
+              diaSelecionado = btn.getAttribute("data-data");
+              editandoId = null;
+              limparFormCal();
+              renderCalendarioCompleto();
+            });
+          });
+        }
+
+        function renderCalendarioCompleto() {
+          renderGradeMes();
+          renderDiaSelecionado();
+          atualizarAgendaDoDia();
+        }
+
+        var btnPrev = document.getElementById("btn-cal-prev");
+        var btnNext = document.getElementById("btn-cal-next");
+        var btnHoje = document.getElementById("btn-cal-hoje");
+        var btnNova = document.getElementById("btn-cal-nova");
+        var formCal = document.getElementById("cal-form");
+        var btnCancelar = document.getElementById("cal-cancelar");
+        var btnExcluir = document.getElementById("cal-excluir");
+
+        if (btnPrev) {
+          btnPrev.addEventListener("click", function () {
+            mesVisivel.setMonth(mesVisivel.getMonth() - 1);
+            renderGradeMes();
+          });
+        }
+        if (btnNext) {
+          btnNext.addEventListener("click", function () {
+            mesVisivel.setMonth(mesVisivel.getMonth() + 1);
+            renderGradeMes();
+          });
+        }
+        if (btnHoje) {
+          btnHoje.addEventListener("click", function () {
+            mesVisivel = new Date(Ag.HOJE.getFullYear(), Ag.HOJE.getMonth(), 1);
+            diaSelecionado = Ag.dataISO(Ag.HOJE);
+            limparFormCal();
+            renderCalendarioCompleto();
+          });
+        }
+        if (btnNova) {
+          btnNova.addEventListener("click", function () {
+            limparFormCal();
+            document.getElementById("cal-nome").focus();
+          });
+        }
+        if (btnCancelar) btnCancelar.addEventListener("click", limparFormCal);
+        if (btnExcluir) {
+          btnExcluir.addEventListener("click", function () {
+            if (!editandoId) return;
+            if (!window.confirm("Excluir esta consulta?")) return;
+            Ag.remover(editandoId);
+            limparFormCal();
+            renderCalendarioCompleto();
+          });
+        }
+        if (formCal) {
+          formCal.addEventListener("submit", function (evento) {
+            evento.preventDefault();
+            var aviso = document.getElementById("cal-aviso");
+            var nome = document.getElementById("cal-nome").value.trim();
+            var data = document.getElementById("cal-data").value;
+            var hora = document.getElementById("cal-hora").value;
+            if (!nome || !data || !hora) {
+              if (aviso) {
+                aviso.textContent = "Preencha data, horário e paciente.";
+                aviso.className = "aviso-form aviso-erro";
+              }
+              return;
+            }
+            var registro = {
+              id: editandoId || Ag.novoId(),
+              data: data,
+              hora: hora,
+              nome: nome,
+              tipo: document.getElementById("cal-tipo").value,
+              status: document.getElementById("cal-status").value,
+              obs: document.getElementById("cal-obs").value.trim(),
+            };
+            Ag.upsert(registro);
+            diaSelecionado = data;
+            mesVisivel = new Date(Ag.parseISO(data).getFullYear(), Ag.parseISO(data).getMonth(), 1);
+            limparFormCal();
+            if (aviso) {
+              aviso.textContent = "Consulta salva.";
+              aviso.className = "aviso-form aviso-sucesso";
+            }
+            renderCalendarioCompleto();
+          });
+        }
+
+        window.atualizarAgendaDoDia = atualizarAgendaDoDia;
+        window.renderCalendarioCompleto = renderCalendarioCompleto;
+        limparFormCal();
+        atualizarAgendaDoDia();
+        renderCalendarioCompleto();
       }
     })();
   </script>
