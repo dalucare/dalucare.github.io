@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro profissional | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722v"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722v">
-  <link rel="stylesheet" href="css/dash.css?v=20260722v">
-  <script src="js/auth.js?v=20260722v"></script>
+  <script src="../js/force-https.js?v=20260722w"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722w">
+  <link rel="stylesheet" href="css/dash.css?v=20260722w">
+  <script src="js/auth.js?v=20260722w"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -20,7 +20,7 @@
   <main class="app-centro">
     <div class="auth-card">
       <h1>Criar conta profissional</h1>
-      <p class="auth-subtitulo">Fase 1: cadastro só para profissionais de saúde. A área do paciente virá depois.</p>
+      <p class="auth-subtitulo">Nome e CRM serão enviados ao receituário MedHub automaticamente.</p>
 
       <form id="form-cadastro" class="formulario">
         <input type="hidden" id="cadastro-tipo" name="tipo" value="profissional">
@@ -36,6 +36,45 @@
           <div class="campo">
             <label for="cadastro-email">E-mail</label>
             <input type="email" id="cadastro-email" name="email" placeholder="voce@exemplo.com" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="linha-form" style="display:grid;grid-template-columns:1fr 2fr;gap:12px;">
+          <div class="campo">
+            <label for="cadastro-crm-uf">UF CRM</label>
+            <select id="cadastro-crm-uf" required>
+              <option value="SP" selected>SP</option>
+              <option value="RJ">RJ</option>
+              <option value="MG">MG</option>
+              <option value="ES">ES</option>
+              <option value="PR">PR</option>
+              <option value="SC">SC</option>
+              <option value="RS">RS</option>
+              <option value="BA">BA</option>
+              <option value="PE">PE</option>
+              <option value="CE">CE</option>
+              <option value="DF">DF</option>
+              <option value="GO">GO</option>
+              <option value="MT">MT</option>
+              <option value="MS">MS</option>
+              <option value="PA">PA</option>
+              <option value="AM">AM</option>
+              <option value="MA">MA</option>
+              <option value="PB">PB</option>
+              <option value="RN">RN</option>
+              <option value="AL">AL</option>
+              <option value="SE">SE</option>
+              <option value="PI">PI</option>
+              <option value="TO">TO</option>
+              <option value="RO">RO</option>
+              <option value="AC">AC</option>
+              <option value="AP">AP</option>
+              <option value="RR">RR</option>
+            </select>
+          </div>
+          <div class="campo">
+            <label for="cadastro-crm">CRM</label>
+            <input type="text" id="cadastro-crm" name="crm" placeholder="Somente números" required inputmode="numeric" pattern="[0-9]+" minlength="4" maxlength="10">
           </div>
         </div>
 
@@ -58,14 +97,14 @@
       </form>
 
       <p class="auth-links">
-        Já tem conta? <a href="login.html?v=20260722v">Faça login</a>
+        Já tem conta? <a href="login.html?v=20260722w">Faça login</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "app.html?v=20260722v";
+      window.location.href = "app.html?v=20260722w";
     }
 
     const formCadastro = document.getElementById("form-cadastro");
@@ -81,6 +120,8 @@
         senha: document.getElementById("cadastro-senha").value,
         confirmarSenha: document.getElementById("cadastro-confirmar").value,
         tipo: "profissional",
+        crm: document.getElementById("cadastro-crm").value,
+        crmUf: document.getElementById("cadastro-crm-uf").value,
       };
 
       btnCadastro.disabled = true;
@@ -89,7 +130,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "app.html?v=20260722v";
+        window.location.href = "app.html?v=20260722w";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;

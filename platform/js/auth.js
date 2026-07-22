@@ -42,6 +42,8 @@ function criarSessao(usuario) {
     nome: usuario.nome,
     email: usuario.email,
     tipo: usuario.tipo || "paciente",
+    crm: usuario.crm || "",
+    crmUf: usuario.crmUf || "SP",
     criadoEm: new Date().toISOString(),
   };
   localStorage.setItem(CHAVE_SESSAO, JSON.stringify(sessao));
@@ -75,12 +77,27 @@ function cadastrarUsuario(dados) {
     throw new Error("As senhas não coincidem.");
   }
 
+  const tipo = dados.tipo || "paciente";
+  const crm = String(dados.crm || "").replace(/\D/g, "");
+  const crmUf = String(dados.crmUf || "SP").trim().toUpperCase().slice(0, 2);
+
+  if (tipo === "profissional") {
+    if (!crm) {
+      throw new Error("Informe o número do CRM.");
+    }
+    if (!crmUf || crmUf.length !== 2) {
+      throw new Error("Informe a UF do CRM (ex.: SP).");
+    }
+  }
+
   const novoUsuario = {
     id: "u_" + Date.now(),
     nome: dados.nome.trim(),
     email: email,
     senhaHash: hashSenha(dados.senha),
-    tipo: dados.tipo || "paciente",
+    tipo: tipo,
+    crm: crm,
+    crmUf: crmUf || "SP",
     cadastroEm: new Date().toISOString(),
   };
 
@@ -142,6 +159,8 @@ function garantirUsuarioDemo(dados) {
     existente.senhaHash = hashSenha(dados.senha);
     existente.tipo = dados.tipo;
     existente.nome = dados.nome;
+    if (dados.crm) existente.crm = String(dados.crm).replace(/\D/g, "");
+    if (dados.crmUf) existente.crmUf = String(dados.crmUf).trim().toUpperCase().slice(0, 2);
     var usuarios = obterUsuarios();
     var indice = usuarios.findIndex(function (u) {
       return u.email === existente.email;
@@ -158,7 +177,47 @@ function garantirUsuarioDemo(dados) {
     senha: dados.senha,
     confirmarSenha: dados.senha,
     tipo: dados.tipo,
+    crm: dados.crm || "",
+    crmUf: dados.crmUf || "SP",
   });
+}
+
+function atualizarPerfilProfissional(dados) {
+  var sessao = obterSessao();
+  if (!sessao) throw new Error("Faça login novamente.");
+  var usuarios = obterUsuarios();
+  var indice = usuarios.findIndex(function (u) {
+    return u.email === sessao.email;
+  });
+  var crm = String(dados.crm || "").replace(/\D/g, "");
+  var crmUf = String(dados.crmUf || "SP").trim().toUpperCase().slice(0, 2);
+  var nome = String(dados.nome || sessao.nome).trim();
+  if (!nome) throw new Error("Informe o nome.");
+  if (!crm) throw new Error("Informe o número do CRM.");
+  if (!crmUf || crmUf.length !== 2) throw new Error("Informe a UF do CRM.");
+
+  if (indice >= 0) {
+    usuarios[indice].nome = nome;
+    usuarios[indice].crm = crm;
+    usuarios[indice].crmUf = crmUf;
+    salvarUsuarios(usuarios);
+    return criarSessao(usuarios[indice]);
+  }
+
+  sessao.nome = nome;
+  sessao.crm = crm;
+  sessao.crmUf = crmUf;
+  localStorage.setItem(CHAVE_SESSAO, JSON.stringify(sessao));
+  return sessao;
+}
+
+function perfilMedHub(sessao) {
+  var s = sessao || obterSessao() || {};
+  return {
+    name: s.nome || "",
+    crmUf: s.crmUf || "SP",
+    crmNumber: s.crm || "",
+  };
 }
 
 function exigirLogin() {

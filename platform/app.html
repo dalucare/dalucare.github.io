@@ -6,14 +6,14 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722v"></script>
+  <script src="../js/force-https.js?v=20260722w"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722v">
-  <link rel="stylesheet" href="css/dash.css?v=20260722v">
-  <script src="js/auth.js?v=20260722v"></script>
-  <script src="js/agenda-slots.js?v=20260722v"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722w">
+  <link rel="stylesheet" href="css/dash.css?v=20260722w">
+  <script src="js/auth.js?v=20260722w"></script>
+  <script src="js/agenda-slots.js?v=20260722w"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -286,12 +286,14 @@
           <div class="painel-bloco-topo">
             <div>
               <h1>Prescrições</h1>
-              <p class="aba-intro">Receituário digital MedHub integrado ao Dalucare.</p>
+              <p class="aba-intro">Receituário MedHub · nome e CRM do login Dalucare são enviados automaticamente.</p>
             </div>
             <a class="link-suave" href="https://www.medhub.ia.br/embed/prescricao.html" target="_blank" rel="noopener noreferrer">Abrir em nova aba</a>
           </div>
+          <p class="cal-dica" id="medhub-perfil-status">Aguardando envio do perfil ao MedHub…</p>
           <div class="embed-frame painel-bloco">
             <iframe
+              id="medhub-rx-embed"
               src="https://www.medhub.ia.br/embed/prescricao.html"
               title="Receituário MedHub"
               style="width:100%;min-height:720px;border:0;"
@@ -302,7 +304,30 @@
         <section class="aba-painel" id="aba-relatorios"><h1>Relatórios</h1><p class="aba-intro">Produtividade e indicadores.</p><div class="painel-aviso">Em breve: painéis gerenciais.</div></section>
         <section class="aba-painel" id="aba-financeiro"><h1>Financeiro</h1><p class="aba-intro">Sinais de 50% e repasses.</p><div class="painel-aviso">Em breve: Mercado Pago.</div></section>
         <section class="aba-painel" id="aba-mensagens"><h1>Mensagens</h1><p class="aba-intro">Comunicação segura.</p><div class="painel-aviso">Em breve: chat.</div></section>
-        <section class="aba-painel" id="aba-config"><h1>Configurações</h1><p class="aba-intro">Conta e preferências.</p><div class="painel-aviso">Em breve: edição de perfil.</div></section>
+        <section class="aba-painel" id="aba-config">
+          <h1>Configurações</h1>
+          <p class="aba-intro">Dados usados no receituário MedHub.</p>
+          <form class="painel-bloco cal-form" id="form-perfil-pro" style="max-width:520px;">
+            <div class="cal-form-grid">
+              <div class="campo cal-campo-largo">
+                <label for="perfil-nome">Nome na receita</label>
+                <input type="text" id="perfil-nome" required minlength="3">
+              </div>
+              <div class="campo">
+                <label for="perfil-crm-uf">UF CRM</label>
+                <input type="text" id="perfil-crm-uf" maxlength="2" required placeholder="SP">
+              </div>
+              <div class="campo">
+                <label for="perfil-crm">CRM</label>
+                <input type="text" id="perfil-crm" required inputmode="numeric" placeholder="123456">
+              </div>
+            </div>
+            <div class="cal-form-acoes">
+              <button type="submit" class="btn btn-principal">Salvar perfil</button>
+            </div>
+            <p class="aviso-form" id="aviso-perfil"></p>
+          </form>
+        </section>
       </main>
     </div>
   </div>
@@ -429,6 +454,108 @@
       setText("dash-brand-sub", ehProfissional ? "Área do profissional" : "Área do paciente");
       setText("dash-avatar", primeiroNome.charAt(0).toUpperCase());
 
+      function obterPerfilMedico() {
+        if (typeof perfilMedHub === "function") return perfilMedHub(sessao);
+        return {
+          name: sessao.nome || "",
+          crmUf: sessao.crmUf || "SP",
+          crmNumber: sessao.crm || "",
+        };
+      }
+
+      function enviarPerfilMedHub() {
+        var frame = document.getElementById("medhub-rx-embed");
+        var status = document.getElementById("medhub-perfil-status");
+        var profile = obterPerfilMedico();
+        if (!frame || !frame.contentWindow) return;
+
+        if (!profile.crmNumber) {
+          if (status) {
+            status.textContent =
+              "Cadastre seu CRM em Configurações para preencher o receituário automaticamente.";
+          }
+          return;
+        }
+
+        try {
+          frame.contentWindow.postMessage(
+            {
+              source: "dalucare",
+              type: "doctor-profile",
+              profile: profile,
+            },
+            "https://www.medhub.ia.br"
+          );
+          if (status) {
+            status.textContent =
+              "Perfil enviado ao MedHub: " +
+              profile.name +
+              " · CRM " +
+              profile.crmUf +
+              " " +
+              profile.crmNumber;
+          }
+        } catch (e) {
+          if (status) status.textContent = "Não foi possível enviar o perfil ao MedHub.";
+        }
+      }
+
+      function preencherFormPerfil() {
+        var nome = document.getElementById("perfil-nome");
+        var uf = document.getElementById("perfil-crm-uf");
+        var crm = document.getElementById("perfil-crm");
+        if (nome) nome.value = sessao.nome || "";
+        if (uf) uf.value = sessao.crmUf || "SP";
+        if (crm) crm.value = sessao.crm || "";
+      }
+
+      var frameMedhub = document.getElementById("medhub-rx-embed");
+      if (frameMedhub) {
+        frameMedhub.addEventListener("load", function () {
+          enviarPerfilMedHub();
+          setTimeout(enviarPerfilMedHub, 600);
+        });
+      }
+
+      window.addEventListener("message", function (evento) {
+        if (evento.origin !== "https://www.medhub.ia.br") return;
+        var data = evento.data || {};
+        if (data.source === "medhub" && (data.type === "ready" || data.type === "doctor-profile-request")) {
+          enviarPerfilMedHub();
+        }
+      });
+
+      var formPerfil = document.getElementById("form-perfil-pro");
+      if (formPerfil) {
+        preencherFormPerfil();
+        formPerfil.addEventListener("submit", function (evento) {
+          evento.preventDefault();
+          var aviso = document.getElementById("aviso-perfil");
+          try {
+            if (typeof atualizarPerfilProfissional !== "function") {
+              throw new Error("Recarregue a página e tente de novo.");
+            }
+            sessao = atualizarPerfilProfissional({
+              nome: document.getElementById("perfil-nome").value,
+              crmUf: document.getElementById("perfil-crm-uf").value,
+              crm: document.getElementById("perfil-crm").value,
+            });
+            setText("dash-user-nome", sessao.nome);
+            setText("dash-saudacao", saudacaoHora + ", " + String(sessao.nome || "").split(" ")[0]);
+            if (aviso) {
+              aviso.textContent = "Perfil salvo. Abrindo Prescrições, o MedHub recebe estes dados.";
+              aviso.className = "aviso-form aviso-sucesso";
+            }
+            enviarPerfilMedHub();
+          } catch (erro) {
+            if (aviso) {
+              aviso.textContent = erro.message || "Não foi possível salvar.";
+              aviso.className = "aviso-form aviso-erro";
+            }
+          }
+        });
+      }
+
       var busca = document.getElementById("dash-busca");
       if (busca) {
         busca.placeholder = ehProfissional ? "Buscar paciente..." : "Buscar profissional...";
@@ -465,6 +592,12 @@
           if (painel) painel.classList.add("ativo");
           if (id === "agenda" && typeof window.renderCalendarioCompleto === "function") {
             window.renderCalendarioCompleto();
+          }
+          if (id === "prescricoes") {
+            setTimeout(enviarPerfilMedHub, 200);
+          }
+          if (id === "config") {
+            preencherFormPerfil();
           }
         }
 
