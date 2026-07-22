@@ -84,7 +84,26 @@
     return mapa;
   }
 
+  function normalizarHora(hora) {
+    var p = String(hora || "").split(":");
+    if (p.length < 2) return String(hora || "");
+    return pad(Number(p[0])) + ":" + pad(Number(p[1] || 0));
+  }
+
+  function horarioOcupado(data, hora, ignorarId) {
+    var h = normalizarHora(hora);
+    return carregar().some(function (e) {
+      if (ignorarId && e.id === ignorarId) return false;
+      if (e.status === "Cancelado") return false;
+      return e.data === data && normalizarHora(e.hora) === h;
+    });
+  }
+
   function upsert(evento) {
+    evento.hora = normalizarHora(evento.hora);
+    if (horarioOcupado(evento.data, evento.hora, evento.id)) {
+      throw new Error("Já existe uma consulta neste dia e horário. Escolha outro horário.");
+    }
     var lista = carregar();
     var i = lista.findIndex(function (e) {
       return e.id === evento.id;
@@ -148,6 +167,8 @@
     paraListaDia: paraListaDia,
     iniciaisDe: iniciaisDe,
     statusClass: statusClass,
+    horarioOcupado: horarioOcupado,
+    normalizarHora: normalizarHora,
     novoId: function () {
       return "ev_" + Date.now() + "_" + Math.floor(Math.random() * 999);
     },
