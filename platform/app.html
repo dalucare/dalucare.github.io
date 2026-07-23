@@ -6,16 +6,17 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ag"></script>
+  <script src="../js/force-https.js?v=20260722ah"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722ag">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ag">
-  <script src="js/auth.js?v=20260722ag"></script>
-  <script src="js/agenda-slots.js?v=20260722ag"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722ag"></script>
-  <script src="js/pacientes.js?v=20260722ag"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ah">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ah">
+  <script src="js/auth.js?v=20260722ah"></script>
+  <script src="js/agenda-slots.js?v=20260722ah"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722ah"></script>
+  <script src="js/pacientes.js?v=20260722ah"></script>
+  <script src="js/prontuarios.js?v=20260722ah"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -426,7 +427,164 @@
             </section>
           </div>
         </section>
-        <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
+        <section class="aba-painel" id="aba-prontuarios">
+          <div class="painel-bloco-topo pac-topo">
+            <div>
+              <h1>Prontuários</h1>
+              <p class="aba-intro">Evoluções clínicas, resumo e documentos por paciente.</p>
+            </div>
+            <button type="button" class="btn btn-secundario" id="btn-pront-ir-pacientes">Ver pacientes</button>
+          </div>
+
+          <div class="pront-layout">
+            <section class="painel-bloco pac-lista-bloco">
+              <label class="campo presc-busca-campo">
+                <span>Buscar na lista</span>
+                <input type="search" id="pront-busca" placeholder="Nome, convênio, cidade..." autocomplete="off">
+              </label>
+              <label class="campo">
+                <span>Paciente do prontuário</span>
+                <select id="pront-paciente-select">
+                  <option value="">Selecione um paciente</option>
+                </select>
+              </label>
+              <ul class="pac-lista" id="pront-pac-lista"></ul>
+            </section>
+
+            <section class="painel-bloco pront-detalhe-bloco">
+              <div id="pront-vazio" class="pac-vazio">
+                <h2>Prontuário eletrônico</h2>
+                <p>Selecione um paciente à esquerda para ver evoluções, alergias, antecedentes e documentos.</p>
+              </div>
+
+              <div id="pront-corpo" hidden>
+                <div class="pac-ficha-topo">
+                  <div class="paciente-resumo">
+                    <div class="dash-avatar grande" id="pront-avatar">?</div>
+                    <div>
+                      <strong id="pront-nome">Paciente</strong>
+                      <p id="pront-meta"></p>
+                    </div>
+                  </div>
+                  <div class="pront-abas" role="tablist">
+                    <button type="button" class="pac-filtro ativo" data-pront-aba="evolucoes">Evoluções</button>
+                    <button type="button" class="pac-filtro" data-pront-aba="resumo">Resumo clínico</button>
+                    <button type="button" class="pac-filtro" data-pront-aba="anexos">Documentos</button>
+                  </div>
+                </div>
+
+                <div id="pront-aba-evolucoes">
+                  <div class="pront-duas-colunas">
+                    <div>
+                      <h3 class="pront-secao-titulo">Linha do tempo</h3>
+                      <ul class="pront-evolucoes" id="pront-evolucoes"></ul>
+                    </div>
+                    <form class="cal-form pront-form-lateral" id="form-pront-evolucao">
+                      <h3 class="pront-secao-titulo">Nova evolução</h3>
+                      <div class="cal-form-grid">
+                        <div class="campo">
+                          <label for="pront-ev-data">Data</label>
+                          <input type="date" id="pront-ev-data" required>
+                        </div>
+                        <div class="campo">
+                          <label for="pront-ev-tipo">Tipo</label>
+                          <select id="pront-ev-tipo">
+                            <option value="Consulta">Consulta</option>
+                            <option value="Retorno">Retorno</option>
+                            <option value="Teleconsulta">Teleconsulta</option>
+                            <option value="Evolução">Evolução</option>
+                            <option value="Atestado">Atestado</option>
+                          </select>
+                        </div>
+                        <div class="campo cal-campo-largo">
+                          <label for="pront-ev-titulo">Título</label>
+                          <input type="text" id="pront-ev-titulo" placeholder="Ex.: Retorno hipertensão">
+                        </div>
+                        <div class="campo cal-campo-largo">
+                          <label for="pront-ev-texto">Evolução clínica</label>
+                          <textarea id="pront-ev-texto" rows="6" required placeholder="Queixa, exame físico, conduta, orientações..."></textarea>
+                        </div>
+                      </div>
+                      <div class="cal-form-acoes">
+                        <button type="submit" class="btn btn-principal">Salvar evolução</button>
+                      </div>
+                      <p class="aviso-form" id="pront-ev-aviso"></p>
+                    </form>
+                  </div>
+                </div>
+
+                <div id="pront-aba-resumo" hidden>
+                  <form class="cal-form" id="form-pront-resumo">
+                    <div class="cal-form-grid">
+                      <div class="campo cal-campo-largo">
+                        <label for="pront-alergias">Alergias</label>
+                        <textarea id="pront-alergias" rows="2" placeholder="Ex.: Dipirona (rash)"></textarea>
+                      </div>
+                      <div class="campo cal-campo-largo">
+                        <label for="pront-antecedentes">Antecedentes</label>
+                        <textarea id="pront-antecedentes" rows="3" placeholder="Comorbidades, cirurgias, história familiar relevante"></textarea>
+                      </div>
+                      <div class="campo cal-campo-largo">
+                        <label for="pront-meds">Medicamentos em uso</label>
+                        <textarea id="pront-meds" rows="3" placeholder="Lista de uso contínuo"></textarea>
+                      </div>
+                    </div>
+                    <div class="cal-form-acoes">
+                      <button type="submit" class="btn btn-principal">Salvar resumo</button>
+                    </div>
+                    <p class="aviso-form" id="pront-resumo-aviso"></p>
+                  </form>
+                </div>
+
+                <div id="pront-aba-anexos" hidden>
+                  <div class="pront-duas-colunas">
+                    <div>
+                      <h3 class="pront-secao-titulo">Documentos do paciente</h3>
+                      <ul class="pront-anexos" id="pront-anexos"></ul>
+                    </div>
+                    <form class="cal-form pront-form-lateral" id="form-pront-anexo">
+                      <h3 class="pront-secao-titulo">Registrar documento</h3>
+                      <div class="cal-form-grid">
+                        <div class="campo cal-campo-largo">
+                          <label for="pront-ax-nome">Nome</label>
+                          <input type="text" id="pront-ax-nome" required placeholder="Ex.: Hemograma 01/2026">
+                        </div>
+                        <div class="campo">
+                          <label for="pront-ax-tipo">Tipo</label>
+                          <select id="pront-ax-tipo">
+                            <option value="Exame">Exame</option>
+                            <option value="Pedido">Pedido</option>
+                            <option value="Atestado">Atestado</option>
+                            <option value="Receita">Receita</option>
+                            <option value="Documento">Documento</option>
+                          </select>
+                        </div>
+                        <div class="campo">
+                          <label for="pront-ax-status">Status</label>
+                          <select id="pront-ax-status">
+                            <option value="Normal">Normal</option>
+                            <option value="Atenção">Atenção</option>
+                            <option value="Pendente">Pendente</option>
+                            <option value="Registrado">Registrado</option>
+                          </select>
+                        </div>
+                        <div class="campo">
+                          <label for="pront-ax-data">Data</label>
+                          <input type="date" id="pront-ax-data" required>
+                        </div>
+                      </div>
+                      <div class="cal-form-acoes">
+                        <button type="submit" class="btn btn-principal">Adicionar</button>
+                      </div>
+                      <p class="aviso-form" id="pront-ax-aviso"></p>
+                      <p class="cal-dica">No MVP o arquivo fica registrado na ficha (upload de arquivo em breve).</p>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
         <section class="aba-painel" id="aba-prescricoes">
           <div class="painel-bloco-topo">
@@ -836,6 +994,9 @@
           }
           if (id === "pacientes" && typeof window.renderPacientes === "function") {
             window.renderPacientes();
+          }
+          if (id === "prontuarios" && typeof window.renderProntuarios === "function") {
+            window.renderProntuarios();
           }
           if (id === "config") {
             preencherFormPerfil();
@@ -1440,13 +1601,22 @@
               }
             }, 100);
           },
-          onProntuario: function () {
-            abrirAba("prontuarios");
+          onProntuario: function (paciente) {
+            if (paciente && paciente.id && typeof window.abrirProntuarioPaciente === "function") {
+              window.abrirProntuarioPaciente(paciente.id);
+            } else {
+              abrirAba("prontuarios");
+            }
           },
           onMensagem: function () {
             abrirAba("mensagens");
           },
         });
+      }
+
+      /* Prontuarios */
+      if (window.DalucareProntuarios && typeof window.DalucareProntuarios.initUI === "function") {
+        window.DalucareProntuarios.initUI();
       }
 
       /* Minhas prescricoes */
