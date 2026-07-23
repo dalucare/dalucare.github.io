@@ -6,15 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ad"></script>
+  <script src="../js/force-https.js?v=20260722ae"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722ad">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ad">
-  <script src="js/auth.js?v=20260722ad"></script>
-  <script src="js/agenda-slots.js?v=20260722ad"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722ad"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ae">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ae">
+  <script src="js/auth.js?v=20260722ae"></script>
+  <script src="js/agenda-slots.js?v=20260722ae"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722ae"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -308,7 +308,7 @@
           <div class="painel-bloco-topo presc-salvas-topo">
             <div>
               <h1>Minhas prescrições</h1>
-              <p class="aba-intro">Suas medicações de uso frequente �?" cadastre uma vez e reutilize no próximo paciente.</p>
+              <p class="aba-intro">Suas medicações de uso frequente — cadastre uma vez e reutilize no próximo paciente.</p>
             </div>
             <button type="button" class="btn btn-principal" id="btn-nova-presc-salva">+ Novo medicamento</button>
           </div>
@@ -316,7 +316,7 @@
           <section class="painel-bloco presc-receita-barra">
             <div class="presc-receita-medico">
               <strong id="presc-receita-medico-nome">Médico(a)</strong>
-              <span id="presc-receita-medico-crm">CRM �?"</span>
+              <span id="presc-receita-medico-crm">CRM —</span>
               <p class="cal-dica" id="presc-receita-resumo">Clique em Usar nos medicamentos para montar a receita.</p>
             </div>
             <div class="presc-receita-acoes">
@@ -329,7 +329,7 @@
             <section class="painel-bloco">
               <label class="campo presc-busca-campo">
                 <span>Buscar medicamento</span>
-                <input type="search" id="presc-salvas-busca" placeholder="Ex.: losartana, omeprazol, jejum�?�" autocomplete="off">
+                <input type="search" id="presc-salvas-busca" placeholder="Ex.: losartana, omeprazol, jejum..." autocomplete="off">
               </label>
               <p class="cal-dica" id="presc-salvas-contagem">0 medicamentos</p>
               <ul class="presc-salvas-lista" id="presc-salvas-lista"></ul>
@@ -337,7 +337,7 @@
 
             <section class="painel-bloco">
               <h2 id="presc-salvas-form-titulo">Novo medicamento</h2>
-              <p class="cal-dica">Preencha e salve. Depois use �?oCopiar�?� ou �?oUsar�?� na lista.</p>
+              <p class="cal-dica">Preencha e salve. Depois use "Copiar" ou "Usar" na lista.</p>
               <form class="cal-form" id="form-presc-salva">
                 <input type="hidden" id="presc-salva-id" value="">
                 <div class="cal-form-grid">
@@ -1376,16 +1376,18 @@
           }
           var texto = Ps.textoReceitaCompleta(receitaAtual, perfil);
           mostrarPreviewTexto(texto);
-          copiarTexto(texto).then(
-            function () {
-              var aviso = document.getElementById("aviso-presc-salva");
-              if (aviso) {
-                aviso.textContent = "Receita gerada com nome e CRM. Texto copiado.";
-                aviso.className = "aviso-form aviso-sucesso";
-              }
-            },
-            function () {}
-          );
+          try {
+            Ps.abrirJanelaReceita(receitaAtual, perfil);
+            var aviso = document.getElementById("aviso-presc-salva");
+            if (aviso) {
+              aviso.textContent =
+                "Receita aberta: edite orientações, imprima ou copie. Nome e CRM ficam no rodapé da folha A4.";
+              aviso.className = "aviso-form aviso-sucesso";
+            }
+          } catch (erro) {
+            window.alert(erro.message || "Não foi possível abrir a janela da receita.");
+            copiarTexto(texto);
+          }
         }
 
         function copiarTexto(texto) {
@@ -1478,7 +1480,7 @@
                 var texto =
                   acao === "usar" && receitaAtual.length
                     ? Ps.textoReceitaCompleta(receitaAtual, perfil)
-                    : Ps.cabecalhoMedico(perfil) + "\n\n" + Ps.textoReceita(atualizado);
+                    : Ps.textoReceita(atualizado) + "\n\n--------------------------------\n" + Ps.rodapeMedico(perfil);
                 mostrarPreviewTexto(texto);
                 copiarTexto(texto).then(
                   function () {
@@ -1486,14 +1488,14 @@
                     if (aviso) {
                       aviso.textContent =
                         acao === "usar"
-                          ? "Incluído na receita (com nome e CRM). Use Gerar receita para finalizar."
-                          : "Medicamento copiado com cabeçalho do médico.";
+                          ? "Incluído na receita. Use Gerar receita para abrir, editar e imprimir."
+                          : "Medicamento copiado (nome e CRM no rodapé).";
                       aviso.className = "aviso-form aviso-sucesso";
                     }
                     renderPrescricoesSalvas();
                   },
                   function () {
-                    window.alert("Não foi possível copiar. Veja o texto em �?oTexto pronto�?�.");
+                    window.alert("Não foi possível copiar. Veja o texto em Texto pronto.");
                   }
                 );
               }
@@ -1569,7 +1571,7 @@
                 aviso.className = "aviso-form aviso-sucesso";
               }
               limparFormPresc();
-              mostrarPreviewTexto(Ps.cabecalhoMedico(perfilMedicoAtual()) + "\n\n" + Ps.textoReceita(salvo));
+              mostrarPreviewTexto(Ps.textoReceita(salvo) + "\n\n--------------------------------\n" + Ps.rodapeMedico(perfilMedicoAtual()));
               renderPrescricoesSalvas();
             } catch (erro) {
               if (aviso) {
