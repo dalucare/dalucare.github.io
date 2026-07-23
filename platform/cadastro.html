@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro profissional | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ai"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722ai">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ai">
-  <script src="js/auth.js?v=20260722ai"></script>
+  <script src="../js/force-https.js?v=20260722aj"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722aj">
+  <link rel="stylesheet" href="css/dash.css?v=20260722aj">
+  <script src="js/auth.js?v=20260722aj"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
@@ -97,14 +97,14 @@
       </form>
 
       <p class="auth-links">
-        Já tem conta? <a href="login.html?v=20260722ai">Faça login</a>
+        Já tem conta? <a href="login.html?v=20260722aj">Faça login</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "app.html?v=20260722ai";
+      window.location.href = "app.html?v=20260722aj";
     }
 
     const formCadastro = document.getElementById("form-cadastro");
@@ -130,7 +130,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "app.html?v=20260722ai";
+        window.location.href = "app.html?v=20260722aj";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;

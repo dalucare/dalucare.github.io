@@ -1,6 +1,6 @@
 /* Prontuario eletronico do profissional — evolucoes, anexos e timeline */
 (function (global) {
-  var CHAVE = "dalucare_prontuarios_v1";
+  var CHAVE = "dalucare_prontuarios_v2";
 
   function seed() {
     return {
@@ -13,10 +13,20 @@
           {
             id: "ev1",
             data: "2026-04-15",
-            tipo: "Consulta",
+            tipo: "Retorno",
             titulo: "Retorno hipertensão",
-            texto:
-              "PA 128/78 mmHg. Paciente refere boa adesão. Mantida losartana. Retorno em 3 meses ou se sintomas.",
+            queixaPrincipal: "Retorno para controle de pressão arterial",
+            hda: "Paciente em uso de losartana há 3 meses. Nega cefaleia, tontura ou dor torácica. Refere boa adesão ao tratamento.",
+            interrogatorio: "Nega dispneia, edema de membros ou palpitação.",
+            antecedentesPessoais: "HAS diagnosticada em janeiro/2026.",
+            antecedentesFamiliares: "Mãe com HAS.",
+            habitos: "Caminhada 3x/semana. Nega tabagismo.",
+            medicamentos: "Losartana 50 mg 1x/dia",
+            alergias: "Dipirona (rash)",
+            exameFisico: "PA 128/78 mmHg. FC 72 bpm. Exame cardiovascular sem alterações.",
+            hipotese: "HAS controlada",
+            conduta: "Manter losartana. Retorno em 3 meses ou se sintomas.",
+            texto: "PA 128/78 mmHg. Paciente refere boa adesão. Mantida losartana. Retorno em 3 meses ou se sintomas.",
             criadoEm: "2026-04-15T14:30:00.000Z",
           },
           {
@@ -24,8 +34,18 @@
             data: "2026-01-20",
             tipo: "Consulta",
             titulo: "Primeira avaliação",
-            texto:
-              "Queixa de cefaleia ocasional. PA elevada em consultório. Solicitados exames e iniciado anti-hipertensivo.",
+            queixaPrincipal: "Cefaleia ocasional",
+            hda: "Cefaleia há 2 meses, predominantemente matinal. Mediu PA elevada em farmácia.",
+            interrogatorio: "Nega náuseas, diplopia ou déficit focal.",
+            antecedentesPessoais: "Negava comorbidades até então.",
+            antecedentesFamiliares: "Pai com IAM aos 60 anos.",
+            habitos: "Sedentária. Café 3x/dia.",
+            medicamentos: "Nenhum de uso contínuo",
+            alergias: "Dipirona (rash)",
+            exameFisico: "PA elevada em consultório. Restante do exame sem alterações.",
+            hipotese: "Hipertensão arterial sistêmica (em investigação)",
+            conduta: "Solicitados exames laboratoriais e ECG. Iniciado anti-hipertensivo.",
+            texto: "Queixa de cefaleia ocasional. PA elevada em consultório. Solicitados exames e iniciado anti-hipertensivo.",
             criadoEm: "2026-01-20T10:00:00.000Z",
           },
         ],
@@ -45,6 +65,17 @@
             data: "2026-06-10",
             tipo: "Retorno",
             titulo: "Revisão de exames",
+            queixaPrincipal: "Retorno para revisão de exames",
+            hda: "Em acompanhamento de dislipidemia. Aguardando lipidograma.",
+            interrogatorio: "Nega dor torácica.",
+            antecedentesPessoais: "Dislipidemia. Sedentarismo.",
+            antecedentesFamiliares: "",
+            habitos: "Sedentário. Orientações de dieta em andamento.",
+            medicamentos: "Omeprazol 20 mg em jejum (SOS)",
+            alergias: "Nega alergias conhecidas",
+            exameFisico: "Sem alterações agudas.",
+            hipotese: "Dislipidemia em investigação",
+            conduta: "Aguardar lipidograma. Reforçar dieta e atividade física.",
             texto: "Aguardando lipidograma. Orientações de dieta e atividade física reforçadas.",
             criadoEm: "2026-06-10T11:15:00.000Z",
           },
@@ -64,6 +95,17 @@
             data: "2026-07-22",
             tipo: "Teleconsulta",
             titulo: "Primeira teleconsulta",
+            queixaPrincipal: "Avaliação inicial online",
+            hda: "Queixas inespecíficas há algumas semanas. Sem sinais de alarme referidos.",
+            interrogatorio: "Nega febre, perda ponderal ou dispneia.",
+            antecedentesPessoais: "Sem comorbidades relatadas.",
+            antecedentesFamiliares: "",
+            habitos: "",
+            medicamentos: "",
+            alergias: "",
+            exameFisico: "Teleconsulta — exame físico limitado.",
+            hipotese: "Queixas inespecíficas · a esclarecer",
+            conduta: "Orientações gerais. Agendar retorno presencial se persistir.",
             texto: "Avaliação inicial online. Queixas inespecíficas. Agendado retorno presencial se necessário.",
             criadoEm: "2026-07-22T09:00:00.000Z",
           },
@@ -127,6 +169,17 @@
     return atual;
   }
 
+  function montarTextoResumo(dados) {
+    var partes = [];
+    if (dados.queixaPrincipal) partes.push("QP: " + dados.queixaPrincipal);
+    if (dados.hda) partes.push("HDA: " + dados.hda);
+    if (dados.exameFisico) partes.push("EF: " + dados.exameFisico);
+    if (dados.hipotese) partes.push("HD: " + dados.hipotese);
+    if (dados.conduta) partes.push("Conduta: " + dados.conduta);
+    if (!partes.length && dados.texto) return String(dados.texto).trim();
+    return partes.join("\n");
+  }
+
   function adicionarEvolucao(pacienteId, dados) {
     var mapa = carregar();
     var atual = garantir(pacienteId);
@@ -134,12 +187,28 @@
       id: novoId("ev"),
       data: String(dados.data || new Date().toISOString().slice(0, 10)),
       tipo: String(dados.tipo || "Consulta").trim(),
-      titulo: String(dados.titulo || "").trim(),
-      texto: String(dados.texto || "").trim(),
+      titulo: String(dados.titulo || dados.queixaPrincipal || dados.tipo || "Atendimento").trim(),
+      queixaPrincipal: String(dados.queixaPrincipal || "").trim(),
+      hda: String(dados.hda || "").trim(),
+      interrogatorio: String(dados.interrogatorio || "").trim(),
+      antecedentesPessoais: String(dados.antecedentesPessoais || "").trim(),
+      antecedentesFamiliares: String(dados.antecedentesFamiliares || "").trim(),
+      habitos: String(dados.habitos || "").trim(),
+      medicamentos: String(dados.medicamentos || "").trim(),
+      alergias: String(dados.alergias || "").trim(),
+      exameFisico: String(dados.exameFisico || "").trim(),
+      hipotese: String(dados.hipotese || "").trim(),
+      conduta: String(dados.conduta || "").trim(),
+      texto: "",
       criadoEm: new Date().toISOString(),
     };
-    if (!item.texto) throw new Error("Escreva a evolucao clinica.");
-    if (!item.titulo) item.titulo = item.tipo;
+    item.texto = montarTextoResumo(item);
+    if (!item.queixaPrincipal && !item.hda && !item.conduta && !item.texto) {
+      throw new Error("Preencha ao menos queixa, HDA e conduta.");
+    }
+    if (!item.queixaPrincipal) throw new Error("Informe a queixa principal.");
+    if (!item.hda) throw new Error("Informe a história da doença atual.");
+    if (!item.conduta) throw new Error("Informe a conduta.");
     atual.evolucoes = [item].concat(atual.evolucoes || []);
     mapa[pacienteId] = atual;
     salvar(mapa);
@@ -290,6 +359,124 @@
         .join("");
     }
 
+    var atendimentoAbertoId = null;
+
+    function mostrarSubHistoria(modo) {
+      // modo: atendimentos | leitura | form
+      if ($("pront-box-atendimentos")) $("pront-box-atendimentos").hidden = modo !== "atendimentos";
+      if ($("pront-box-leitura")) $("pront-box-leitura").hidden = modo !== "leitura";
+      if ($("pront-form-box")) $("pront-form-box").hidden = modo !== "form";
+    }
+
+    function limparFormAnamnese() {
+      [
+        "pront-ev-qp",
+        "pront-ev-hda",
+        "pront-ev-is",
+        "pront-ev-ap",
+        "pront-ev-af",
+        "pront-ev-habitos",
+        "pront-ev-meds",
+        "pront-ev-alergias",
+        "pront-ev-exame",
+        "pront-ev-hd",
+        "pront-ev-conduta",
+      ].forEach(function (id) {
+        var el = $(id);
+        if (el) el.value = "";
+      });
+      if ($("pront-ev-tipo")) $("pront-ev-tipo").value = "Consulta";
+      if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
+      if ($("pront-ev-aviso")) {
+        $("pront-ev-aviso").textContent = "";
+        $("pront-ev-aviso").className = "aviso-form";
+      }
+    }
+
+    function secaoAnamnese(titulo, valor) {
+      if (!valor) return "";
+      return (
+        '<div class="pront-anamnese-bloco"><h3>' +
+        escapar(titulo) +
+        "</h3><p>" +
+        escapar(valor).replace(/\n/g, "<br>") +
+        "</p></div>"
+      );
+    }
+
+    function renderAtendimentos() {
+      var lista = $("pront-atend-lista");
+      if (!lista || !selecionadoId) return;
+      var evolucoes = (obter(selecionadoId).evolucoes || []).slice();
+      if (!evolucoes.length) {
+        lista.innerHTML =
+          '<li class="pront-vazio-item">Nenhum atendimento registrado. Clique em + Novo atendimento.</li>';
+        return;
+      }
+      lista.innerHTML = evolucoes
+        .map(function (e) {
+          var preview = e.queixaPrincipal || e.titulo || e.texto || "Atendimento";
+          return (
+            '<li class="pront-atend-item" data-id="' +
+            escapar(e.id) +
+            '" role="button" tabindex="0">' +
+            '<div class="pront-atend-topo">' +
+            "<strong>" +
+            escapar(e.titulo || e.queixaPrincipal || e.tipo) +
+            "</strong>" +
+            '<span class="pront-chip">' +
+            escapar(e.tipo) +
+            "</span>" +
+            "<em>" +
+            formatarData(e.data) +
+            "</em>" +
+            "</div>" +
+            "<p>" +
+            escapar(preview) +
+            "</p>" +
+            '<span class="pront-abrir-dica">Abrir anamnese →</span>' +
+            "</li>"
+          );
+        })
+        .join("");
+    }
+
+    function abrirLeitura(atendId) {
+      atendimentoAbertoId = atendId;
+      var pront = obter(selecionadoId);
+      var e =
+        (pront.evolucoes || []).find(function (item) {
+          return item.id === atendId;
+        }) || null;
+      var box = $("pront-anamnese-leitura");
+      if (!box || !e) return;
+      var html = "";
+      html +=
+        '<div class="pront-anamnese-cabecalho"><strong>' +
+        escapar(e.titulo || e.queixaPrincipal || e.tipo) +
+        '</strong><span class="pront-chip">' +
+        escapar(e.tipo) +
+        "</span><em>" +
+        formatarData(e.data) +
+        "</em></div>";
+      html += secaoAnamnese("Queixa principal", e.queixaPrincipal);
+      html += secaoAnamnese("História da doença atual (HDA)", e.hda);
+      html += secaoAnamnese("Interrogatório / revisão de sistemas", e.interrogatorio);
+      html += secaoAnamnese("Antecedentes pessoais", e.antecedentesPessoais);
+      html += secaoAnamnese("Antecedentes familiares", e.antecedentesFamiliares);
+      html += secaoAnamnese("Hábitos de vida", e.habitos);
+      html += secaoAnamnese("Medicamentos em uso", e.medicamentos);
+      html += secaoAnamnese("Alergias", e.alergias);
+      html += secaoAnamnese("Exame físico", e.exameFisico);
+      html += secaoAnamnese("Hipótese diagnóstica", e.hipotese);
+      html += secaoAnamnese("Conduta e orientações", e.conduta);
+      if (!e.queixaPrincipal && !e.hda && e.texto) {
+        html += secaoAnamnese("Registro clínico", e.texto);
+      }
+      box.innerHTML = html;
+      mostrarSubHistoria("leitura");
+    }
+
     function renderHistoria() {
       if (!selecionadoId) {
         mostrarVista("lista");
@@ -326,51 +513,19 @@
           "</p>";
       }
 
-      var evLista = $("pront-evolucoes");
-      if (evLista) {
-        var evolucoes = (pront.evolucoes || []).slice();
-        if (!evolucoes.length) {
-          evLista.innerHTML =
-            '<li class="pront-vazio-item">Ainda não há história clínica registrada para este paciente.</li>';
-        } else {
-          evLista.innerHTML = evolucoes
-            .map(function (e) {
-              return (
-                '<li class="pront-evolucao">' +
-                '<div class="pront-evolucao-topo">' +
-                "<strong>" +
-                escapar(e.titulo || e.tipo) +
-                "</strong>" +
-                '<span class="pront-chip">' +
-                escapar(e.tipo) +
-                "</span>" +
-                "<em>" +
-                formatarData(e.data) +
-                "</em>" +
-                "</div>" +
-                "<p>" +
-                escapar(e.texto).replace(/\n/g, "<br>") +
-                "</p>" +
-                '<button type="button" class="link-suave" data-ev="' +
-                escapar(e.id) +
-                '">Excluir</button>' +
-                "</li>"
-              );
-            })
-            .join("");
-        }
-      }
-
-      if ($("pront-form-box")) $("pront-form-box").hidden = true;
-      if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
+      atendimentoAbertoId = null;
+      limparFormAnamnese();
+      renderAtendimentos();
+      mostrarSubHistoria("atendimentos");
     }
 
     function voltarLista() {
       selecionadoId = null;
+      atendimentoAbertoId = null;
       try {
         sessionStorage.removeItem("dalucare_pront_paciente");
       } catch (e) {}
-      if ($("pront-form-box")) $("pront-form-box").hidden = true;
+      mostrarSubHistoria("atendimentos");
       mostrarVista("lista");
       renderLista();
     }
@@ -381,18 +536,6 @@
         sessionStorage.setItem("dalucare_pront_paciente", id);
       } catch (e) {}
       renderHistoria();
-    }
-
-    function render(forcarHistoria) {
-      if (forcarHistoria && selecionadoId) {
-        renderHistoria();
-        return;
-      }
-      if (selecionadoId) renderHistoria();
-      else {
-        mostrarVista("lista");
-        renderLista();
-      }
     }
 
     var busca = $("pront-busca");
@@ -424,22 +567,47 @@
     var btnNova = $("btn-pront-nova-ev");
     if (btnNova) {
       btnNova.addEventListener("click", function () {
-        var box = $("pront-form-box");
-        if (!box) return;
-        box.hidden = false;
-        if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
-        if ($("pront-ev-titulo")) $("pront-ev-titulo").focus();
+        limparFormAnamnese();
+        mostrarSubHistoria("form");
+        if ($("pront-ev-qp")) $("pront-ev-qp").focus();
       });
     }
 
+    function cancelarForm() {
+      limparFormAnamnese();
+      mostrarSubHistoria("atendimentos");
+    }
+
     var btnCancelar = $("btn-pront-cancelar-ev");
-    if (btnCancelar) {
-      btnCancelar.addEventListener("click", function () {
-        if ($("pront-form-box")) $("pront-form-box").hidden = true;
-        if ($("pront-ev-aviso")) {
-          $("pront-ev-aviso").textContent = "";
-          $("pront-ev-aviso").className = "aviso-form";
-        }
+    if (btnCancelar) btnCancelar.addEventListener("click", cancelarForm);
+    var btnCancelar2 = $("btn-pront-cancelar-ev-2");
+    if (btnCancelar2) btnCancelar2.addEventListener("click", cancelarForm);
+
+    var btnFecharLeitura = $("btn-pront-fechar-leitura");
+    if (btnFecharLeitura) {
+      btnFecharLeitura.addEventListener("click", function () {
+        atendimentoAbertoId = null;
+        mostrarSubHistoria("atendimentos");
+      });
+    }
+
+    var btnExcluirAtend = $("btn-pront-excluir-atend");
+    if (btnExcluirAtend) {
+      btnExcluirAtend.addEventListener("click", function () {
+        if (!selecionadoId || !atendimentoAbertoId) return;
+        if (!window.confirm("Excluir este atendimento da história clínica?")) return;
+        removerEvolucao(selecionadoId, atendimentoAbertoId);
+        atendimentoAbertoId = null;
+        renderHistoria();
+      });
+    }
+
+    var atendLista = $("pront-atend-lista");
+    if (atendLista) {
+      atendLista.addEventListener("click", function (ev) {
+        var item = ev.target.closest(".pront-atend-item");
+        if (!item) return;
+        abrirLeitura(item.getAttribute("data-id"));
       });
     }
 
@@ -453,16 +621,19 @@
           adicionarEvolucao(selecionadoId, {
             data: $("pront-ev-data").value,
             tipo: $("pront-ev-tipo").value,
-            titulo: $("pront-ev-titulo").value,
-            texto: $("pront-ev-texto").value,
+            queixaPrincipal: $("pront-ev-qp").value,
+            hda: $("pront-ev-hda").value,
+            interrogatorio: $("pront-ev-is").value,
+            antecedentesPessoais: $("pront-ev-ap").value,
+            antecedentesFamiliares: $("pront-ev-af").value,
+            habitos: $("pront-ev-habitos").value,
+            medicamentos: $("pront-ev-meds").value,
+            alergias: $("pront-ev-alergias").value,
+            exameFisico: $("pront-ev-exame").value,
+            hipotese: $("pront-ev-hd").value,
+            conduta: $("pront-ev-conduta").value,
           });
-          $("pront-ev-titulo").value = "";
-          $("pront-ev-texto").value = "";
-          if ($("pront-form-box")) $("pront-form-box").hidden = true;
-          if (aviso) {
-            aviso.textContent = "";
-            aviso.className = "aviso-form";
-          }
+          limparFormAnamnese();
           renderHistoria();
         } catch (erro) {
           if (aviso) {
@@ -470,17 +641,6 @@
             aviso.className = "aviso-form aviso-erro";
           }
         }
-      });
-    }
-
-    var evLista = $("pront-evolucoes");
-    if (evLista) {
-      evLista.addEventListener("click", function (ev) {
-        var btn = ev.target.closest("[data-ev]");
-        if (!btn || !selecionadoId) return;
-        if (!window.confirm("Excluir esta evolução da história clínica?")) return;
-        removerEvolucao(selecionadoId, btn.getAttribute("data-ev"));
-        renderHistoria();
       });
     }
 

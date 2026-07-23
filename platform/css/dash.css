@@ -1974,6 +1974,77 @@ body.modal-aberto {
   background: rgba(58, 160, 216, 0.16);
   color: #9fd4f0;
 }
+.pront-atend-lista {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.pront-atend-item {
+  border: 1px solid var(--dash-borda, rgba(255,255,255,.1));
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.03);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.pront-atend-item:hover {
+  border-color: var(--cor-primaria, #1d6fa3);
+  background: rgba(29, 111, 163, 0.1);
+}
+.pront-atend-topo {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.pront-atend-topo em {
+  margin-left: auto;
+  color: var(--dash-suave);
+  font-style: normal;
+  font-size: 0.85rem;
+}
+.pront-atend-item > p {
+  margin: 0;
+  color: var(--dash-suave);
+  font-size: 0.9rem;
+}
+.pront-anamnese-leitura {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.pront-anamnese-cabecalho {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.pront-anamnese-cabecalho em {
+  margin-left: auto;
+  color: var(--dash-suave);
+  font-style: normal;
+}
+.pront-anamnese-bloco {
+  border: 1px solid var(--dash-borda, rgba(255,255,255,.08));
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.02);
+}
+.pront-anamnese-bloco h3 {
+  margin: 0 0 6px;
+  font-size: 0.92rem;
+  color: var(--cor-primaria, #3aa0d8);
+}
+.pront-anamnese-bloco p {
+  margin: 0;
+  line-height: 1.5;
+}
 @media (max-width: 700px) {
   .pront-abrir-dica {
     display: none;
