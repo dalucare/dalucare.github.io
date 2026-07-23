@@ -8,18 +8,42 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=0, must-revalidate"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    },
+    {
+      "source": "/platform/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
         }
       ]
     }
   ],
-  "rewrites": [
+  "redirects": [
     {
       "source": "/plataforma",
-      "destination": "/platform/login.html"
+      "destination": "/platform/entrar.html",
+      "permanent": false
+    },
+    {
+      "source": "/login",
+      "destination": "/platform/login.html",
+      "permanent": false
     },
     {
       "source": "/app",
-      "destination": "/platform/app.html"
+      "destination": "/platform/app.html",
+      "permanent": false
     }
   ]
 }
