@@ -6,17 +6,17 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722aj"></script>
+  <script src="../js/force-https.js?v=20260722ak"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722aj">
-  <link rel="stylesheet" href="css/dash.css?v=20260722aj">
-  <script src="js/auth.js?v=20260722aj"></script>
-  <script src="js/agenda-slots.js?v=20260722aj"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722aj"></script>
-  <script src="js/pacientes.js?v=20260722aj"></script>
-  <script src="js/prontuarios.js?v=20260722aj"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ak">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ak">
+  <script src="js/auth.js?v=20260722ak"></script>
+  <script src="js/agenda-slots.js?v=20260722ak"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722ak"></script>
+  <script src="js/pacientes.js?v=20260722ak"></script>
+  <script src="js/prontuarios.js?v=20260722ak"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -462,8 +462,38 @@
 
             <div class="pront-historia-layout">
               <section class="painel-bloco">
-                <h2 class="pront-secao-titulo">Resumo clínico</h2>
-                <div class="pront-resumo-leitura" id="pront-resumo-leitura"></div>
+                <div class="painel-bloco-topo">
+                  <h2 class="pront-secao-titulo">Histórico do paciente</h2>
+                  <span class="cal-dica">Dados permanentes · não repetir a cada atendimento</span>
+                </div>
+                <form class="cal-form" id="form-pront-resumo">
+                  <div class="cal-form-grid">
+                    <div class="campo cal-campo-largo">
+                      <label for="pront-alergias">Alergias</label>
+                      <textarea id="pront-alergias" rows="2" placeholder="Medicamentos, alimentos, contraste..."></textarea>
+                    </div>
+                    <div class="campo cal-campo-largo">
+                      <label for="pront-antecedentes">Antecedentes pessoais</label>
+                      <textarea id="pront-antecedentes" rows="2" placeholder="Doenças prévias, cirurgias, internamentos"></textarea>
+                    </div>
+                    <div class="campo cal-campo-largo">
+                      <label for="pront-af">Antecedentes familiares</label>
+                      <textarea id="pront-af" rows="2" placeholder="História familiar relevante"></textarea>
+                    </div>
+                    <div class="campo">
+                      <label for="pront-habitos">Hábitos de vida</label>
+                      <textarea id="pront-habitos" rows="2" placeholder="Tabaco, álcool, atividade física, sono"></textarea>
+                    </div>
+                    <div class="campo">
+                      <label for="pront-meds">Medicamentos em uso</label>
+                      <textarea id="pront-meds" rows="2" placeholder="Nome, dose e posologia"></textarea>
+                    </div>
+                  </div>
+                  <div class="cal-form-acoes">
+                    <button type="submit" class="btn btn-secundario btn-sm">Salvar histórico</button>
+                  </div>
+                  <p class="aviso-form" id="pront-resumo-aviso"></p>
+                </form>
               </section>
 
               <section class="painel-bloco" id="pront-box-atendimentos">
@@ -471,7 +501,7 @@
                   <h2 class="pront-secao-titulo">Atendimentos</h2>
                   <button type="button" class="btn btn-principal btn-sm" id="btn-pront-nova-ev">+ Novo atendimento</button>
                 </div>
-                <p class="cal-dica">Clique em um atendimento para abrir a anamnese completa.</p>
+                <p class="cal-dica">Clique em um atendimento para abrir a anamnese daquele dia.</p>
                 <ul class="pront-atend-lista" id="pront-atend-lista"></ul>
               </section>
 
@@ -480,6 +510,7 @@
                   <h2 class="pront-secao-titulo">Anamnese do atendimento</h2>
                   <button type="button" class="btn btn-secundario btn-sm" id="btn-pront-fechar-leitura">← Voltar aos atendimentos</button>
                 </div>
+                <div id="pront-historico-contexto" class="pront-historico-contexto"></div>
                 <div id="pront-anamnese-leitura" class="pront-anamnese-leitura"></div>
                 <div class="cal-form-acoes">
                   <button type="button" class="link-suave pac-excluir" id="btn-pront-excluir-atend">Excluir atendimento</button>
@@ -488,9 +519,11 @@
 
               <section class="painel-bloco" id="pront-form-box" hidden>
                 <div class="painel-bloco-topo">
-                  <h2 class="pront-secao-titulo" id="pront-form-titulo">Novo atendimento · Anamnese</h2>
+                  <h2 class="pront-secao-titulo" id="pront-form-titulo">Novo atendimento</h2>
                   <button type="button" class="btn btn-secundario btn-sm" id="btn-pront-cancelar-ev">Cancelar</button>
                 </div>
+                <div id="pront-historico-contexto-form" class="pront-historico-contexto"></div>
+                <p class="cal-dica">Preencha só o que mudou neste atendimento. O histórico permanente já está acima.</p>
                 <form class="cal-form" id="form-pront-evolucao">
                   <div class="cal-form-grid">
                     <div class="campo">
@@ -516,27 +549,7 @@
                     </div>
                     <div class="campo cal-campo-largo">
                       <label for="pront-ev-is">Interrogatório / revisão de sistemas</label>
-                      <textarea id="pront-ev-is" rows="3" placeholder="Sintomas associados por sistema (cardiovascular, respiratório, GI, neurológico...)"></textarea>
-                    </div>
-                    <div class="campo cal-campo-largo">
-                      <label for="pront-ev-ap">Antecedentes pessoais</label>
-                      <textarea id="pront-ev-ap" rows="2" placeholder="Doenças prévias, cirurgias, internamentos"></textarea>
-                    </div>
-                    <div class="campo cal-campo-largo">
-                      <label for="pront-ev-af">Antecedentes familiares</label>
-                      <textarea id="pront-ev-af" rows="2" placeholder="História familiar relevante"></textarea>
-                    </div>
-                    <div class="campo">
-                      <label for="pront-ev-habitos">Hábitos de vida</label>
-                      <textarea id="pront-ev-habitos" rows="2" placeholder="Tabaco, álcool, atividade física, sono"></textarea>
-                    </div>
-                    <div class="campo">
-                      <label for="pront-ev-meds">Medicamentos em uso</label>
-                      <textarea id="pront-ev-meds" rows="2" placeholder="Nome, dose e posologia"></textarea>
-                    </div>
-                    <div class="campo cal-campo-largo">
-                      <label for="pront-ev-alergias">Alergias</label>
-                      <input type="text" id="pront-ev-alergias" placeholder="Medicamentos, alimentos, contraste...">
+                      <textarea id="pront-ev-is" rows="3" placeholder="Sintomas associados por sistema"></textarea>
                     </div>
                     <div class="campo cal-campo-largo">
                       <label for="pront-ev-exame">Exame físico</label>

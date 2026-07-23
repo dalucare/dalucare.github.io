@@ -1,6 +1,6 @@
 /* Prontuario eletronico do profissional — evolucoes, anexos e timeline */
 (function (global) {
-  var CHAVE = "dalucare_prontuarios_v2";
+  var CHAVE = "dalucare_prontuarios_v3";
 
   function seed() {
     return {
@@ -8,6 +8,8 @@
         pacienteId: "pac1",
         alergias: "Dipirona (rash)",
         antecedentes: "HAS em acompanhamento. Nega DM.",
+        antecedentesFamiliares: "Mãe com HAS. Pai com IAM aos 60 anos.",
+        habitos: "Caminhada 3x/semana. Nega tabagismo.",
         medicamentosUso: "Losartana 50 mg 1x/dia",
         evolucoes: [
           {
@@ -18,15 +20,10 @@
             queixaPrincipal: "Retorno para controle de pressão arterial",
             hda: "Paciente em uso de losartana há 3 meses. Nega cefaleia, tontura ou dor torácica. Refere boa adesão ao tratamento.",
             interrogatorio: "Nega dispneia, edema de membros ou palpitação.",
-            antecedentesPessoais: "HAS diagnosticada em janeiro/2026.",
-            antecedentesFamiliares: "Mãe com HAS.",
-            habitos: "Caminhada 3x/semana. Nega tabagismo.",
-            medicamentos: "Losartana 50 mg 1x/dia",
-            alergias: "Dipirona (rash)",
             exameFisico: "PA 128/78 mmHg. FC 72 bpm. Exame cardiovascular sem alterações.",
             hipotese: "HAS controlada",
             conduta: "Manter losartana. Retorno em 3 meses ou se sintomas.",
-            texto: "PA 128/78 mmHg. Paciente refere boa adesão. Mantida losartana. Retorno em 3 meses ou se sintomas.",
+            texto: "QP: Retorno hipertensão. HAS controlada. Conduta: manter losartana.",
             criadoEm: "2026-04-15T14:30:00.000Z",
           },
           {
@@ -37,15 +34,10 @@
             queixaPrincipal: "Cefaleia ocasional",
             hda: "Cefaleia há 2 meses, predominantemente matinal. Mediu PA elevada em farmácia.",
             interrogatorio: "Nega náuseas, diplopia ou déficit focal.",
-            antecedentesPessoais: "Negava comorbidades até então.",
-            antecedentesFamiliares: "Pai com IAM aos 60 anos.",
-            habitos: "Sedentária. Café 3x/dia.",
-            medicamentos: "Nenhum de uso contínuo",
-            alergias: "Dipirona (rash)",
             exameFisico: "PA elevada em consultório. Restante do exame sem alterações.",
             hipotese: "Hipertensão arterial sistêmica (em investigação)",
             conduta: "Solicitados exames laboratoriais e ECG. Iniciado anti-hipertensivo.",
-            texto: "Queixa de cefaleia ocasional. PA elevada em consultório. Solicitados exames e iniciado anti-hipertensivo.",
+            texto: "QP: Cefaleia ocasional. PA elevada. Iniciado anti-hipertensivo.",
             criadoEm: "2026-01-20T10:00:00.000Z",
           },
         ],
@@ -58,6 +50,8 @@
         pacienteId: "pac2",
         alergias: "Nega alergias conhecidas",
         antecedentes: "Dislipidemia. Sedentarismo.",
+        antecedentesFamiliares: "",
+        habitos: "Sedentário. Dieta em orientação.",
         medicamentosUso: "Omeprazol 20 mg em jejum (SOS)",
         evolucoes: [
           {
@@ -68,15 +62,10 @@
             queixaPrincipal: "Retorno para revisão de exames",
             hda: "Em acompanhamento de dislipidemia. Aguardando lipidograma.",
             interrogatorio: "Nega dor torácica.",
-            antecedentesPessoais: "Dislipidemia. Sedentarismo.",
-            antecedentesFamiliares: "",
-            habitos: "Sedentário. Orientações de dieta em andamento.",
-            medicamentos: "Omeprazol 20 mg em jejum (SOS)",
-            alergias: "Nega alergias conhecidas",
             exameFisico: "Sem alterações agudas.",
             hipotese: "Dislipidemia em investigação",
             conduta: "Aguardar lipidograma. Reforçar dieta e atividade física.",
-            texto: "Aguardando lipidograma. Orientações de dieta e atividade física reforçadas.",
+            texto: "Retorno dislipidemia. Aguardando lipidograma.",
             criadoEm: "2026-06-10T11:15:00.000Z",
           },
         ],
@@ -88,6 +77,8 @@
         pacienteId: "pac3",
         alergias: "",
         antecedentes: "Sem comorbidades relatadas.",
+        antecedentesFamiliares: "",
+        habitos: "",
         medicamentosUso: "",
         evolucoes: [
           {
@@ -98,15 +89,10 @@
             queixaPrincipal: "Avaliação inicial online",
             hda: "Queixas inespecíficas há algumas semanas. Sem sinais de alarme referidos.",
             interrogatorio: "Nega febre, perda ponderal ou dispneia.",
-            antecedentesPessoais: "Sem comorbidades relatadas.",
-            antecedentesFamiliares: "",
-            habitos: "",
-            medicamentos: "",
-            alergias: "",
             exameFisico: "Teleconsulta — exame físico limitado.",
             hipotese: "Queixas inespecíficas · a esclarecer",
             conduta: "Orientações gerais. Agendar retorno presencial se persistir.",
-            texto: "Avaliação inicial online. Queixas inespecíficas. Agendado retorno presencial se necessário.",
+            texto: "Avaliação inicial online. Queixas inespecíficas.",
             criadoEm: "2026-07-22T09:00:00.000Z",
           },
         ],
@@ -145,11 +131,17 @@
         pacienteId: pacienteId,
         alergias: "",
         antecedentes: "",
+        antecedentesFamiliares: "",
+        habitos: "",
         medicamentosUso: "",
         evolucoes: [],
         anexos: [],
       };
       salvar(mapa);
+    } else {
+      var p = mapa[pacienteId];
+      if (p.antecedentesFamiliares == null) p.antecedentesFamiliares = "";
+      if (p.habitos == null) p.habitos = "";
     }
     return mapa[pacienteId];
   }
@@ -163,6 +155,8 @@
     var atual = garantir(pacienteId);
     atual.alergias = String(dados.alergias || "").trim();
     atual.antecedentes = String(dados.antecedentes || "").trim();
+    atual.antecedentesFamiliares = String(dados.antecedentesFamiliares || "").trim();
+    atual.habitos = String(dados.habitos || "").trim();
     atual.medicamentosUso = String(dados.medicamentosUso || "").trim();
     mapa[pacienteId] = atual;
     salvar(mapa);
@@ -191,11 +185,6 @@
       queixaPrincipal: String(dados.queixaPrincipal || "").trim(),
       hda: String(dados.hda || "").trim(),
       interrogatorio: String(dados.interrogatorio || "").trim(),
-      antecedentesPessoais: String(dados.antecedentesPessoais || "").trim(),
-      antecedentesFamiliares: String(dados.antecedentesFamiliares || "").trim(),
-      habitos: String(dados.habitos || "").trim(),
-      medicamentos: String(dados.medicamentos || "").trim(),
-      alergias: String(dados.alergias || "").trim(),
       exameFisico: String(dados.exameFisico || "").trim(),
       hipotese: String(dados.hipotese || "").trim(),
       conduta: String(dados.conduta || "").trim(),
@@ -203,9 +192,6 @@
       criadoEm: new Date().toISOString(),
     };
     item.texto = montarTextoResumo(item);
-    if (!item.queixaPrincipal && !item.hda && !item.conduta && !item.texto) {
-      throw new Error("Preencha ao menos queixa, HDA e conduta.");
-    }
     if (!item.queixaPrincipal) throw new Error("Informe a queixa principal.");
     if (!item.hda) throw new Error("Informe a história da doença atual.");
     if (!item.conduta) throw new Error("Informe a conduta.");
@@ -369,28 +355,41 @@
     }
 
     function limparFormAnamnese() {
-      [
-        "pront-ev-qp",
-        "pront-ev-hda",
-        "pront-ev-is",
-        "pront-ev-ap",
-        "pront-ev-af",
-        "pront-ev-habitos",
-        "pront-ev-meds",
-        "pront-ev-alergias",
-        "pront-ev-exame",
-        "pront-ev-hd",
-        "pront-ev-conduta",
-      ].forEach(function (id) {
-        var el = $(id);
-        if (el) el.value = "";
-      });
+      ["pront-ev-qp", "pront-ev-hda", "pront-ev-is", "pront-ev-exame", "pront-ev-hd", "pront-ev-conduta"].forEach(
+        function (id) {
+          var el = $(id);
+          if (el) el.value = "";
+        }
+      );
       if ($("pront-ev-tipo")) $("pront-ev-tipo").value = "Consulta";
       if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
       if ($("pront-ev-aviso")) {
         $("pront-ev-aviso").textContent = "";
         $("pront-ev-aviso").className = "aviso-form";
       }
+    }
+
+    function htmlHistoricoPaciente(pront) {
+      return (
+        '<div class="pront-historico-card">' +
+        "<h3>Histórico permanente do paciente</h3>" +
+        "<p><strong>Alergias:</strong> " +
+        escapar(pront.alergias || "Não informadas") +
+        "</p>" +
+        "<p><strong>Antecedentes pessoais:</strong> " +
+        escapar(pront.antecedentes || "Não informados") +
+        "</p>" +
+        "<p><strong>Antecedentes familiares:</strong> " +
+        escapar(pront.antecedentesFamiliares || "Não informados") +
+        "</p>" +
+        "<p><strong>Hábitos:</strong> " +
+        escapar(pront.habitos || "Não informados") +
+        "</p>" +
+        "<p><strong>Medicamentos em uso:</strong> " +
+        escapar(pront.medicamentosUso || "Não informados") +
+        "</p>" +
+        "</div>"
+      );
     }
 
     function secaoAnamnese(titulo, valor) {
@@ -402,6 +401,18 @@
         escapar(valor).replace(/\n/g, "<br>") +
         "</p></div>"
       );
+    }
+
+    function preencherFormHistorico(pront) {
+      if ($("pront-alergias")) $("pront-alergias").value = pront.alergias || "";
+      if ($("pront-antecedentes")) $("pront-antecedentes").value = pront.antecedentes || "";
+      if ($("pront-af")) $("pront-af").value = pront.antecedentesFamiliares || "";
+      if ($("pront-habitos")) $("pront-habitos").value = pront.habitos || "";
+      if ($("pront-meds")) $("pront-meds").value = pront.medicamentosUso || "";
+      if ($("pront-resumo-aviso")) {
+        $("pront-resumo-aviso").textContent = "";
+        $("pront-resumo-aviso").className = "aviso-form";
+      }
     }
 
     function renderAtendimentos() {
@@ -449,7 +460,9 @@
           return item.id === atendId;
         }) || null;
       var box = $("pront-anamnese-leitura");
+      var ctx = $("pront-historico-contexto");
       if (!box || !e) return;
+      if (ctx) ctx.innerHTML = htmlHistoricoPaciente(pront);
       var html = "";
       html +=
         '<div class="pront-anamnese-cabecalho"><strong>' +
@@ -459,14 +472,10 @@
         "</span><em>" +
         formatarData(e.data) +
         "</em></div>";
+      html += '<p class="cal-dica">Dados deste atendimento</p>';
       html += secaoAnamnese("Queixa principal", e.queixaPrincipal);
       html += secaoAnamnese("História da doença atual (HDA)", e.hda);
       html += secaoAnamnese("Interrogatório / revisão de sistemas", e.interrogatorio);
-      html += secaoAnamnese("Antecedentes pessoais", e.antecedentesPessoais);
-      html += secaoAnamnese("Antecedentes familiares", e.antecedentesFamiliares);
-      html += secaoAnamnese("Hábitos de vida", e.habitos);
-      html += secaoAnamnese("Medicamentos em uso", e.medicamentos);
-      html += secaoAnamnese("Alergias", e.alergias);
       html += secaoAnamnese("Exame físico", e.exameFisico);
       html += secaoAnamnese("Hipótese diagnóstica", e.hipotese);
       html += secaoAnamnese("Conduta e orientações", e.conduta);
@@ -499,20 +508,7 @@
           : "";
       }
 
-      var resumo = $("pront-resumo-leitura");
-      if (resumo) {
-        resumo.innerHTML =
-          "<p><strong>Alergias:</strong> " +
-          escapar(pront.alergias || "Não informadas") +
-          "</p>" +
-          "<p><strong>Antecedentes:</strong> " +
-          escapar(pront.antecedentes || "Não informados") +
-          "</p>" +
-          "<p><strong>Medicamentos em uso:</strong> " +
-          escapar(pront.medicamentosUso || "Não informados") +
-          "</p>";
-      }
-
+      preencherFormHistorico(pront);
       atendimentoAbertoId = null;
       limparFormAnamnese();
       renderAtendimentos();
@@ -568,6 +564,8 @@
     if (btnNova) {
       btnNova.addEventListener("click", function () {
         limparFormAnamnese();
+        var ctx = $("pront-historico-contexto-form");
+        if (ctx && selecionadoId) ctx.innerHTML = htmlHistoricoPaciente(obter(selecionadoId));
         mostrarSubHistoria("form");
         if ($("pront-ev-qp")) $("pront-ev-qp").focus();
       });
@@ -582,6 +580,26 @@
     if (btnCancelar) btnCancelar.addEventListener("click", cancelarForm);
     var btnCancelar2 = $("btn-pront-cancelar-ev-2");
     if (btnCancelar2) btnCancelar2.addEventListener("click", cancelarForm);
+
+    var formResumo = $("form-pront-resumo");
+    if (formResumo) {
+      formResumo.addEventListener("submit", function (ev) {
+        ev.preventDefault();
+        if (!selecionadoId) return;
+        salvarCabecalho(selecionadoId, {
+          alergias: $("pront-alergias").value,
+          antecedentes: $("pront-antecedentes").value,
+          antecedentesFamiliares: $("pront-af").value,
+          habitos: $("pront-habitos").value,
+          medicamentosUso: $("pront-meds").value,
+        });
+        var aviso = $("pront-resumo-aviso");
+        if (aviso) {
+          aviso.textContent = "Histórico do paciente salvo.";
+          aviso.className = "aviso-form aviso-sucesso";
+        }
+      });
+    }
 
     var btnFecharLeitura = $("btn-pront-fechar-leitura");
     if (btnFecharLeitura) {
@@ -624,11 +642,6 @@
             queixaPrincipal: $("pront-ev-qp").value,
             hda: $("pront-ev-hda").value,
             interrogatorio: $("pront-ev-is").value,
-            antecedentesPessoais: $("pront-ev-ap").value,
-            antecedentesFamiliares: $("pront-ev-af").value,
-            habitos: $("pront-ev-habitos").value,
-            medicamentos: $("pront-ev-meds").value,
-            alergias: $("pront-ev-alergias").value,
             exameFisico: $("pront-ev-exame").value,
             hipotese: $("pront-ev-hd").value,
             conduta: $("pront-ev-conduta").value,
