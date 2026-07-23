@@ -1,26 +1,26 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cadastro profissional | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ac"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722ac">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ac">
-  <script src="js/auth.js?v=20260722ac"></script>
+  <script src="../js/force-https.js?v=20260722ad"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ad">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ad">
+  <script src="js/auth.js?v=20260722ad"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
     <div class="container">
       <a class="logo" href="../index.html">Dalucare</a>
-      <a class="link-voltar" href="login.html">â† JÃ¡ tenho conta</a>
+      <a class="link-voltar" href="login.html">�?� Já tenho conta</a>
     </div>
   </header>
 
   <main class="app-centro">
     <div class="auth-card">
       <h1>Criar conta profissional</h1>
-      <p class="auth-subtitulo">Nome e CRM serÃ£o enviados ao receituÃ¡rio MedHub automaticamente.</p>
+      <p class="auth-subtitulo">Nome e CRM serão enviados ao receituário MedHub automaticamente.</p>
 
       <form id="form-cadastro" class="formulario">
         <input type="hidden" id="cadastro-tipo" name="tipo" value="profissional">
@@ -74,14 +74,14 @@
           </div>
           <div class="campo">
             <label for="cadastro-crm">CRM</label>
-            <input type="text" id="cadastro-crm" name="crm" placeholder="Somente nÃºmeros" required inputmode="numeric" pattern="[0-9]+" minlength="4" maxlength="10">
+            <input type="text" id="cadastro-crm" name="crm" placeholder="Somente números" required inputmode="numeric" pattern="[0-9]+" minlength="4" maxlength="10">
           </div>
         </div>
 
         <div class="linha-form">
           <div class="campo">
             <label for="cadastro-senha">Senha</label>
-            <input type="password" id="cadastro-senha" name="senha" placeholder="MÃ­nimo 6 caracteres" required minlength="6" autocomplete="new-password">
+            <input type="password" id="cadastro-senha" name="senha" placeholder="Mínimo 6 caracteres" required minlength="6" autocomplete="new-password">
           </div>
         </div>
 
@@ -97,14 +97,14 @@
       </form>
 
       <p class="auth-links">
-        JÃ¡ tem conta? <a href="login.html?v=20260722ac">FaÃ§a login</a>
+        Já tem conta? <a href="login.html?v=20260722ad">Faça login</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "app.html?v=20260722ac";
+      window.location.href = "app.html?v=20260722ad";
     }
 
     const formCadastro = document.getElementById("form-cadastro");
@@ -130,7 +130,7 @@
       try {
         cadastrarUsuario(dados);
         autenticarUsuario(dados.email, dados.senha);
-        window.location.href = "app.html?v=20260722ac";
+        window.location.href = "app.html?v=20260722ad";
       } catch (erro) {
         mostrarAviso(avisoCadastro, erro.message, "erro");
         btnCadastro.disabled = false;

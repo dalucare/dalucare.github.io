@@ -1,26 +1,26 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-BR" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar | Dalucare Profissional</title>
-  <script src="../js/force-https.js?v=20260722ac"></script>
-  <link rel="stylesheet" href="../css/style.css?v=20260722ac">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ac">
-  <script src="js/auth.js?v=20260722ac"></script>
+  <script src="../js/force-https.js?v=20260722ad"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ad">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ad">
+  <script src="js/auth.js?v=20260722ad"></script>
 </head>
 <body class="pagina-app">
   <header class="app-topo">
     <div class="container">
       <a class="logo" href="../index.html">Dalucare</a>
-      <a class="link-voltar" href="../index.html">â† Voltar ao site</a>
+      <a class="link-voltar" href="../index.html">�?� Voltar ao site</a>
     </div>
   </header>
 
   <main class="app-centro">
     <div class="auth-card">
-      <h1>Ãrea do profissional</h1>
-      <p class="auth-subtitulo">Painel clÃ­nico Dalucare (agenda, pacientes e prontuÃ¡rio).</p>
+      <h1>Área do profissional</h1>
+      <p class="auth-subtitulo">Painel clínico Dalucare (agenda, pacientes e prontuário).</p>
 
       <div class="demo-acessos">
         <button type="button" class="btn btn-principal" id="btn-demo-pro" style="width: 100%;">Entrar no painel agora</button>
@@ -51,7 +51,7 @@
       </p>
 
       <form id="form-recuperar" class="formulario" hidden>
-        <p class="auth-subtitulo">Defina uma nova senha para o e-mail jÃ¡ cadastrado neste navegador.</p>
+        <p class="auth-subtitulo">Defina uma nova senha para o e-mail já cadastrado neste navegador.</p>
         <div class="linha-form">
           <div class="campo">
             <label for="recuperar-email">E-mail</label>
@@ -75,14 +75,14 @@
       </form>
 
       <p class="auth-links">
-        NÃ£o tem conta? <a href="cadastro.html?v=20260722ac">Cadastre-se como profissional</a>
+        Não tem conta? <a href="cadastro.html?v=20260722ad">Cadastre-se como profissional</a>
       </p>
     </div>
   </main>
 
   <script>
     if (obterSessao()) {
-      window.location.href = "app.html?v=20260722ac";
+      window.location.href = "app.html?v=20260722ad";
     }
 
     const formLogin = document.getElementById("form-login");
@@ -92,7 +92,7 @@
     const btnLogin = document.getElementById("btn-login");
     const btnRecuperar = document.getElementById("btn-recuperar");
     const btnMostrar = document.getElementById("btn-mostrar-recuperar");
-    const DESTINO = "app.html?v=20260722ac";
+    const DESTINO = "app.html?v=20260722ad";
 
     function entrarPainelDemo() {
       try {
@@ -100,7 +100,7 @@
       } catch (e) {}
       try {
         garantirUsuarioDemo({
-          nome: "Dr. JoÃ£o Silva",
+          nome: "Dr. João Silva",
           email: "profissional@dalucare.demo",
           senha: "demo123",
           tipo: "profissional",
@@ -113,7 +113,7 @@
           "dalucare_sessao",
           JSON.stringify({
             id: "demo_pro",
-            nome: "Dr. JoÃ£o Silva",
+            nome: "Dr. João Silva",
             email: "profissional@dalucare.demo",
             tipo: "profissional",
             crm: "123456",
