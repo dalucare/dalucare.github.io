@@ -6,15 +6,15 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722ae"></script>
+  <script src="../js/force-https.js?v=20260722af"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722ae">
-  <link rel="stylesheet" href="css/dash.css?v=20260722ae">
-  <script src="js/auth.js?v=20260722ae"></script>
-  <script src="js/agenda-slots.js?v=20260722ae"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722ae"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722af">
+  <link rel="stylesheet" href="css/dash.css?v=20260722af">
+  <script src="js/auth.js?v=20260722af"></script>
+  <script src="js/agenda-slots.js?v=20260722af"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722af"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -53,7 +53,7 @@
     <div class="dash-main">
       <header class="dash-top">
         <div class="dash-top-esquerda">
-          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">�~�</button>
+          <button type="button" class="dash-menu-btn" id="btn-menu-lateral" aria-label="Abrir menu">☰</button>
           <div>
             <h1 class="dash-saudacao" id="dash-saudacao">Olá</h1>
             <p class="dash-data" id="dash-data"></p>
@@ -70,7 +70,7 @@
           </button>
           <a class="dash-link-site" href="../index.html">Site</a>
           <button type="button" class="btn-tema dash-btn-tema" id="btn-tema" aria-label="Ativar modo escuro" title="Ativar modo escuro">
-            <span id="icone-tema" aria-hidden="true">�~�</span>
+            <span id="icone-tema" aria-hidden="true">☾</span>
           </button>
           <button type="button" class="btn btn-secundario btn-sair" id="btn-sair">Sair</button>
         </div>
@@ -169,7 +169,7 @@
                   <button type="button" class="btn btn-secundario" data-ir="online">Iniciar teleconsulta</button>
                 </div>
                 <div class="ficha-bloco">
-                  <h3>�sltima consulta</h3>
+                  <h3>Última consulta</h3>
                   <p id="ficha-ultima">15/04/2026 · Retorno · Hipertensão controlada</p>
                 </div>
                 <div class="campo-obs">
@@ -210,9 +210,9 @@
           <div class="cal-layout">
             <section class="painel-bloco cal-mes-bloco">
               <div class="cal-nav">
-                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-prev" aria-label="Mês anterior">�?�</button>
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-prev" aria-label="Mês anterior">‹</button>
                 <h2 id="cal-mes-titulo">Julho 2026</h2>
-                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-next" aria-label="Próximo mês">�?�</button>
+                <button type="button" class="btn btn-secundario btn-sm" id="btn-cal-next" aria-label="Próximo mês">›</button>
                 <button type="button" class="link-suave" id="btn-cal-hoje">Hoje</button>
               </div>
               <div class="cal-grade" id="cal-grade" aria-label="Calendário mensal"></div>
@@ -231,7 +231,7 @@
 
         <div class="modal-overlay" id="modal-consulta" hidden>
           <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="cal-form-titulo">
-            <button type="button" class="modal-fechar" id="modal-consulta-fechar" aria-label="Fechar">�-</button>
+            <button type="button" class="modal-fechar" id="modal-consulta-fechar" aria-label="Fechar">×</button>
             <form class="cal-form" id="cal-form">
               <h3 id="cal-form-titulo">Nova consulta</h3>
               <p class="auth-subtitulo" id="cal-form-sub">Preencha os dados e salve na agenda.</p>
@@ -294,7 +294,7 @@
             </div>
             <a class="link-suave" href="https://www.medhub.ia.br/embed/prescricao.html?v=rx-20260722i" target="_blank" rel="noopener noreferrer">Abrir em nova aba</a>
           </div>
-          <p class="cal-dica" id="medhub-perfil-status">Aguardando envio do perfil ao MedHub�?�</p>
+          <p class="cal-dica" id="medhub-perfil-status">Aguardando envio do perfil ao MedHub...</p>
           <div class="embed-frame painel-bloco">
             <iframe
               id="medhub-rx-embed"
@@ -759,7 +759,7 @@
         var tema = document.documentElement.getAttribute("data-theme") || "light";
         var icone = document.getElementById("icone-tema");
         var btn = document.getElementById("btn-tema");
-        if (icone) icone.textContent = tema === "dark" ? "�~?" : "�~�";
+        if (icone) icone.textContent = tema === "dark" ? "☀" : "☾";
         if (btn) {
           var rotulo = tema === "dark" ? "Ativar modo claro" : "Ativar modo escuro";
           btn.setAttribute("aria-label", rotulo);
@@ -804,7 +804,7 @@
         if (label) label.textContent = formatarDataLonga(agora);
         if (lista) {
           lista.innerHTML =
-            "<li><time>�?"</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horário com um profissional</span></div><span class=\"status status-livre\">Livre</span></li>";
+            "<li><time>--</time><div><strong>Nenhuma consulta hoje</strong><span>Agende um horário com um profissional</span></div><span class=\"status status-livre\">Livre</span></li>";
         }
       }
 
@@ -818,7 +818,7 @@
         if (label) {
           label.textContent =
             inicio.toLocaleDateString("pt-BR", { day: "2-digit", month: "short" }) +
-            " �?" " +
+            " - " +
             fim.toLocaleDateString("pt-BR", { day: "2-digit", month: "short", year: "numeric" });
         }
         var nomes = ["Seg", "Ter", "Qua", "Qui", "Sex", "Sáb", "Dom"];
@@ -917,7 +917,7 @@
               .map(function (d) {
                 return "<li><span>" + d.nome + '</span><span class="status ' + d.classe + '">' + d.status + "</span></li>";
               })
-              .join("") || "<li><span>Sem documentos</span><span class=\"status status-livre\">�?"</span></li>";
+              .join("") || "<li><span>Sem documentos</span><span class=\"status status-livre\">-</span></li>";
           }
         }
 
@@ -934,9 +934,7 @@
                 '" data-id="' +
                 (item.id || "") +
                 '" role="button" tabindex="0">' +
-                "<time>" +
-                item.hora +
-                "</time>" +
+                "<time>--</time>" +
                 '<div class="agenda-item-corpo">' +
                 '<div class="agenda-avatar" aria-hidden="true">' +
                 item.iniciais +
@@ -1277,7 +1275,7 @@
         renderCalendarioCompleto();
       }
 
-      /* �?"�?"�?" Minhas prescrições �?"�?"�?" */
+      /* Minhas prescricoes */
       (function initPrescricoesSalvas() {
         var Ps = window.DalucarePrescricoesSalvas;
         if (!Ps) return;
