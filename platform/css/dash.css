@@ -1723,3 +1723,176 @@ body.modal-aberto {
 .presc-receita-medico span { color: var(--dash-suave); font-size:14px; font-weight:600; }
 .presc-receita-acoes { display:flex; gap:8px; flex-wrap:wrap; }
 .presc-salva-item.na-receita { border-color: var(--cor-primaria, #1d6fa3); box-shadow: inset 0 0 0 1px var(--cor-primaria, #1d6fa3); }
+
+/* --- Pacientes --- */
+.pac-topo { margin-bottom: 12px; }
+.pac-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.pac-stat {
+  background: var(--dash-card, #132033);
+  border: 1px solid var(--dash-borda, rgba(255,255,255,.08));
+  border-radius: 14px;
+  padding: 14px 16px;
+}
+.pac-stat strong {
+  display: block;
+  font-size: 1.5rem;
+  line-height: 1.1;
+}
+.pac-stat span {
+  color: var(--dash-suave);
+  font-size: 0.86rem;
+}
+.pac-layout {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.95fr) minmax(320px, 1.25fr);
+  gap: 16px;
+  align-items: start;
+}
+.pac-filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 10px 0 6px;
+}
+.pac-filtro {
+  border: 1px solid var(--dash-borda, rgba(255,255,255,.12));
+  background: transparent;
+  color: var(--dash-texto, #e8eef5);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+.pac-filtro.ativo {
+  background: var(--cor-primaria, #1d6fa3);
+  border-color: var(--cor-primaria, #1d6fa3);
+  color: #fff;
+}
+.pac-lista {
+  list-style: none;
+  margin: 10px 0 0;
+  padding: 0;
+  max-height: min(62vh, 640px);
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.pac-item {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  background: rgba(255,255,255,.03);
+}
+.pac-item:hover,
+.pac-item.ativo {
+  border-color: var(--cor-primaria, #1d6fa3);
+  background: rgba(29, 111, 163, 0.12);
+}
+.pac-avatar {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  font-size: 0.85rem;
+}
+.pac-item-info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.pac-item-info strong {
+  font-size: 0.98rem;
+}
+.pac-item-info span,
+.pac-item-info em {
+  color: var(--dash-suave);
+  font-size: 0.82rem;
+  font-style: normal;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.pac-lista-vazio,
+.pac-vazio {
+  color: var(--dash-suave);
+  padding: 18px 8px;
+}
+.pac-vazio h2 {
+  margin: 0 0 8px;
+  color: var(--dash-texto, #e8eef5);
+}
+.pac-ficha-topo {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+.pac-ficha-acoes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.pac-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+.pac-tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.75rem;
+  background: rgba(58, 160, 216, 0.18);
+  color: #9fd4f0;
+}
+.pac-tag-suave {
+  background: rgba(255,255,255,.06);
+  color: var(--dash-suave);
+}
+.pac-ficha-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+.pac-obs-bloco {
+  grid-column: 1 / -1;
+}
+.pac-label {
+  display: inline-block;
+  min-width: 118px;
+  color: var(--dash-suave);
+  font-size: 0.85rem;
+}
+.pac-excluir {
+  color: #f0a0a0 !important;
+}
+@media (max-width: 980px) {
+  .pac-layout {
+    grid-template-columns: 1fr;
+  }
+  .pac-lista {
+    max-height: 360px;
+  }
+}
+@media (max-width: 600px) {
+  .pac-stats {
+    grid-template-columns: 1fr;
+  }
+  .pac-ficha-grid {
+    grid-template-columns: 1fr;
+  }
+}
+

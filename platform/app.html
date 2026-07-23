@@ -6,15 +6,16 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <title>Início | Dalucare</title>
-  <script src="../js/force-https.js?v=20260722af"></script>
+  <script src="../js/force-https.js?v=20260722ag"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260722af">
-  <link rel="stylesheet" href="css/dash.css?v=20260722af">
-  <script src="js/auth.js?v=20260722af"></script>
-  <script src="js/agenda-slots.js?v=20260722af"></script>
-  <script src="js/prescricoes-salvas.js?v=20260722af"></script>
+  <link rel="stylesheet" href="../css/style.css?v=20260722ag">
+  <link rel="stylesheet" href="css/dash.css?v=20260722ag">
+  <script src="js/auth.js?v=20260722ag"></script>
+  <script src="js/agenda-slots.js?v=20260722ag"></script>
+  <script src="js/prescricoes-salvas.js?v=20260722ag"></script>
+  <script src="js/pacientes.js?v=20260722ag"></script>
 </head>
 <body class="pagina-dashboard">
   <div class="dash">
@@ -118,7 +119,7 @@
               <section class="painel-bloco">
                 <h2>Atalhos rápidos</h2>
                 <div class="atalhos-grid atalhos-clinica">
-                  <button type="button" class="atalho-btn" data-ir="pacientes"><span class="atalho-ico ico-azul"></span>Novo paciente</button>
+                  <button type="button" class="atalho-btn" data-ir="pacientes" data-novo-paciente="1"><span class="atalho-ico ico-azul"></span>Novo paciente</button>
                   <button type="button" class="atalho-btn" data-ir="agenda" data-nova-consulta="1"><span class="atalho-ico ico-verde"></span>Nova consulta</button>
                   <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-ciano"></span>Prescrição</button>
                   <button type="button" class="atalho-btn" data-ir="prontuarios"><span class="atalho-ico ico-laranja"></span>Atestado</button>
@@ -283,7 +284,148 @@
           </div>
         </div>
 
-        <section class="aba-painel" id="aba-pacientes"><h1>Pacientes</h1><p class="aba-intro">Cadastro e histórico.</p><div class="painel-aviso">Em breve: busca e ficha.</div></section>
+        <section class="aba-painel" id="aba-pacientes">
+          <div class="painel-bloco-topo pac-topo">
+            <div>
+              <h1>Pacientes</h1>
+              <p class="aba-intro">Cadastro, busca e ficha clínica rápida.</p>
+            </div>
+            <button type="button" class="btn btn-principal" id="btn-novo-paciente">+ Novo paciente</button>
+          </div>
+
+          <div class="pac-stats">
+            <div class="pac-stat"><strong id="pac-stat-total">0</strong><span>Total</span></div>
+            <div class="pac-stat"><strong id="pac-stat-novos">0</strong><span>Novos / 1ª consulta</span></div>
+            <div class="pac-stat"><strong id="pac-stat-retorno">0</strong><span>Com retorno</span></div>
+          </div>
+
+          <div class="pac-layout">
+            <section class="painel-bloco pac-lista-bloco">
+              <label class="campo presc-busca-campo">
+                <span>Buscar paciente</span>
+                <input type="search" id="pac-busca" placeholder="Nome, telefone, convênio, cidade..." autocomplete="off">
+              </label>
+              <div class="pac-filtros" role="tablist" aria-label="Filtros de pacientes">
+                <button type="button" class="pac-filtro ativo" data-pac-filtro="todos">Todos</button>
+                <button type="button" class="pac-filtro" data-pac-filtro="retorno">Retorno</button>
+                <button type="button" class="pac-filtro" data-pac-filtro="novos">Novos</button>
+                <button type="button" class="pac-filtro" data-pac-filtro="tele">Teleconsulta</button>
+              </div>
+              <p class="cal-dica" id="pac-contagem">0 pacientes</p>
+              <ul class="pac-lista" id="pac-lista"></ul>
+            </section>
+
+            <section class="painel-bloco pac-detalhe-bloco">
+              <div id="pac-painel-vazio" class="pac-vazio">
+                <h2>Ficha do paciente</h2>
+                <p>Selecione alguém na lista ou cadastre um novo paciente para ver dados, histórico e ações rápidas.</p>
+              </div>
+
+              <div id="pac-painel-ficha" hidden>
+                <div class="pac-ficha-topo">
+                  <div class="paciente-resumo">
+                    <div class="dash-avatar grande" id="pac-ficha-avatar">?</div>
+                    <div>
+                      <strong id="pac-ficha-nome">Paciente</strong>
+                      <p id="pac-ficha-meta"></p>
+                      <div class="pac-tags" id="pac-ficha-tags"></div>
+                    </div>
+                  </div>
+                  <div class="pac-ficha-acoes">
+                    <button type="button" class="btn btn-principal btn-sm" id="btn-pac-nova-consulta">Nova consulta</button>
+                    <button type="button" class="btn btn-secundario btn-sm" id="btn-pac-prontuario">Prontuário</button>
+                    <button type="button" class="btn btn-secundario btn-sm" id="btn-pac-mensagem">Mensagem</button>
+                    <button type="button" class="link-suave" id="btn-pac-editar">Editar</button>
+                    <button type="button" class="link-suave pac-excluir" id="btn-pac-excluir">Excluir</button>
+                  </div>
+                </div>
+
+                <div class="pac-ficha-grid">
+                  <div class="ficha-bloco">
+                    <h3>Contato</h3>
+                    <p><span class="pac-label">Telefone</span> <span id="pac-ficha-tel">-</span></p>
+                    <p><span class="pac-label">E-mail</span> <span id="pac-ficha-email">-</span></p>
+                    <p><span class="pac-label">Cidade</span> <span id="pac-ficha-cidade">-</span></p>
+                  </div>
+                  <div class="ficha-bloco">
+                    <h3>Administrativo</h3>
+                    <p><span class="pac-label">Convênio</span> <span id="pac-ficha-convenio">-</span></p>
+                    <p><span class="pac-label">Última consulta</span> <span id="pac-ficha-ult">-</span></p>
+                    <p><span class="pac-label">Próxima consulta</span> <span id="pac-ficha-prox">-</span></p>
+                  </div>
+                  <div class="ficha-bloco pac-obs-bloco">
+                    <h3>Observações clínicas</h3>
+                    <p id="pac-ficha-obs"></p>
+                  </div>
+                </div>
+              </div>
+
+              <div id="pac-painel-form" hidden>
+                <h2 id="pac-form-titulo">Novo paciente</h2>
+                <p class="cal-dica">Preencha os dados principais. Você pode editar depois.</p>
+                <form class="cal-form" id="form-paciente">
+                  <input type="hidden" id="pac-form-id" value="">
+                  <div class="cal-form-grid">
+                    <div class="campo cal-campo-largo">
+                      <label for="pac-form-nome">Nome completo</label>
+                      <input type="text" id="pac-form-nome" required minlength="2" placeholder="Nome do paciente">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-nasc">Nascimento</label>
+                      <input type="date" id="pac-form-nasc">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-sexo">Sexo</label>
+                      <select id="pac-form-sexo">
+                        <option value="">-</option>
+                        <option value="Feminino">Feminino</option>
+                        <option value="Masculino">Masculino</option>
+                        <option value="Outro">Outro</option>
+                      </select>
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-tel">Telefone</label>
+                      <input type="tel" id="pac-form-tel" placeholder="(00) 00000-0000">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-email">E-mail</label>
+                      <input type="email" id="pac-form-email" placeholder="email@exemplo.com">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-convenio">Convênio</label>
+                      <input type="text" id="pac-form-convenio" placeholder="Particular, Unimed...">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-cidade">Cidade</label>
+                      <input type="text" id="pac-form-cidade" placeholder="Cidade">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-ult">Última consulta</label>
+                      <input type="date" id="pac-form-ult">
+                    </div>
+                    <div class="campo">
+                      <label for="pac-form-prox">Próxima consulta</label>
+                      <input type="date" id="pac-form-prox">
+                    </div>
+                    <div class="campo cal-campo-largo">
+                      <label for="pac-form-tags">Etiquetas</label>
+                      <input type="text" id="pac-form-tags" placeholder="Ex.: Retorno, Hipertensão, Novo">
+                    </div>
+                    <div class="campo cal-campo-largo">
+                      <label for="pac-form-obs">Observações</label>
+                      <textarea id="pac-form-obs" rows="3" placeholder="Anotações clínicas ou administrativas"></textarea>
+                    </div>
+                  </div>
+                  <div class="cal-form-acoes">
+                    <button type="submit" class="btn btn-principal">Salvar paciente</button>
+                    <button type="button" class="btn btn-secundario" id="btn-pac-form-cancelar">Cancelar</button>
+                  </div>
+                  <p class="aviso-form" id="pac-form-aviso"></p>
+                </form>
+              </div>
+            </section>
+          </div>
+        </section>
         <section class="aba-painel" id="aba-prontuarios"><h1>Prontuários</h1><p class="aba-intro">Evoluções e anexos.</p><div class="painel-aviso">Em breve: prontuário eletrônico.</div></section>
         <section class="aba-painel" id="aba-online"><h1>Atendimento online</h1><p class="aba-intro">Teleconsultas (Google Meet no MVP).</p><div class="painel-aviso">Em breve: sala integrada.</div></section>
         <section class="aba-painel" id="aba-prescricoes">
@@ -692,6 +834,9 @@
           if (id === "prescricoes-salvas" && typeof window.renderPrescricoesSalvas === "function") {
             window.renderPrescricoesSalvas();
           }
+          if (id === "pacientes" && typeof window.renderPacientes === "function") {
+            window.renderPacientes();
+          }
           if (id === "config") {
             preencherFormPerfil();
           }
@@ -719,6 +864,11 @@
           if (botao.getAttribute("data-nova-consulta") === "1") {
             setTimeout(function () {
               if (typeof window.abrirModalConsulta === "function") window.abrirModalConsulta();
+            }, 80);
+          }
+          if (botao.getAttribute("data-novo-paciente") === "1") {
+            setTimeout(function () {
+              if (typeof window.abrirNovoPaciente === "function") window.abrirNovoPaciente();
             }, 80);
           }
         });
@@ -1273,6 +1423,30 @@
         limparFormCal();
         atualizarAgendaDoDia();
         renderCalendarioCompleto();
+      }
+
+      /* Pacientes */
+      if (window.DalucarePacientes && typeof window.DalucarePacientes.initUI === "function") {
+        window.DalucarePacientes.initUI({
+          onNovaConsulta: function (paciente) {
+            abrirAba("agenda");
+            setTimeout(function () {
+              if (typeof window.abrirModalConsulta === "function") {
+                window.abrirModalConsulta();
+                if (paciente && paciente.nome) {
+                  var nomeEl = document.getElementById("cal-nome");
+                  if (nomeEl) nomeEl.value = paciente.nome;
+                }
+              }
+            }, 100);
+          },
+          onProntuario: function () {
+            abrirAba("prontuarios");
+          },
+          onMensagem: function () {
+            abrirAba("mensagens");
+          },
+        });
       }
 
       /* Minhas prescricoes */
