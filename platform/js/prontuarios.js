@@ -209,64 +209,62 @@
 
   function initUI() {
     var selecionadoId = null;
-    var abaAtiva = "evolucoes";
 
     function $(id) {
       return document.getElementById(id);
     }
 
-    function setAba(nome) {
-      abaAtiva = nome;
-      document.querySelectorAll("[data-pront-aba]").forEach(function (btn) {
-        btn.classList.toggle("ativo", btn.getAttribute("data-pront-aba") === nome);
-      });
-      ["evolucoes", "resumo", "anexos"].forEach(function (nomeAba) {
-        var painel = $("pront-aba-" + nomeAba);
-        if (painel) painel.hidden = nomeAba !== nome;
-      });
+    function iniFn(nome) {
+      if (global.DalucarePacientes && global.DalucarePacientes.iniciais) {
+        return global.DalucarePacientes.iniciais(nome);
+      }
+      return String(nome || "?").slice(0, 2).toUpperCase();
     }
 
-    function preencherSelect(pacientes) {
-      var sel = $("pront-paciente-select");
-      if (!sel) return;
-      var atual = selecionadoId;
-      sel.innerHTML =
-        '<option value="">Selecione um paciente</option>' +
-        pacientes
-          .map(function (p) {
-            return '<option value="' + escapar(p.id) + '">' + escapar(p.nome) + "</option>";
-          })
-          .join("");
-      if (atual) sel.value = atual;
+    function dataHoje() {
+      var hoje = new Date();
+      var mm = String(hoje.getMonth() + 1);
+      var dd = String(hoje.getDate());
+      if (mm.length < 2) mm = "0" + mm;
+      if (dd.length < 2) dd = "0" + dd;
+      return hoje.getFullYear() + "-" + mm + "-" + dd;
     }
 
-    function renderListaLateral(pacientes, termo) {
+    function mostrarVista(modo) {
+      var lista = $("pront-vista-lista");
+      var historia = $("pront-vista-historia");
+      var topoLista = $("pront-topo-lista");
+      if (lista) lista.hidden = modo !== "lista";
+      if (historia) historia.hidden = modo !== "historia";
+      if (topoLista) topoLista.hidden = modo !== "lista";
+    }
+
+    function renderLista() {
       var lista = $("pront-pac-lista");
+      var contagem = $("pront-contagem");
+      var busca = $("pront-busca");
       if (!lista) return;
-      var q = String(termo || "").toLowerCase();
+      var pacientes = listarPacientes();
+      var q = String(busca && busca.value ? busca.value : "").toLowerCase();
       var filtrados = pacientes.filter(function (p) {
         if (!q) return true;
-        return [p.nome, p.convenio, p.cidade].join(" ").toLowerCase().indexOf(q) >= 0;
+        return [p.nome, p.convenio, p.cidade, p.telefone].join(" ").toLowerCase().indexOf(q) >= 0;
       });
+      if (contagem) {
+        contagem.textContent =
+          filtrados.length + (filtrados.length === 1 ? " paciente" : " pacientes");
+      }
       if (!filtrados.length) {
-        lista.innerHTML = '<li class="pac-lista-vazio">Nenhum paciente encontrado.</li>';
+        lista.innerHTML =
+          '<li class="pac-lista-vazio">Nenhum paciente encontrado. Cadastre em Pacientes.</li>';
         return;
       }
-      var iniFn =
-        global.DalucarePacientes && global.DalucarePacientes.iniciais
-          ? global.DalucarePacientes.iniciais
-          : function (n) {
-              return String(n || "?").slice(0, 2).toUpperCase();
-            };
       lista.innerHTML = filtrados
         .map(function (p) {
-          var ativo = p.id === selecionadoId ? " ativo" : "";
           var pront = obter(p.id);
           var qtd = (pront.evolucoes || []).length;
           return (
-            '<li class="pac-item' +
-            ativo +
-            '" data-id="' +
+            '<li class="pac-item pront-lista-item" data-id="' +
             escapar(p.id) +
             '" role="button" tabindex="0">' +
             '<div class="dash-avatar pac-avatar">' +
@@ -282,63 +280,63 @@
             "</span>" +
             "<em>" +
             qtd +
-            (qtd === 1 ? " evolucao" : " evolucoes") +
+            (qtd === 1 ? " evolução na história" : " evoluções na história") +
             "</em>" +
-            "</div></li>"
+            "</div>" +
+            '<span class="pront-abrir-dica">Abrir história →</span>' +
+            "</li>"
           );
         })
         .join("");
     }
 
-    function renderDetalhe() {
-      var vazio = $("pront-vazio");
-      var corpo = $("pront-corpo");
+    function renderHistoria() {
       if (!selecionadoId) {
-        if (vazio) vazio.hidden = false;
-        if (corpo) corpo.hidden = true;
+        mostrarVista("lista");
+        renderLista();
         return;
       }
-      if (vazio) vazio.hidden = true;
-      if (corpo) corpo.hidden = false;
-
+      mostrarVista("historia");
       var pacientes = listarPacientes();
       var pac =
         pacientes.find(function (p) {
           return p.id === selecionadoId;
         }) || null;
       var pront = obter(selecionadoId);
-      var iniFn =
-        global.DalucarePacientes && global.DalucarePacientes.iniciais
-          ? global.DalucarePacientes.iniciais
-          : function (n) {
-              return "?";
-            };
 
       if ($("pront-avatar")) $("pront-avatar").textContent = iniFn(pac ? pac.nome : "?");
       if ($("pront-nome")) $("pront-nome").textContent = pac ? pac.nome : "Paciente";
       if ($("pront-meta")) {
         $("pront-meta").textContent = pac
-          ? [pac.sexo, pac.convenio, pac.telefone].filter(Boolean).join(" · ")
+          ? [pac.sexo, pac.convenio, pac.telefone, pac.cidade].filter(Boolean).join(" · ")
           : "";
       }
 
-      if ($("pront-alergias")) $("pront-alergias").value = pront.alergias || "";
-      if ($("pront-antecedentes")) $("pront-antecedentes").value = pront.antecedentes || "";
-      if ($("pront-meds")) $("pront-meds").value = pront.medicamentosUso || "";
+      var resumo = $("pront-resumo-leitura");
+      if (resumo) {
+        resumo.innerHTML =
+          "<p><strong>Alergias:</strong> " +
+          escapar(pront.alergias || "Não informadas") +
+          "</p>" +
+          "<p><strong>Antecedentes:</strong> " +
+          escapar(pront.antecedentes || "Não informados") +
+          "</p>" +
+          "<p><strong>Medicamentos em uso:</strong> " +
+          escapar(pront.medicamentosUso || "Não informados") +
+          "</p>";
+      }
 
       var evLista = $("pront-evolucoes");
       if (evLista) {
         var evolucoes = (pront.evolucoes || []).slice();
         if (!evolucoes.length) {
           evLista.innerHTML =
-            '<li class="pront-vazio-item">Nenhuma evolucao ainda. Registre a primeira a direita.</li>';
+            '<li class="pront-vazio-item">Ainda não há história clínica registrada para este paciente.</li>';
         } else {
           evLista.innerHTML = evolucoes
             .map(function (e) {
               return (
-                '<li class="pront-evolucao" data-id="' +
-                escapar(e.id) +
-                '">' +
+                '<li class="pront-evolucao">' +
                 '<div class="pront-evolucao-topo">' +
                 "<strong>" +
                 escapar(e.titulo || e.tipo) +
@@ -353,7 +351,7 @@
                 "<p>" +
                 escapar(e.texto).replace(/\n/g, "<br>") +
                 "</p>" +
-                '<button type="button" class="link-suave pront-ev-excluir" data-ev="' +
+                '<button type="button" class="link-suave" data-ev="' +
                 escapar(e.id) +
                 '">Excluir</button>' +
                 "</li>"
@@ -363,70 +361,44 @@
         }
       }
 
-      var axLista = $("pront-anexos");
-      if (axLista) {
-        var anexos = pront.anexos || [];
-        if (!anexos.length) {
-          axLista.innerHTML = '<li class="pront-vazio-item">Nenhum documento registrado.</li>';
-        } else {
-          axLista.innerHTML = anexos
-            .map(function (a) {
-              return (
-                '<li class="pront-anexo">' +
-                "<div><strong>" +
-                escapar(a.nome) +
-                "</strong><span>" +
-                escapar(a.tipo) +
-                " · " +
-                formatarData(a.data) +
-                '</span></div><span class="status status-ok">' +
-                escapar(a.status) +
-                '</span><button type="button" class="link-suave" data-ax="' +
-                escapar(a.id) +
-                '">Remover</button></li>'
-              );
-            })
-            .join("");
-        }
-      }
-
-      var hoje = new Date();
-      var yyyy = hoje.getFullYear();
-      var mm = String(hoje.getMonth() + 1);
-      if (mm.length < 2) mm = "0" + mm;
-      var dd = String(hoje.getDate());
-      if (dd.length < 2) dd = "0" + dd;
-      if ($("pront-ev-data") && !$("pront-ev-data").value) {
-        $("pront-ev-data").value = yyyy + "-" + mm + "-" + dd;
-      }
-      if ($("pront-ax-data") && !$("pront-ax-data").value) {
-        $("pront-ax-data").value = yyyy + "-" + mm + "-" + dd;
-      }
+      if ($("pront-form-box")) $("pront-form-box").hidden = true;
+      if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
     }
 
-    function selecionar(id) {
-      selecionadoId = id || null;
+    function voltarLista() {
+      selecionadoId = null;
       try {
-        if (selecionadoId) sessionStorage.setItem("dalucare_pront_paciente", selecionadoId);
-        else sessionStorage.removeItem("dalucare_pront_paciente");
+        sessionStorage.removeItem("dalucare_pront_paciente");
       } catch (e) {}
-      var sel = $("pront-paciente-select");
-      if (sel) sel.value = selecionadoId || "";
-      render();
+      if ($("pront-form-box")) $("pront-form-box").hidden = true;
+      mostrarVista("lista");
+      renderLista();
     }
 
-    function render() {
-      var pacientes = listarPacientes();
-      preencherSelect(pacientes);
-      renderListaLateral(pacientes, $("pront-busca") ? $("pront-busca").value : "");
-      renderDetalhe();
-      setAba(abaAtiva);
+    function abrirHistoria(id) {
+      selecionadoId = id;
+      try {
+        sessionStorage.setItem("dalucare_pront_paciente", id);
+      } catch (e) {}
+      renderHistoria();
+    }
+
+    function render(forcarHistoria) {
+      if (forcarHistoria && selecionadoId) {
+        renderHistoria();
+        return;
+      }
+      if (selecionadoId) renderHistoria();
+      else {
+        mostrarVista("lista");
+        renderLista();
+      }
     }
 
     var busca = $("pront-busca");
     if (busca) {
       busca.addEventListener("input", function () {
-        renderListaLateral(listarPacientes(), busca.value);
+        renderLista();
       });
     }
 
@@ -435,37 +407,38 @@
       lista.addEventListener("click", function (ev) {
         var item = ev.target.closest(".pac-item");
         if (!item) return;
-        selecionar(item.getAttribute("data-id"));
+        abrirHistoria(item.getAttribute("data-id"));
       });
-    }
-
-    var sel = $("pront-paciente-select");
-    if (sel) {
-      sel.addEventListener("change", function () {
-        selecionar(sel.value || null);
-      });
-    }
-
-    document.querySelectorAll("[data-pront-aba]").forEach(function (btn) {
-      btn.addEventListener("click", function () {
-        setAba(btn.getAttribute("data-pront-aba") || "evolucoes");
-      });
-    });
-
-    var formResumo = $("form-pront-resumo");
-    if (formResumo) {
-      formResumo.addEventListener("submit", function (ev) {
+      lista.addEventListener("keydown", function (ev) {
+        if (ev.key !== "Enter" && ev.key !== " ") return;
+        var item = ev.target.closest(".pac-item");
+        if (!item) return;
         ev.preventDefault();
-        if (!selecionadoId) return;
-        salvarCabecalho(selecionadoId, {
-          alergias: $("pront-alergias").value,
-          antecedentes: $("pront-antecedentes").value,
-          medicamentosUso: $("pront-meds").value,
-        });
-        var aviso = $("pront-resumo-aviso");
-        if (aviso) {
-          aviso.textContent = "Resumo clinico salvo.";
-          aviso.className = "aviso-form aviso-sucesso";
+        abrirHistoria(item.getAttribute("data-id"));
+      });
+    }
+
+    var btnVoltar = $("btn-pront-voltar");
+    if (btnVoltar) btnVoltar.addEventListener("click", voltarLista);
+
+    var btnNova = $("btn-pront-nova-ev");
+    if (btnNova) {
+      btnNova.addEventListener("click", function () {
+        var box = $("pront-form-box");
+        if (!box) return;
+        box.hidden = false;
+        if ($("pront-ev-data")) $("pront-ev-data").value = dataHoje();
+        if ($("pront-ev-titulo")) $("pront-ev-titulo").focus();
+      });
+    }
+
+    var btnCancelar = $("btn-pront-cancelar-ev");
+    if (btnCancelar) {
+      btnCancelar.addEventListener("click", function () {
+        if ($("pront-form-box")) $("pront-form-box").hidden = true;
+        if ($("pront-ev-aviso")) {
+          $("pront-ev-aviso").textContent = "";
+          $("pront-ev-aviso").className = "aviso-form";
         }
       });
     }
@@ -485,45 +458,15 @@
           });
           $("pront-ev-titulo").value = "";
           $("pront-ev-texto").value = "";
+          if ($("pront-form-box")) $("pront-form-box").hidden = true;
           if (aviso) {
-            aviso.textContent = "Evolucao registrada.";
-            aviso.className = "aviso-form aviso-sucesso";
+            aviso.textContent = "";
+            aviso.className = "aviso-form";
           }
-          setAba("evolucoes");
-          renderDetalhe();
-          renderListaLateral(listarPacientes(), $("pront-busca") ? $("pront-busca").value : "");
+          renderHistoria();
         } catch (erro) {
           if (aviso) {
-            aviso.textContent = erro.message || "Nao foi possivel salvar.";
-            aviso.className = "aviso-form aviso-erro";
-          }
-        }
-      });
-    }
-
-    var formAx = $("form-pront-anexo");
-    if (formAx) {
-      formAx.addEventListener("submit", function (ev) {
-        ev.preventDefault();
-        var aviso = $("pront-ax-aviso");
-        try {
-          if (!selecionadoId) throw new Error("Selecione um paciente.");
-          adicionarAnexo(selecionadoId, {
-            nome: $("pront-ax-nome").value,
-            tipo: $("pront-ax-tipo").value,
-            status: $("pront-ax-status").value,
-            data: $("pront-ax-data").value,
-          });
-          $("pront-ax-nome").value = "";
-          if (aviso) {
-            aviso.textContent = "Documento adicionado.";
-            aviso.className = "aviso-form aviso-sucesso";
-          }
-          setAba("anexos");
-          renderDetalhe();
-        } catch (erro) {
-          if (aviso) {
-            aviso.textContent = erro.message || "Nao foi possivel salvar.";
+            aviso.textContent = erro.message || "Não foi possível salvar.";
             aviso.className = "aviso-form aviso-erro";
           }
         }
@@ -535,59 +478,36 @@
       evLista.addEventListener("click", function (ev) {
         var btn = ev.target.closest("[data-ev]");
         if (!btn || !selecionadoId) return;
-        if (!window.confirm("Excluir esta evolucao?")) return;
+        if (!window.confirm("Excluir esta evolução da história clínica?")) return;
         removerEvolucao(selecionadoId, btn.getAttribute("data-ev"));
-        render();
+        renderHistoria();
       });
     }
-
-    var axLista = $("pront-anexos");
-    if (axLista) {
-      axLista.addEventListener("click", function (ev) {
-        var btn = ev.target.closest("[data-ax]");
-        if (!btn || !selecionadoId) return;
-        removerAnexo(selecionadoId, btn.getAttribute("data-ax"));
-        renderDetalhe();
-      });
-    }
-
-    var btnIrPac = $("btn-pront-ir-pacientes");
-    if (btnIrPac) {
-      btnIrPac.addEventListener("click", function () {
-        if (typeof global.abrirAbaPacientes === "function") global.abrirAbaPacientes();
-        else {
-          var nav = document.querySelector('.dash-nav-item[data-aba="pacientes"]');
-          if (nav) nav.click();
-        }
-      });
-    }
-
-    global.renderProntuarios = function (pacienteIdOpcional) {
-      if (pacienteIdOpcional) selecionadoId = pacienteIdOpcional;
-      else {
-        try {
-          var salvo = sessionStorage.getItem("dalucare_pront_paciente");
-          if (salvo) selecionadoId = salvo;
-        } catch (e) {}
-      }
-      render();
-    };
 
     global.abrirProntuarioPaciente = function (pacienteId) {
       try {
         sessionStorage.setItem("dalucare_pront_paciente", pacienteId);
       } catch (e) {}
-      selecionadoId = pacienteId;
+      global.__prontAbrirId = pacienteId;
       var nav = document.querySelector('.dash-nav-item[data-aba="prontuarios"]');
       if (nav) nav.click();
-      else if (typeof global.renderProntuarios === "function") global.renderProntuarios(pacienteId);
+      else abrirHistoria(pacienteId);
     };
 
-    try {
-      var inicial = sessionStorage.getItem("dalucare_pront_paciente");
-      if (inicial) selecionadoId = inicial;
-    } catch (e) {}
-    render();
+    global.renderProntuarios = function (pacienteIdOpcional) {
+      var id = pacienteIdOpcional || global.__prontAbrirId || null;
+      global.__prontAbrirId = null;
+      if (id) {
+        abrirHistoria(id);
+        return;
+      }
+      selecionadoId = null;
+      mostrarVista("lista");
+      renderLista();
+    };
+
+    mostrarVista("lista");
+    renderLista();
   }
 
   global.DalucareProntuarios = {
